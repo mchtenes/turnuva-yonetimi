@@ -4,11 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Avrupa Ligi Turnuva Yönetimi</title>
-    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
-    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
-    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.sheetjs.com/xlsx-0.20.1/package/dist/xlsx.full.min.js"></script>
     <style>
         * {
             margin: 0;
@@ -16,717 +12,725 @@
             box-sizing: border-box;
         }
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+            background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 50%, #1e3a8a 100%);
+            min-height: 100vh;
         }
-        .icon {
-            display: inline-block;
-            width: 1.25rem;
-            height: 1.25rem;
-            stroke: currentColor;
-            stroke-width: 2;
-            fill: none;
-            stroke-linecap: round;
-            stroke-linejoin: round;
+        .header {
+            background: #0c1e4a;
+            border-bottom: 4px solid #fbbf24;
+            padding: 1.5rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+        }
+        .header-content {
+            max-width: 1280px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        .title-section {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        .title {
+            font-size: 2rem;
+            font-weight: bold;
+            color: white;
+        }
+        .season {
+            color: #fbbf24;
+            font-size: 0.875rem;
+        }
+        .stats {
+            display: flex;
+            gap: 2rem;
+            color: white;
+        }
+        .stat-item {
+            text-align: center;
+        }
+        .stat-value {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #fbbf24;
+        }
+        .stat-label {
+            font-size: 0.75rem;
+        }
+        .nav {
+            background: #1e40af;
+            border-bottom: 2px solid #1e3a8a;
+        }
+        .nav-content {
+            max-width: 1280px;
+            margin: 0 auto;
+            display: flex;
+            gap: 0.25rem;
+            overflow-x: auto;
+        }
+        .nav-btn {
+            padding: 1rem 1.5rem;
+            border: none;
+            background: none;
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: all 0.3s;
+        }
+        .nav-btn:hover {
+            background: rgba(30, 64, 175, 0.5);
+        }
+        .nav-btn.active {
+            background: #1e3a8a;
+            color: #fbbf24;
+            border-bottom: 4px solid #fbbf24;
+        }
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+        .card {
+            background: white;
+            border-radius: 0.5rem;
+            box-shadow: 0 10px 15px rgba(0,0,0,0.3);
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        .card-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #1e3a8a;
+            margin-bottom: 1rem;
+        }
+        .form-group {
+            margin-bottom: 1rem;
+        }
+        .form-label {
+            display: block;
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: #374151;
+            margin-bottom: 0.5rem;
+        }
+        .form-input {
+            width: 100%;
+            padding: 0.5rem 1rem;
+            border: 1px solid #d1d5db;
+            border-radius: 0.5rem;
+            font-size: 1rem;
+        }
+        .form-input:focus {
+            outline: none;
+            border-color: #2563eb;
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+        }
+        .grid-4 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+        .btn {
+            padding: 0.5rem 1.5rem;
+            border: none;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .btn-primary {
+            background: #2563eb;
+            color: white;
+        }
+        .btn-primary:hover {
+            background: #1d4ed8;
+        }
+        .btn-danger {
+            background: #dc2626;
+            color: white;
+        }
+        .btn-danger:hover {
+            background: #b91c1c;
+        }
+        .btn-secondary {
+            background: #6b7280;
+            color: white;
+        }
+        .btn-secondary:hover {
+            background: #4b5563;
+        }
+        .btn-large {
+            padding: 1rem 3rem;
+            font-size: 1.25rem;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        thead {
+            background: #f9fafb;
+        }
+        th, td {
+            padding: 0.75rem;
+            text-align: left;
+            border-bottom: 1px solid #e5e7eb;
+        }
+        th {
+            font-weight: 600;
+            color: #374151;
+            font-size: 0.875rem;
+        }
+        tr:hover {
+            background: #f9fafb;
+        }
+        .hidden {
+            display: none;
+        }
+        .text-center {
+            text-align: center;
+        }
+        .spinner {
+            border: 4px solid #f3f4f6;
+            border-top: 4px solid #fbbf24;
+            border-radius: 50%;
+            width: 80px;
+            height: 80px;
+            animation: spin 1s linear infinite;
+            margin: 2rem auto;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .success-box {
+            background: #ecfdf5;
+            border: 2px solid #10b981;
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            margin: 1rem 0;
+            text-align: center;
+        }
+        .match-card {
+            border: 2px solid #e5e7eb;
+            border-radius: 0.5rem;
+            padding: 1rem;
+            margin-bottom: 0.75rem;
+        }
+        .match-card.played {
+            background: #ecfdf5;
+            border-color: #10b981;
+        }
+        .match-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        .score-input {
+            width: 60px;
+            text-align: center;
+        }
+        .leader-row {
+            background: #fef3c7 !important;
+        }
+        .small-text {
+            font-size: 0.75rem;
+            color: #6b7280;
         }
     </style>
 </head>
 <body>
-    <div id="root"></div>
-
-    <script type="text/babel">
-        const { useState, useEffect } = React;
-
-        const Icon = ({ name, className = "" }) => {
-            const icons = {
-                trophy: <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6M18 9h1.5a2.5 2.5 0 0 0 0-5H18M4 22h16M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22M18 2H6v7a6 6 0 0 0 12 0V2Z"/>,
-                users: <><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></>,
-                shuffle: <><path d="M2 18h1.4c1.3 0 2.5-.6 3.3-1.7l6.1-8.6c.7-1.1 2-1.7 3.3-1.7H22"/><polyline points="18 2 22 6 18 10"/><path d="M2 6h1.9c1.5 0 2.9.9 3.6 2.2"/><path d="M22 18h-5.9c-1.3 0-2.6-.7-3.3-1.8l-.5-.8"/><polyline points="18 14 22 18 18 22"/></>,
-                calendar: <><path d="M8 2v4M16 2v4M3 10h18"/><rect width="18" height="18" x="3" y="4" rx="2"/></>,
-                barChart: <><path d="M12 20V10M18 20V4M6 20v-4"/></>,
-                plus: <><path d="M5 12h14M12 5v14"/></>,
-                x: <><path d="m18 6-12 12M6 6l12 12"/></>,
-                check: <path d="M20 6 9 17l-5-5"/>,
-                edit: <><path d="M12 20h9M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"/></>,
-                download: <><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/>,
-                upload: <><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M17 8l-5-5-5 5M12 3v12"/>,
-            };
-            return <svg className={`icon ${className}`} viewBox="0 0 24 24">{icons[name]}</svg>;
-        };
-
-        const TournamentManager = () => {
-            const [activeTab, setActiveTab] = useState('setup');
-            const [tournamentName, setTournamentName] = useState('');
-            const [season, setSeason] = useState('2024-25');
-            const [teams, setTeams] = useState([]);
-            const [matchCount, setMatchCount] = useState(8);
-            const [matches, setMatches] = useState([]);
-            const [fixtures, setFixtures] = useState([]);
-            const [startDate, setStartDate] = useState('');
-            const [drawInProgress, setDrawInProgress] = useState(false);
-            const [selectedTeam, setSelectedTeam] = useState(null);
-            const [newTeam, setNewTeam] = useState({ name: '', country: '', logo: '' });
-
-            const addTeam = () => {
-                if (newTeam.name && newTeam.country) {
-                    setTeams([...teams, { ...newTeam, id: Date.now() }]);
-                    setNewTeam({ name: '', country: '', logo: '' });
-                }
-            };
-
-            const removeTeam = (id) => {
-                setTeams(teams.filter(t => t.id !== id));
-            };
-
-            const handleFileUpload = (e) => {
-                const file = e.target.files[0];
-                if (!file) return;
-
-                const reader = new FileReader();
-                reader.onload = (event) => {
-                    const data = new Uint8Array(event.target.result);
-                    const workbook = XLSX.read(data, { type: 'array' });
-                    const worksheet = workbook.Sheets[workbook.SheetNames[0]];
-                    const jsonData = XLSX.utils.sheet_to_json(worksheet);
-                    
-                    const importedTeams = jsonData.map((row, index) => ({
-                        id: Date.now() + index,
-                        name: row['Takım Adı'] || row['Team Name'] || row['Name'] || '',
-                        country: row['Ülke'] || row['Country'] || '',
-                        logo: row['Logo'] || ''
-                    })).filter(t => t.name);
-
-                    setTeams([...teams, ...importedTeams]);
-                };
-                reader.readAsArrayBuffer(file);
-            };
-
-            const performDraw = () => {
-                if (teams.length < 2) {
-                    alert('En az 2 takım gerekli!');
-                    return;
-                }
-
-                setDrawInProgress(true);
-                
-                setTimeout(() => {
-                    const newMatches = [];
-                    const teamsCopy = [...teams];
-                    const opponents = {};
-
-                    teams.forEach(team => {
-                        opponents[team.id] = [];
-                    });
-
-                    teams.forEach(team => {
-                        const availableOpponents = teamsCopy.filter(t => 
-                            t.id !== team.id && 
-                            opponents[team.id].length < matchCount &&
-                            !opponents[team.id].includes(t.id) &&
-                            opponents[t.id].length < matchCount &&
-                            !opponents[t.id].includes(team.id)
-                        );
-
-                        while (opponents[team.id].length < matchCount && availableOpponents.length > 0) {
-                            const randomIndex = Math.floor(Math.random() * availableOpponents.length);
-                            const opponent = availableOpponents[randomIndex];
-                            
-                            if (!opponents[team.id].includes(opponent.id) && 
-                                !opponents[opponent.id].includes(team.id) &&
-                                opponents[opponent.id].length < matchCount) {
-                                
-                                const isHome = Math.random() > 0.5;
-                                const match = {
-                                    id: Date.now() + newMatches.length,
-                                    homeTeam: isHome ? team : opponent,
-                                    awayTeam: isHome ? opponent : team,
-                                    homeScore: null,
-                                    awayScore: null,
-                                    date: null,
-                                    played: false
-                                };
-                                
-                                newMatches.push(match);
-                                opponents[team.id].push(opponent.id);
-                                opponents[opponent.id].push(team.id);
-                            }
-                            
-                            availableOpponents.splice(randomIndex, 1);
-                        }
-                    });
-
-                    setMatches(newMatches);
-                    setDrawInProgress(false);
-                    setActiveTab('fixtures');
-                }, 2000);
-            };
-
-            const generateFixtures = () => {
-                if (!startDate || matches.length === 0) return;
-
-                const fixtureList = [];
-                let currentDate = new Date(startDate);
-                let matchIndex = 0;
-
-                while (matchIndex < matches.length) {
-                    const dayOfWeek = currentDate.getDay();
-                    
-                    if (dayOfWeek === 0 || dayOfWeek === 6) {
-                        currentDate.setDate(currentDate.getDate() + 1);
-                        continue;
-                    }
-
-                    const matchesPerDay = dayOfWeek === 1 ? 2 : 1;
-                    
-                    for (let i = 0; i < matchesPerDay && matchIndex < matches.length; i++) {
-                        fixtureList.push({
-                            ...matches[matchIndex],
-                            date: new Date(currentDate).toISOString().split('T')[0],
-                            time: i === 0 ? '19:00' : '21:45'
-                        });
-                        matchIndex++;
-                    }
-
-                    currentDate.setDate(currentDate.getDate() + 1);
-                }
-
-                setFixtures(fixtureList);
-            };
-
-            useEffect(() => {
-                if (startDate && matches.length > 0) {
-                    generateFixtures();
-                }
-            }, [startDate, matches]);
-
-            const updateScore = (fixtureId, homeScore, awayScore) => {
-                setFixtures(fixtures.map(f => 
-                    f.id === fixtureId 
-                        ? { ...f, homeScore: parseInt(homeScore) || 0, awayScore: parseInt(awayScore) || 0, played: true }
-                        : f
-                ));
-            };
-
-            const calculateStandings = () => {
-                const standings = {};
-                
-                teams.forEach(team => {
-                    standings[team.id] = {
-                        team: team,
-                        played: 0,
-                        won: 0,
-                        drawn: 0,
-                        lost: 0,
-                        goalsFor: 0,
-                        goalsAgainst: 0,
-                        goalDifference: 0,
-                        points: 0
-                    };
-                });
-
-                fixtures.forEach(fixture => {
-                    if (fixture.played && fixture.homeScore !== null && fixture.awayScore !== null) {
-                        const homeStats = standings[fixture.homeTeam.id];
-                        const awayStats = standings[fixture.awayTeam.id];
-
-                        homeStats.played++;
-                        awayStats.played++;
-                        homeStats.goalsFor += fixture.homeScore;
-                        homeStats.goalsAgainst += fixture.awayScore;
-                        awayStats.goalsFor += fixture.awayScore;
-                        awayStats.goalsAgainst += fixture.homeScore;
-
-                        if (fixture.homeScore > fixture.awayScore) {
-                            homeStats.won++;
-                            homeStats.points += 3;
-                            awayStats.lost++;
-                        } else if (fixture.homeScore < fixture.awayScore) {
-                            awayStats.won++;
-                            awayStats.points += 3;
-                            homeStats.lost++;
-                        } else {
-                            homeStats.drawn++;
-                            awayStats.drawn++;
-                            homeStats.points += 1;
-                            awayStats.points += 1;
-                        }
-
-                        homeStats.goalDifference = homeStats.goalsFor - homeStats.goalsAgainst;
-                        awayStats.goalDifference = awayStats.goalsFor - awayStats.goalsAgainst;
-                    }
-                });
-
-                return Object.values(standings).sort((a, b) => {
-                    if (b.points !== a.points) return b.points - a.points;
-                    if (b.goalDifference !== a.goalDifference) return b.goalDifference - a.goalDifference;
-                    return b.goalsFor - a.goalsFor;
-                });
-            };
-
-            const getStats = () => {
-                const standings = calculateStandings();
-                const totalMatches = fixtures.filter(f => f.played).length;
-                const totalGoals = fixtures.reduce((sum, f) => 
-                    f.played ? sum + (f.homeScore || 0) + (f.awayScore || 0) : sum, 0
-                );
-                
-                return {
-                    totalMatches,
-                    totalGoals,
-                    avgGoals: totalMatches > 0 ? (totalGoals / totalMatches).toFixed(2) : 0,
-                    topTeam: standings[0]?.team?.name || '-'
-                };
-            };
-
-            const stats = getStats();
-
-            return (
-                <div className="min-h-screen bg-gradient-to-br from-blue-900 via-blue-800 to-blue-900">
-                    <div className="bg-blue-950 border-b-4 border-yellow-400 shadow-xl">
-                        <div className="max-w-7xl mx-auto px-4 py-6">
-                            <div className="flex items-center justify-between flex-wrap gap-4">
-                                <div className="flex items-center gap-3">
-                                    <Icon name="trophy" className="w-10 h-10 text-yellow-400" />
-                                    <div>
-                                        <h1 className="text-3xl font-bold text-white">
-                                            {tournamentName || 'Turnuva Yönetimi'}
-                                        </h1>
-                                        <p className="text-yellow-400 text-sm">{season} Sezonu</p>
-                                    </div>
-                                </div>
-                                <div className="flex gap-6 text-white">
-                                    <div className="text-center">
-                                        <div className="text-2xl font-bold text-yellow-400">{stats.totalMatches}</div>
-                                        <div className="text-xs">Oynanan Maç</div>
-                                    </div>
-                                    <div className="text-center">
-                                        <div className="text-2xl font-bold text-yellow-400">{stats.totalGoals}</div>
-                                        <div className="text-xs">Toplam Gol</div>
-                                    </div>
-                                    <div className="text-center">
-                                        <div className="text-2xl font-bold text-yellow-400">{stats.avgGoals}</div>
-                                        <div className="text-xs">Ort. Gol</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div className="bg-blue-900 border-b-2 border-blue-800">
-                        <div className="max-w-7xl mx-auto px-4">
-                            <div className="flex gap-1 overflow-x-auto">
-                                {[
-                                    { id: 'setup', label: 'Takımlar', icon: 'users' },
-                                    { id: 'draw', label: 'Kura Çekimi', icon: 'shuffle' },
-                                    { id: 'fixtures', label: 'Fikstür', icon: 'calendar' },
-                                    { id: 'standings', label: 'Puan Durumu', icon: 'barChart' }
-                                ].map(tab => (
-                                    <button
-                                        key={tab.id}
-                                        onClick={() => setActiveTab(tab.id)}
-                                        className={`flex items-center gap-2 px-6 py-4 font-semibold transition-all whitespace-nowrap ${
-                                            activeTab === tab.id
-                                                ? 'bg-blue-800 text-yellow-400 border-b-4 border-yellow-400'
-                                                : 'text-white hover:bg-blue-800/50'
-                                        }`}
-                                    >
-                                        <Icon name={tab.icon} />
-                                        {tab.label}
-                                    </button>
-                                ))}
-                            </div>
-                        </div>
-                    </div>
-
-                    <div className="max-w-7xl mx-auto px-4 py-8">
-                        {activeTab === 'setup' && (
-                            <div className="space-y-6">
-                                <div className="bg-white rounded-lg shadow-xl p-6">
-                                    <h2 className="text-2xl font-bold text-blue-900 mb-4">Turnuva Bilgileri</h2>
-                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                        <div>
-                                            <label className="block text-sm font-medium text-gray-700 mb-2">Turnuva Adı</label>
-                                            <input
-                                                type="text"
-                                                value={tournamentName}
-                                                onChange={(e) => setTournamentName(e.target.value)}
-                                                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                                                placeholder="Örn: UEFA Champions League"
-                                            />
-                                        </div>
-                                        <div>
-                                            <label className="block text-sm font-medium text-gray-700 mb-2">Sezon</label>
-                                            <input
-                                                type="text"
-                                                value={season}
-                                                onChange={(e) => setSeason(e.target.value)}
-                                                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                                            />
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div className="bg-white rounded-lg shadow-xl p-6">
-                                    <h2 className="text-2xl font-bold text-blue-900 mb-4">Takım Ekle</h2>
-                                    <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-4">
-                                        <input
-                                            type="text"
-                                            placeholder="Takım Adı"
-                                            value={newTeam.name}
-                                            onChange={(e) => setNewTeam({...newTeam, name: e.target.value})}
-                                            className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
-                                        />
-                                        <input
-                                            type="text"
-                                            placeholder="Ülke"
-                                            value={newTeam.country}
-                                            onChange={(e) => setNewTeam({...newTeam, country: e.target.value})}
-                                            className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
-                                        />
-                                        <input
-                                            type="text"
-                                            placeholder="Logo URL (opsiyonel)"
-                                            value={newTeam.logo}
-                                            onChange={(e) => setNewTeam({...newTeam, logo: e.target.value})}
-                                            className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
-                                        />
-                                        <button
-                                            onClick={addTeam}
-                                            className="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition flex items-center justify-center gap-2"
-                                        >
-                                            <Icon name="plus" />
-                                            Ekle
-                                        </button>
-                                    </div>
-
-                                    <div className="mb-4">
-                                        <label className="block text-sm font-medium text-gray-700 mb-2">
-                                            Excel/CSV ile Toplu Ekle
-                                        </label>
-                                        <input
-                                            type="file"
-                                            accept=".xlsx,.xls,.csv"
-                                            onChange={handleFileUpload}
-                                            className="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"
-                                        />
-                                        <p className="text-xs text-gray-500 mt-1">Sütunlar: "Takım Adı", "Ülke", "Logo"</p>
-                                    </div>
-
-                                    <div className="mb-4">
-                                        <label className="block text-sm font-medium text-gray-700 mb-2">
-                                            Maç Sayısı (Her takım kaç maç oynayacak)
-                                        </label>
-                                        <input
-                                            type="number"
-                                            min="2"
-                                            max="20"
-                                            value={matchCount}
-                                            onChange={(e) => setMatchCount(parseInt(e.target.value))}
-                                            className="w-32 px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
-                                        />
-                                    </div>
-
-                                    <h3 className="text-lg font-bold text-blue-900 mb-3">Kayıtlı Takımlar ({teams.length})</h3>
-                                    <div className="overflow-x-auto">
-                                        <table className="w-full">
-                                            <thead className="bg-gray-50">
-                                                <tr>
-                                                    <th className="px-4 py-3 text-left text-sm font-semibold text-gray-700">Takım Adı</th>
-                                                    <th className="px-4 py-3 text-left text-sm font-semibold text-gray-700">Ülke</th>
-                                                    <th className="px-4 py-3 text-left text-sm font-semibold text-gray-700">Logo</th>
-                                                    <th className="px-4 py-3 text-center text-sm font-semibold text-gray-700">İşlem</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody className="divide-y divide-gray-200">
-                                                {teams.map(team => (
-                                                    <tr key={team.id} className="hover:bg-gray-50">
-                                                        <td className="px-4 py-3 text-sm font-medium text-gray-900">{team.name}</td>
-                                                        <td className="px-4 py-3 text-sm text-gray-600">{team.country}</td>
-                                                        <td className="px-4 py-3 text-sm text-gray-600">
-                                                            {team.logo ? (
-                                                                <img src={team.logo} alt={team.name} className="w-8 h-8 object-contain" />
-                                                            ) : (
-                                                                <span className="text-gray-400">-</span>
-                                                            )}
-                                                        </td>
-                                                        <td className="px-4 py-3 text-center">
-                                                            <button
-                                                                onClick={() => removeTeam(team.id)}
-                                                                className="text-red-600 hover:text-red-800"
-                                                            >
-                                                                <Icon name="x" />
-                                                            </button>
-                                                        </td>
-                                                    </tr>
-                                                ))}
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
-                        )}
-
-                        {activeTab === 'draw' && (
-                            <div className="space-y-6">
-                                <div className="bg-white rounded-lg shadow-xl p-8 text-center">
-                                    <h2 className="text-3xl font-bold text-blue-900 mb-6">Kura Çekimi</h2>
-                                    
-                                    {drawInProgress ? (
-                                        <div className="py-16">
-                                            <div className="animate-spin rounded-full h-24 w-24 border-b-4 border-yellow-400 mx-auto mb-6"></div>
-                                            <p className="text-xl text-gray-600">Eşleşmeler oluşturuluyor...</p>
-                                        </div>
-                                    ) : matches.length === 0 ? (
-                                        <div>
-                                            <p className="text-gray-600 mb-6 text-lg">
-                                                {teams.length} takım kayıtlı. Her takım {matchCount} farklı rakiple karşılaşacak.
-                                            </p>
-                                            <button
-                                                onClick={performDraw}
-                                                disabled={teams.length < 2}
-                                                className="bg-gradient-to-r from-blue-600 to-blue-700 text-white px-12 py-4 rounded-lg text-xl font-bold hover:from-blue-700 hover:to-blue-800 transition disabled:opacity-50 disabled:cursor-not-allowed inline-flex items-center gap-3"
-                                            >
-                                                <Icon name="shuffle" />
-                                                Kura Çekimini Başlat
-                                            </button>
-                                        </div>
-                                    ) : (
-                                        <div>
-                                            <div className="bg-green-50 border-2 border-green-500 rounded-lg p-6 mb-6">
-                                                <Icon name="check" className="w-16 h-16 text-green-500 mx-auto mb-3" />
-                                                <p className="text-xl font-bold text-green-700">Kura çekimi tamamlandı!</p>
-                                                <p className="text-gray-600 mt-2">{matches.length} maç oluşturuldu</p>
-                                            </div>
-                                            
-                                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 max-h-96 overflow-y-auto">
-                                                {matches.map((match, index) => (
-                                                    <div key={match.id} className="bg-gray-50 rounded-lg p-4 border-2 border-gray-200">
-                                                        <div className="text-xs text-gray-500 mb-2">Maç #{index + 1}</div>
-                                                        <div className="flex items-center justify-between text-sm">
-                                                            <div className="font-semibold text-gray-800">{match.homeTeam.name}</div>
-                                                            <div className="text-xs text-gray-500">vs</div>
-                                                            <div className="font-semibold text-gray-800">{match.awayTeam.name}</div>
-                                                        </div>
-                                                    </div>
-                                                ))}
-                                            </div>
-
-                                            <button
-                                                onClick={() => { setMatches([]); setFixtures([]); }}
-                                                className="mt-6 bg-gray-500 text-white px-8 py-3 rounded-lg hover:bg-gray-600 transition"
-                                            >
-                                                Yeniden Kura Çek
-                                            </button>
-                                        </div>
-                                    )}
-                                </div>
-                            </div>
-                        )}
-
-                        {activeTab === 'fixtures' && (
-                            <div className="space-y-6">
-                                <div className="bg-white rounded-lg shadow-xl p-6">
-                                    <h2 className="text-2xl font-bold text-blue-900 mb-4">Maç Takvimi</h2>
-                                    
-                                    {matches.length === 0 ? (
-                                        <p className="text-gray-600 text-center py-8">Önce kura çekimi yapmalısınız.</p>
-                                    ) : (
-                                        <>
-                                            <div className="mb-6">
-                                                <label className="block text-sm font-medium text-gray-700 mb-2">Başlangıç Tarihi</label>
-                                                <input
-                                                    type="date"
-                                                    value={startDate}
-                                                    onChange={(e) => setStartDate(e.target.value)}
-                                                    className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
-                                                />
-                                                <p className="text-xs text-gray-500 mt-1">Pazartesi: 2 maç | Salı-Cuma: 1 maç | C.tesi-Pazar: Boş</p>
-                                            </div>
-
-                                            <div className="space-y-3 max-h-[600px] overflow-y-auto">
-                                                {fixtures.map((fixture) => (
-                                                    <div
-                                                        key={fixture.id}
-                                                        className={`border-2 rounded-lg p-4 transition ${
-                                                            fixture.played ? 'bg-green-50 border-green-300' : 'bg-white border-gray-200 hover:border-blue-300'
-                                                        }`}
-                                                    >
-                                                        <div className="flex items-center justify-between flex-wrap gap-4">
-                                                            <div className="flex items-center gap-4">
-                                                                <div className="text-sm font-medium text-gray-600 w-24">{fixture.date}</div>
-                                                                <div className="text-sm text-gray-500 w-16">{fixture.time}</div>
-                                                            </div>
-                                                            <div className="flex items-center gap-3 flex-1 justify-end">
-                                                                <div className="text-right font-semibold text-gray-800">{fixture.homeTeam.name}</div>
-                                                                {fixture.played ? (
-                                                                    <div className="bg-blue-900 text-yellow-400 px-4 py-2 rounded font-bold text-lg">
-                                                                        {fixture.homeScore} - {fixture.awayScore}
-                                                                    </div>
-                                                                ) : (
-                                                                    <div className="flex items-center gap-2">
-                                                                        <input
-                                                                            type="number"
-                                                                            min="0"
-                                                                            placeholder="0"
-                                                                            className="w-16 px-2 py-1 border border-gray-300 rounded text-center"
-                                                                            onChange={(e) => {
-                                                                                const val = e.target.value;
-                                                                                if (val !== '') {
-                                                                                    const awayScore = document.getElementById(`away-${fixture.id}`).value;
-                                                                                    if (awayScore !== '') updateScore(fixture.id, val, awayScore);
-                                                                                }
-                                                                            }}
-                                                                            id={`home-${fixture.id}`}
-                                                                        />
-                                                                        <span className="text-gray-500">-</span>
-                                                                        <input
-                                                                            type="number"
-                                                                            min="0"
-                                                                            placeholder="0"
-                                                                            className="w-16 px-2 py-1 border border-gray-300 rounded text-center"
-                                                                            onChange={(e) => {
-                                                                                const val = e.target.value;
-                                                                                if (val !== '') {
-                                                                                    const homeScore = document.getElementById(`home-${fixture.id}`).value;
-                                                                                    if (homeScore !== '') updateScore(fixture.id, homeScore, val);
-                                                                                }
-                                                                            }}
-                                                                            id={`away-${fixture.id}`}
-                                                                        />
-                                                                    </div>
-                                                                )}
-                                                                <div className="font-semibold text-gray-800">{fixture.awayTeam.name}</div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                ))}
-                                            </div>
-                                        </>
-                                    )}
-                                </div>
-                            </div>
-                        )}
-
-                        {activeTab === 'standings' && (
-                            <div className="space-y-6">
-                                <div className="bg-white rounded-lg shadow-xl overflow-hidden">
-                                    <div className="bg-gradient-to-r from-blue-900 to-blue-800 px-6 py-4">
-                                        <h2 className="text-2xl font-bold text-yellow-400">Puan Durumu</h2>
-                                    </div>
-                                    
-                                    <div className="overflow-x-auto">
-                                        <table className="w-full">
-                                            <thead className="bg-gray-50">
-                                                <tr>
-                                                    <th className="px-4 py-3 text-left text-sm font-semibold text-gray-700">Sıra</th>
-                                                    <th className="px-4 py-3 text-left text-sm font-semibold text-gray-700">Takım</th>
-                                                    <th className="px-4 py-3 text-center text-sm font-semibold text-gray-700">O</th>
-                                                    <th className="px-4 py-3 text-center text-sm font-semibold text-gray-700">G</th>
-                                                    <th className="px-4 py-3 text-center text-sm font-semibold text-gray-700">B</th>
-                                                    <th className="px-4 py-3 text-center text-sm font-semibold text-gray-700">M</th>
-                                                    <th className="px-4 py-3 text-center text-sm font-semibold text-gray-700">A</th>
-                                                    <th className="px-4 py-3 text-center text-sm font-semibold text-gray-700">Y</th>
-                                                    <th className="px-4 py-3 text-center text-sm font-semibold text-gray-700">Av</th>
-                                                    <th className="px-4 py-3 text-center text-sm font-semibold text-gray-700">Puan</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody className="divide-y divide-gray-200">
-                                                {calculateStandings().map((standing, index) => (
-                                                    <tr
-                                                        key={standing.team.id}
-                                                        className={`hover:bg-gray-50 cursor-pointer ${index === 0 ? 'bg-yellow-50' : ''}`}
-                                                        onClick={() => setSelectedTeam(standing.team)}
-                                                    >
-                                                        <td className="px-4 py-3 text-center">
-                                                            <span className={`font-bold ${index === 0 ? 'text-yellow-600' : 'text-gray-600'}`}>
-                                                                {index + 1}
-                                                            </span>
-                                                        </td>
-                                                        <td className="px-4 py-3">
-                                                            <div className="flex items-center gap-2">
-                                                                {standing.team.logo && (
-                                                                    <img src={standing.team.logo} alt="" className="w-6 h-6 object-contain" />
-                                                                )}
-                                                                <div>
-                                                                    <div className="font-semibold text-gray-800">{standing.team.name}</div>
-                                                                    <div className="text-xs text-gray-500">{standing.team.country}</div>
-                                                                </div>
-                                                            </div>
-                                                        </td>
-                                                        <td className="px-4 py-3 text-center text-sm text-gray-600">{standing.played}</td>
-                                                        <td className="px-4 py-3 text-center text-sm text-gray-600">{standing.won}</td>
-                                                        <td className="px-4 py-3 text-center text-sm text-gray-600">{standing.drawn}</td>
-                                                        <td className="px-4 py-3 text-center text-sm text-gray-600">{standing.lost}</td>
-                                                        <td className="px-4 py-3 text-center text-sm text-gray-600">{standing.goalsFor}</td>
-                                                        <td className="px-4 py-3 text-center text-sm text-gray-600">{standing.goalsAgainst}</td>
-                                                        <td className="px-4 py-3 text-center text-sm font-medium text-gray-800">
-                                                            {standing.goalDifference > 0 ? '+' : ''}{standing.goalDifference}
-                                                        </td>
-                                                        <td className="px-4 py-3 text-center">
-                                                            <span className="font-bold text-lg text-blue-900">{standing.points}</span>
-                                                        </td>
-                                                    </tr>
-                                                ))}
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
-                        )}
-                    </div>
-
-                    {selectedTeam && (
-                        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-                            <div className="bg-white rounded-lg max-w-2xl w-full max-h-[90vh] overflow-y-auto">
-                                <div className="bg-gradient-to-r from-blue-900 to-blue-800 px-6 py-4 flex items-center justify-between">
-                                    <div className="flex items-center gap-3">
-                                        {selectedTeam.logo && (
-                                            <img src={selectedTeam.logo} alt="" className="w-12 h-12 object-contain" />
-                                        )}
-                                        <div>
-                                            <h3 className="text-2xl font-bold text-white">{selectedTeam.name}</h3>
-                                            <p className="text-yellow-400">{selectedTeam.country}</p>
-                                        </div>
-                                    </div>
-                                    <button onClick={() => setSelectedTeam(null)} className="text-white hover:text-yellow-400">
-                                        <Icon name="x" className="w-6 h-6" />
-                                    </button>
-                                </div>
-                                
-                                <div className="p-6">
-                                    <h4 className="font-bold text-lg text-gray-800 mb-3">Maç Programı</h4>
-                                    <div className="space-y-2">
-                                        {fixtures
-                                            .filter(f => f.homeTeam.id === selectedTeam.id || f.awayTeam.id === selectedTeam.id)
-                                            .map(fixture => (
-                                                <div key={fixture.id} className="border rounded-lg p-3 bg-gray-50">
-                                                    <div className="flex items-center justify-between text-sm">
-                                                        <span className="text-gray-600">{fixture.date}</span>
-                                                        <div className="flex items-center gap-2">
-                                                            <span className={fixture.homeTeam.id === selectedTeam.id ? 'font-bold' : ''}>
-                                                                {fixture.homeTeam.name}
-                                                            </span>
-                                                            {fixture.played ? (
-                                                                <span className="font-bold text-blue-900">{fixture.homeScore} - {fixture.awayScore}</span>
-                                                            ) : (
-                                                                <span className="text-gray-500">vs</span>
-                                                            )}
-                                                            <span className={fixture.awayTeam.id === selectedTeam.id ? 'font-bold' : ''}>
-                                                                {fixture.awayTeam.name}
-                                                            </span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            ))}
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    )}
+    <div class="header">
+        <div class="header-content">
+            <div class="title-section">
+                <div>
+                    <div class="title" id="tournamentTitle">Turnuva Yönetimi</div>
+                    <div class="season" id="seasonText">2024-25 Sezonu</div>
                 </div>
-            );
-        };
+            </div>
+            <div class="stats">
+                <div class="stat-item">
+                    <div class="stat-value" id="statMatches">0</div>
+                    <div class="stat-label">Oynanan Maç</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value" id="statGoals">0</div>
+                    <div class="stat-label">Toplam Gol</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value" id="statAvg">0</div>
+                    <div class="stat-label">Ort. Gol</div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-        ReactDOM.render(<TournamentManager />, document.getElementById('root'));
+    <div class="nav">
+        <div class="nav-content">
+            <button class="nav-btn active" onclick="showTab('setup')">📋 Takımlar</button>
+            <button class="nav-btn" onclick="showTab('draw')">🎲 Kura Çekimi</button>
+            <button class="nav-btn" onclick="showTab('fixtures')">📅 Fikstür</button>
+            <button class="nav-btn" onclick="showTab('standings')">🏆 Puan Durumu</button>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- Takımlar Sekmesi -->
+        <div id="tab-setup">
+            <div class="card">
+                <h2 class="card-title">Turnuva Bilgileri</h2>
+                <div class="grid-2">
+                    <div class="form-group">
+                        <label class="form-label">Turnuva Adı</label>
+                        <input type="text" class="form-input" id="inputTournamentName" placeholder="Örn: UEFA Champions League">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Sezon</label>
+                        <input type="text" class="form-input" id="inputSeason" value="2024-25">
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2 class="card-title">Takım Ekle</h2>
+                <div class="grid-4">
+                    <input type="text" class="form-input" id="inputTeamName" placeholder="Takım Adı">
+                    <input type="text" class="form-input" id="inputTeamCountry" placeholder="Ülke">
+                    <input type="text" class="form-input" id="inputTeamLogo" placeholder="Logo URL">
+                    <button class="btn btn-primary" onclick="addTeam()">➕ Ekle</button>
+                </div>
+                <div class="form-group" style="margin-top: 1rem;">
+                    <label class="form-label">Excel/CSV ile Toplu Ekle</label>
+                    <input type="file" accept=".xlsx,.xls,.csv" onchange="handleFileUpload(event)" class="form-input">
+                    <p class="small-text">Sütunlar: "Takım Adı", "Ülke", "Logo"</p>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Maç Sayısı (Her takım kaç maç oynayacak)</label>
+                    <input type="number" class="form-input" id="inputMatchCount" value="8" min="2" max="20" style="width: 150px;">
+                </div>
+                <h3 class="card-title">Kayıtlı Takımlar (<span id="teamCount">0</span>)</h3>
+                <table id="teamsTable">
+                    <thead>
+                        <tr>
+                            <th>Takım Adı</th>
+                            <th>Ülke</th>
+                            <th style="text-align: center;">İşlem</th>
+                        </tr>
+                    </thead>
+                    <tbody id="teamsBody"></tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Kura Çekimi Sekmesi -->
+        <div id="tab-draw" class="hidden">
+            <div class="card text-center">
+                <h2 class="card-title">Kura Çekimi</h2>
+                <div id="drawContent"></div>
+            </div>
+        </div>
+
+        <!-- Fikstür Sekmesi -->
+        <div id="tab-fixtures" class="hidden">
+            <div class="card">
+                <h2 class="card-title">Maç Takvimi</h2>
+                <div id="fixturesContent"></div>
+            </div>
+        </div>
+
+        <!-- Puan Durumu Sekmesi -->
+        <div id="tab-standings" class="hidden">
+            <div class="card">
+                <h2 class="card-title" style="background: linear-gradient(to right, #1e3a8a, #1e40af); color: #fbbf24; padding: 1rem; border-radius: 0.5rem 0.5rem 0 0; margin: -1.5rem -1.5rem 1rem -1.5rem;">Puan Durumu</h2>
+                <table id="standingsTable">
+                    <thead>
+                        <tr>
+                            <th style="text-align: center;">#</th>
+                            <th>Takım</th>
+                            <th style="text-align: center;">O</th>
+                            <th style="text-align: center;">G</th>
+                            <th style="text-align: center;">B</th>
+                            <th style="text-align: center;">M</th>
+                            <th style="text-align: center;">A</th>
+                            <th style="text-align: center;">Y</th>
+                            <th style="text-align: center;">Av</th>
+                            <th style="text-align: center;">Puan</th>
+                        </tr>
+                    </thead>
+                    <tbody id="standingsBody"></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let teams = [];
+        let matches = [];
+        let fixtures = [];
+        let matchCount = 8;
+
+        function showTab(tab) {
+            ['setup', 'draw', 'fixtures', 'standings'].forEach(t => {
+                document.getElementById('tab-' + t).classList.add('hidden');
+            });
+            document.getElementById('tab-' + tab).classList.remove('hidden');
+            
+            document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+
+            if (tab === 'draw') renderDraw();
+            if (tab === 'fixtures') renderFixtures();
+            if (tab === 'standings') renderStandings();
+        }
+
+        function updateHeader() {
+            const name = document.getElementById('inputTournamentName').value || 'Turnuva Yönetimi';
+            const season = document.getElementById('inputSeason').value || '2024-25';
+            document.getElementById('tournamentTitle').textContent = name;
+            document.getElementById('seasonText').textContent = season + ' Sezonu';
+            updateStats();
+        }
+
+        function updateStats() {
+            const played = fixtures.filter(f => f.played).length;
+            const goals = fixtures.filter(f => f.played).reduce((sum, f) => sum + f.homeScore + f.awayScore, 0);
+            const avg = played > 0 ? (goals / played).toFixed(2) : 0;
+            
+            document.getElementById('statMatches').textContent = played;
+            document.getElementById('statGoals').textContent = goals;
+            document.getElementById('statAvg').textContent = avg;
+        }
+
+        function addTeam() {
+            const name = document.getElementById('inputTeamName').value.trim();
+            const country = document.getElementById('inputTeamCountry').value.trim();
+            const logo = document.getElementById('inputTeamLogo').value.trim();
+            
+            if (!name || !country) {
+                alert('Takım adı ve ülke gerekli!');
+                return;
+            }
+            
+            teams.push({ id: Date.now(), name, country, logo });
+            document.getElementById('inputTeamName').value = '';
+            document.getElementById('inputTeamCountry').value = '';
+            document.getElementById('inputTeamLogo').value = '';
+            renderTeams();
+        }
+
+        function removeTeam(id) {
+            teams = teams.filter(t => t.id !== id);
+            renderTeams();
+        }
+
+        function renderTeams() {
+            const tbody = document.getElementById('teamsBody');
+            tbody.innerHTML = '';
+            teams.forEach(team => {
+                const row = tbody.insertRow();
+                row.innerHTML = `
+                    <td><strong>${team.name}</strong></td>
+                    <td>${team.country}</td>
+                    <td style="text-align: center;">
+                        <button class="btn btn-danger" onclick="removeTeam(${team.id})">❌</button>
+                    </td>
+                `;
+            });
+            document.getElementById('teamCount').textContent = teams.length;
+        }
+
+        function handleFileUpload(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                try {
+                    const data = new Uint8Array(e.target.result);
+                    const workbook = XLSX.read(data, { type: 'array' });
+                    const sheet = workbook.Sheets[workbook.SheetNames[0]];
+                    const json = XLSX.utils.sheet_to_json(sheet);
+                    
+                    json.forEach(row => {
+                        const name = row['Takım Adı'] || row['Team Name'] || row['Name'] || '';
+                        const country = row['Ülke'] || row['Country'] || '';
+                        const logo = row['Logo'] || '';
+                        if (name) {
+                            teams.push({ id: Date.now() + teams.length, name, country, logo });
+                        }
+                    });
+                    renderTeams();
+                    alert(json.length + ' takım eklendi!');
+                } catch (err) {
+                    alert('Dosya okuma hatası: ' + err.message);
+                }
+            };
+            reader.readAsArrayBuffer(file);
+        }
+
+        function performDraw() {
+            if (teams.length < 2) {
+                alert('En az 2 takım gerekli!');
+                return;
+            }
+
+            matchCount = parseInt(document.getElementById('inputMatchCount').value);
+            
+            document.getElementById('drawContent').innerHTML = '<div class="spinner"></div><p>Eşleşmeler oluşturuluyor...</p>';
+            
+            setTimeout(() => {
+                matches = [];
+                const opponents = {};
+                teams.forEach(team => opponents[team.id] = []);
+
+                teams.forEach(team => {
+                    const available = teams.filter(t => 
+                        t.id !== team.id && 
+                        opponents[team.id].length < matchCount &&
+                        !opponents[team.id].includes(t.id) &&
+                        opponents[t.id].length < matchCount &&
+                        !opponents[t.id].includes(team.id)
+                    );
+
+                    while (opponents[team.id].length < matchCount && available.length > 0) {
+                        const idx = Math.floor(Math.random() * available.length);
+                        const opp = available[idx];
+                        
+                        if (!opponents[team.id].includes(opp.id) && 
+                            !opponents[opp.id].includes(team.id) &&
+                            opponents[opp.id].length < matchCount) {
+                            
+                            const isHome = Math.random() > 0.5;
+                            matches.push({
+                                id: Date.now() + matches.length,
+                                homeTeam: isHome ? team : opp,
+                                awayTeam: isHome ? opp : team,
+                                homeScore: null,
+                                awayScore: null,
+                                played: false
+                            });
+                            opponents[team.id].push(opp.id);
+                            opponents[opp.id].push(team.id);
+                        }
+                        available.splice(idx, 1);
+                    }
+                });
+
+                renderDraw();
+            }, 2000);
+        }
+
+        function renderDraw() {
+            const content = document.getElementById('drawContent');
+            if (matches.length === 0) {
+                content.innerHTML = `
+                    <p style="margin: 2rem 0;">${teams.length} takım kayıtlı. Her takım ${matchCount} farklı rakiple karşılaşacak.</p>
+                    <button class="btn btn-primary btn-large" onclick="performDraw()">🎲 Kura Çekimini Başlat</button>
+                `;
+            } else {
+                let html = `
+                    <div class="success-box">
+                        <h3 style="color: #10b981; font-size: 1.5rem;">✅ Kura çekimi tamamlandı!</h3>
+                        <p style="color: #6b7280; margin-top: 0.5rem;">${matches.length} maç oluşturuldu</p>
+                    </div>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; max-height: 400px; overflow-y: auto; margin: 1rem 0;">
+                `;
+                matches.forEach((m, i) => {
+                    html += `
+                        <div style="background: #f9fafb; border: 2px solid #e5e7eb; border-radius: 0.5rem; padding: 1rem;">
+                            <div style="font-size: 0.75rem; color: #6b7280; margin-bottom: 0.5rem;">Maç #${i + 1}</div>
+                            <div style="display: flex; justify-content: space-between; align-items: center; font-size: 0.875rem;">
+                                <strong>${m.homeTeam.name}</strong>
+                                <span style="color: #6b7280;">vs</span>
+                                <strong>${m.awayTeam.name}</strong>
+                            </div>
+                        </div>
+                    `;
+                });
+                html += `</div>
+                    <button class="btn btn-secondary" onclick="matches = []; fixtures = []; renderDraw();">Yeniden Kura Çek</button>
+                `;
+                content.innerHTML = html;
+            }
+        }
+
+        function generateFixtures() {
+            const startDate = document.getElementById('inputStartDate').value;
+            if (!startDate) return;
+
+            fixtures = [];
+            let current = new Date(startDate);
+            let idx = 0;
+
+            while (idx < matches.length) {
+                const day = current.getDay();
+                if (day === 0 || day === 6) {
+                    current.setDate(current.getDate() + 1);
+                    continue;
+                }
+
+                const count = day === 1 ? 2 : 1;
+                for (let i = 0; i < count && idx < matches.length; i++) {
+                    fixtures.push({
+                        ...matches[idx],
+                        date: current.toISOString().split('T')[0],
+                        time: i === 0 ? '19:00' : '21:45'
+                    });
+                    idx++;
+                }
+                current.setDate(current.getDate() + 1);
+            }
+            renderFixtures();
+        }
+
+        function renderFixtures() {
+            const content = document.getElementById('fixturesContent');
+            if (matches.length === 0) {
+                content.innerHTML = '<p class="text-center">Önce kura çekimi yapmalısınız.</p>';
+                return;
+            }
+
+            let html = `
+                <div class="form-group">
+                    <label class="form-label">Başlangıç Tarihi</label>
+                    <input type="date" class="form-input" id="inputStartDate" onchange="generateFixtures()" style="width: 200px;">
+                    <p class="small-text">Pazartesi: 2 maç | Salı-Cuma: 1 maç | C.tesi-Pazar: Boş</p>
+                </div>
+                <div style="max-height: 600px; overflow-y: auto;">
+            `;
+
+            fixtures.forEach(f => {
+                html += `
+                    <div class="match-card ${f.played ? 'played' : ''}">
+                        <div class="match-row">
+                            <div>
+                                <strong>${f.date}</strong> <span style="color: #6b7280;">${f.time}</span>
+                            </div>
+                            <div style="display: flex; align-items: center; gap: 1rem;">
+                                <strong>${f.homeTeam.name}</strong>
+                                ${f.played ? 
+                                    `<div style="background: #1e3a8a; color: #fbbf24; padding: 0.5rem 1rem; border-radius: 0.5rem; font-weight: bold; font-size: 1.1rem;">
+                                        ${f.homeScore} - ${f.awayScore}
+                                    </div>` :
+                                    `<input type="number" min="0" placeholder="0" class="form-input score-input" id="home-${f.id}">
+                                    <span>-</span>
+                                    <input type="number" min="0" placeholder="0" class="form-input score-input" id="away-${f.id}">
+                                    <button class="btn btn-primary" onclick="saveScore(${f.id})">Kaydet</button>`
+                                }
+                                <strong>${f.awayTeam.name}</strong>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+            html += '</div>';
+            content.innerHTML = html;
+        }
+
+        function saveScore(fixtureId) {
+            const homeVal = document.getElementById(`home-${fixtureId}`).value;
+            const awayVal = document.getElementById(`away-${fixtureId}`).value;
+            
+            if (!homeVal || !awayVal) {
+                alert('Her iki skoru da girin!');
+                return;
+            }
+
+            fixtures = fixtures.map(f => 
+                f.id === fixtureId ? 
+                { ...f, homeScore: parseInt(homeVal), awayScore: parseInt(awayVal), played: true } : 
+                f
+            );
+            
+            renderFixtures();
+            updateStats();
+        }
+
+        function renderStandings() {
+            const standings = {};
+            teams.forEach(team => {
+                standings[team.id] = {
+                    team, played: 0, won: 0, drawn: 0, lost: 0,
+                    goalsFor: 0, goalsAgainst: 0, goalDifference: 0, points: 0
+                };
+            });
+
+            fixtures.forEach(f => {
+                if (f.played) {
+                    const home = standings[f.homeTeam.id];
+                    const away = standings[f.awayTeam.id];
+
+                    home.played++;
+                    away.played++;
+                    home.goalsFor += f.homeScore;
+                    home.goalsAgainst += f.awayScore;
+                    away.goalsFor += f.awayScore;
+                    away.goalsAgainst += f.homeScore;
+
+                    if (f.homeScore > f.awayScore) {
+                        home.won++;
+                        home.points += 3;
+                        away.lost++;
+                    } else if (f.homeScore < f.awayScore) {
+                        away.won++;
+                        away.points += 3;
+                        home.lost++;
+                    } else {
+                        home.drawn++;
+                        away.drawn++;
+                        home.points++;
+                        away.points++;
+                    }
+
+                    home.goalDifference = home.goalsFor - home.goalsAgainst;
+                    away.goalDifference = away.goalsFor - away.goalsAgainst;
+                }
+            });
+
+            const sorted = Object.values(standings).sort((a, b) => {
+                if (b.points !== a.points) return b.points - a.points;
+                if (b.goalDifference !== a.goalDifference) return b.goalDifference - a.goalDifference;
+                return b.goalsFor - a.goalsFor;
+            });
+
+            const tbody = document.getElementById('standingsBody');
+            tbody.innerHTML = '';
+            sorted.forEach((s, i) => {
+                const row = tbody.insertRow();
+                row.className = i === 0 ? 'leader-row' : '';
+                row.innerHTML = `
+                    <td style="text-align: center;"><strong>${i + 1}</strong></td>
+                    <td><strong>${s.team.name}</strong><br><small style="color: #6b7280;">${s.team.country}</small></td>
+                    <td style="text-align: center;">${s.played}</td>
+                    <td style="text-align: center;">${s.won}</td>
+                    <td style="text-align: center;">${s.drawn}</td>
+                    <td style="text-align: center;">${s.lost}</td>
+                    <td style="text-align: center;">${s.goalsFor}</td>
+                    <td style="text-align: center;">${s.goalsAgainst}</td>
+                    <td style="text-align: center;"><strong>${s.goalDifference > 0 ? '+' : ''}${s.goalDifference}</strong></td>
+                    <td style="text-align: center;"><strong style="font-size: 1.2rem; color: #1e3a8a;">${s.points}</strong></td>
+                `;
+            });
+        }
+
+        // Event listeners
+        document.getElementById('inputTournamentName').addEventListener('change', updateHeader);
+        document.getElementById('inputSeason').addEventListener('change', updateHeader);
+
+        // Başlangıç
+        renderTeams();
+        renderDraw();
     </script>
 </body>
 </html>
