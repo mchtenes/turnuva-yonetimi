@@ -407,7 +407,11 @@
             <div class="form-group">
                 <label class="form-label">Başlangıç Tarihi</label>
                 <input type="date" class="form-input" id="inputStartDate" onchange="generateFixtures()" style="width: 200px;">
-                <p class="small-text">📌 Kurallar: Pazartesi 2 maç, Salı-Cuma 1 maç, Cumartesi-Pazar boş</p>
+                <p class="small-text">
+                    📌 <strong>Haftalık Program:</strong> Pazartesi 2 maç, Salı-Cuma 1 maç, Cumartesi-Pazar boş<br>
+                    🏆 <strong>Tur Sistemi:</strong> Her takım her turda sadece 1 maç oynar<br>
+                    ⏱️ <strong>Dinlenme Kuralı:</strong> Her takımın iki maçı arasında minimum 5 gün olmalıdır
+                </p>
             </div>
             <div id="fixturePreview"></div>
         </div>
@@ -702,27 +706,111 @@
             if (!startDate) return;
 
             fixtures = [];
-            let current = new Date(startDate);
-            let idx = 0;
-
-            while (idx < matches.length) {
-                const day = current.getDay();
-                if (day === 0 || day === 6) {
-                    current.setDate(current.getDate() + 1);
-                    continue;
+            
+            // ADIM 1: Maçları turlara ayır (her turda her takım sadece 1 kez oynar)
+            const rounds = [];
+            const usedMatches = new Set();
+            
+            while (usedMatches.size < matches.length) {
+                const round = [];
+                const teamsInRound = new Set();
+                
+                matches.forEach((match, idx) => {
+                    if (usedMatches.has(idx)) return;
+                    
+                    // Bu turda bu takımlar daha önce oynamadıysa ekle
+                    if (!teamsInRound.has(match.homeTeam.id) && !teamsInRound.has(match.awayTeam.id)) {
+                        round.push({...match, originalIndex: idx});
+                        teamsInRound.add(match.homeTeam.id);
+                        teamsInRound.add(match.awayTeam.id);
+                        usedMatches.add(idx);
+                    }
+                });
+                
+                if (round.length > 0) {
+                    rounds.push(round);
                 }
-
-                const count = day === 1 ? 2 : 1;
-                for (let i = 0; i < count && idx < matches.length; i++) {
-                    fixtures.push({
-                        ...matches[idx],
-                        date: current.toISOString().split('T')[0],
-                        time: i === 0 ? '19:00' : '21:45'
-                    });
-                    idx++;
-                }
-                current.setDate(current.getDate() + 1);
             }
+            
+            // ADIM 2: Her takımın son oynadığı tarihi takip et
+            const teamLastMatchDate = {};
+            let currentDate = new Date(startDate);
+            let roundNumber = 1;
+            
+            // Her turdaki maçları sırayla yerleştir
+            rounds.forEach((round) => {
+                let matchesScheduledInRound = 0;
+                
+                while (matchesScheduledInRound < round.length) {
+                    const dayOfWeek = currentDate.getDay();
+                    
+                    // Cumartesi-Pazar atla
+                    if (dayOfWeek === 0 || dayOfWeek === 6) {
+                        currentDate.setDate(currentDate.getDate() + 1);
+                        continue;
+                    }
+                    
+                    // Pazartesi 2, diğer günler 1 maç
+                    const maxMatchesPerDay = dayOfWeek === 1 ? 2 : 1;
+                    let matchesScheduledToday = 0;
+                    
+                    // Bu gün için uygun maçları bul
+                    for (let i = matchesScheduledInRound; i < round.length && matchesScheduledToday < maxMatchesPerDay; i++) {
+                        const match = round[i];
+                        const homeTeamId = match.homeTeam.id;
+                        const awayTeamId = match.awayTeam.id;
+                        
+                        // Her iki takım için de son maçtan 5 gün geçmiş mi kontrol et
+                        const currentDateMs = currentDate.getTime();
+                        const homeLastMatch = teamLastMatchDate[homeTeamId];
+                        const awayLastMatch = teamLastMatchDate[awayTeamId];
+                        
+                        let canSchedule = true;
+                        
+                        // Ev sahibi takım için kontrol
+                        if (homeLastMatch) {
+                            const daysSinceHome = (currentDateMs - homeLastMatch) / (1000 * 60 * 60 * 24);
+                            if (daysSinceHome < 5) {
+                                canSchedule = false;
+                            }
+                        }
+                        
+                        // Deplasman takımı için kontrol
+                        if (awayLastMatch && canSchedule) {
+                            const daysSinceAway = (currentDateMs - awayLastMatch) / (1000 * 60 * 60 * 24);
+                            if (daysSinceAway < 5) {
+                                canSchedule = false;
+                            }
+                        }
+                        
+                        // Eğer bu maç bu gün oynanabiliyorsa
+                        if (canSchedule) {
+                            fixtures.push({
+                                ...match,
+                                date: new Date(currentDate).toISOString().split('T')[0],
+                                time: matchesScheduledToday === 0 ? '19:00' : '21:45',
+                                round: roundNumber
+                            });
+                            
+                            // Son maç tarihlerini güncelle
+                            teamLastMatchDate[homeTeamId] = currentDateMs;
+                            teamLastMatchDate[awayTeamId] = currentDateMs;
+                            
+                            matchesScheduledToday++;
+                            matchesScheduledInRound++;
+                            
+                            // Bu maçı round'dan çıkar
+                            round.splice(i, 1);
+                            i--; // İndeks düzeltmesi
+                        }
+                    }
+                    
+                    // Bir sonraki güne geç
+                    currentDate.setDate(currentDate.getDate() + 1);
+                }
+                
+                roundNumber++;
+            });
             
             renderFixturePreview();
             document.getElementById('exportSection').style.display = 'block';
@@ -731,14 +819,30 @@
 
         function renderFixturePreview() {
             let html = '<h3 style="color: #1e3a8a; margin-bottom: 1rem;">📋 Oluşturulan Fikstür</h3>';
+            html += '<p style="color: #047857; background: #ecfdf5; padding: 1rem; border-radius: 0.5rem; border-left: 4px solid #10b981; margin-bottom: 1rem;">';
+            html += '✅ <strong>Tur Sistemi:</strong> Her takım her turda sadece 1 maç oynar<br>';
+            html += '⏱️ <strong>Dinlenme Kuralı:</strong> Her takımın iki maçı arasında minimum 5 gün vardır<br>';
+            html += '📅 <strong>Esnek Program:</strong> Turlar peş peşe gelebilir, önemli olan takımların dinlenme süresidir';
+            html += '</p>';
             html += '<div style="max-height: 400px; overflow-y: auto; background: #f9fafb; padding: 1rem; border-radius: 0.5rem;">';
             
+            let currentRound = 0;
             fixtures.forEach((f, i) => {
+                // Yeni tur başlıyorsa başlık göster
+                if (f.round !== currentRound) {
+                    currentRound = f.round;
+                    html += `
+                        <div style="background: linear-gradient(135deg, #1e3a8a, #1e40af); color: white; padding: 0.75rem 1rem; border-radius: 0.5rem; margin: 1rem 0 0.75rem 0; font-weight: bold; font-size: 1.1rem;">
+                            🏆 ${currentRound}. TUR
+                        </div>
+                    `;
+                }
+                
                 html += `
                     <div style="background: white; border: 2px solid #e5e7eb; border-radius: 0.5rem; padding: 1rem; margin-bottom: 0.75rem;">
                         <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
                             <div>
-                                <span class="badge badge-info">Maç #${i + 1}</span>
+                                <span class="badge badge-info">Tur ${f.round}</span>
                                 <strong style="margin-left: 1rem; color: #374151;">${f.date}</strong>
                                 <span style="margin-left: 0.5rem; color: #6b7280;">${f.time}</span>
                             </div>
@@ -751,6 +855,30 @@
             });
             
             html += '</div>';
+            
+            // Tur istatistikleri
+            const roundCount = Math.max(...fixtures.map(f => f.round));
+            html += `
+                <div style="margin-top: 1.5rem; padding: 1rem; background: #f3f4f6; border-radius: 0.5rem; display: flex; gap: 2rem; justify-content: center; flex-wrap: wrap;">
+                    <div style="text-align: center;">
+                        <div style="font-size: 2rem; font-weight: bold; color: #1e3a8a;">${roundCount}</div>
+                        <div style="font-size: 0.875rem; color: #6b7280;">Toplam Tur</div>
+                    </div>
+                    <div style="text-align: center;">
+                        <div style="font-size: 2rem; font-weight: bold; color: #1e3a8a;">${fixtures.length}</div>
+                        <div style="font-size: 0.875rem; color: #6b7280;">Toplam Maç</div>
+                    </div>
+                    <div style="text-align: center;">
+                        <div style="font-size: 2rem; font-weight: bold; color: #1e3a8a;">${fixtures[0].date}</div>
+                        <div style="font-size: 0.875rem; color: #6b7280;">Başlangıç</div>
+                    </div>
+                    <div style="text-align: center;">
+                        <div style="font-size: 2rem; font-weight: bold; color: #1e3a8a;">${fixtures[fixtures.length-1].date}</div>
+                        <div style="font-size: 0.875rem; color: #6b7280;">Bitiş</div>
+                    </div>
+                </div>
+            `;
+            
             document.getElementById('fixturePreview').innerHTML = html;
         }
 
