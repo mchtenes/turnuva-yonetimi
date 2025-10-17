@@ -433,70 +433,63 @@
         }
 
         async function loadTournamentData() {
-            const loadingElement = document.getElementById("loadingScreen");
-            const contentElement = document.getElementById("mainContent");
+            const loadingElement = document.getElementById("loadingOverlay");
+            const contentElement = document.getElementById("contentSection");
+            const errorElement = document.getElementById("errorSection");
         
             try {
                 const response = await fetch("tournament_data.json?" + new Date().getTime());
-        
-                if (!response.ok) {
-                    throw new Error(`JSON dosyası yüklenemedi: ${response.status} ${response.statusText}`);
-                }
+                if (!response.ok) throw new Error("tournament_data.json bulunamadı veya okunamadı.");
         
                 const data = await response.json();
+                if (!data || !Array.isArray(data.fixtures))
+                    throw new Error("Geçersiz veri yapısı: 'fixtures' listesi bulunamadı.");
         
-                // Veri yapısını doğrula
-                if (!data || !Array.isArray(data.fixtures)) {
-                    throw new Error("Geçersiz veri yapısı. 'fixtures' alanı bulunamadı.");
+                // Global değişkenleri doldur
+                tournamentData = data;
+                allFixtures = data.fixtures;
+                filteredFixtures = data.fixtures;
+        
+                // Başlık ve sezon bilgileri
+                document.getElementById("tournamentTitle").textContent = data.tournamentName || "Turnuva Görüntüleme";
+                document.getElementById("seasonText").textContent = (data.season || "2025") + " Sezonu";
+        
+                // Genel istatistikler
+                const totalMatches = data.fixtures.length;
+                const playedMatches = data.fixtures.filter(f => f.played).length;
+                const totalGoals = data.fixtures.filter(f => f.played).reduce((sum, f) => sum + (f.homeScore || 0) + (f.awayScore || 0), 0);
+                const avgGoals = playedMatches > 0 ? (totalGoals / playedMatches).toFixed(2) : "0.00";
+        
+                document.getElementById("statMatches").textContent = totalMatches;
+                document.getElementById("statPlayed").textContent = playedMatches;
+                document.getElementById("statGoals").textContent = totalGoals;
+                document.getElementById("statAvg").textContent = avgGoals;
+        
+                // Takım filtresi doldur
+                const teamSelect = document.getElementById("filterTeam");
+                teamSelect.innerHTML = '<option value="all">Tüm Takımlar</option>';
+                if (data.teams && Array.isArray(data.teams)) {
+                    data.teams.forEach(team => {
+                        teamSelect.innerHTML += `<option value="${team.id}">${team.name}</option>`;
+                    });
                 }
         
-                // Sayfadaki bilgileri güncelle
-                document.getElementById("tournamentName").textContent = data.tournamentName || "Bilinmeyen Turnuva";
-                document.getElementById("season").textContent = data.season || "-";
-                document.getElementById("teamCount").textContent = data.totalTeams || data.teams?.length || "-";
-                document.getElementById("matchCount").textContent = data.totalMatches || data.fixtures.length || "-";
-                document.getElementById("matchesPerTeam").textContent = data.matchesPerTeam || "-";
-                document.getElementById("importDate").textContent = data.exportDate
-                    ? new Date(data.exportDate).toLocaleString("tr-TR")
-                    : "-";
+                // Fikstürü oluştur
+                renderFixtures();
         
-                // Fikstür tablosunu oluştur
-                const tbody = document.getElementById("fixturesBody");
-                tbody.innerHTML = "";
-                data.fixtures.forEach((f, i) => {
-                    const row = document.createElement("tr");
-                    row.innerHTML = `
-                        <td>${i + 1}</td>
-                        <td>${f.round ?? "-"}</td>
-                        <td>${f.date ?? "-"}</td>
-                        <td>${f.time ?? "-"}</td>
-                        <td>${f.homeTeam ?? "-"}</td>
-                        <td>${f.awayTeam ?? "-"}</td>
-                        <td>
-                            ${
-                                f.played
-                                    ? `<span style="font-weight:bold;color:#10b981">${f.homeScore ?? 0} - ${f.awayScore ?? 0}</span>`
-                                    : `<span style="color:#9ca3af;">Henüz oynanmadı</span>`
-                            }
-                        </td>
-                    `;
-                    tbody.appendChild(row);
-                });
-        
-                // Görünüm: yükleme kalksın, içerik gelsin
+                // Sayfayı göster
                 loadingElement.style.display = "none";
                 contentElement.style.display = "block";
+                errorElement.classList.add("hidden");
+        
+                console.log("✅ Turnuva verileri başarıyla yüklendi.");
         
             } catch (err) {
-                console.error("JSON yükleme hatası:", err);
+                console.error("Yükleme hatası:", err);
+                if (loadingElement) loadingElement.style.display = "none";
+                if (errorElement) errorElement.classList.remove("hidden");
+        
                 alert("❌ Turnuva verileri yüklenemedi:\n" + err.message);
-                loadingElement.innerHTML = `
-                    <div style="color:#f87171;text-align:center;padding:2rem;">
-                        <h3>❌ Turnuva Yükleme Hatası</h3>
-                        <p>${err.message}</p>
-                        <p style="margin-top:1rem;font-size:0.9rem;">Lütfen "tournament_data.json" dosyasının bu sayfa ile aynı dizinde olduğundan emin olun.</p>
-                    </div>
-                `;
             }
         }
 
