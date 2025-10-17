@@ -327,6 +327,154 @@
             color: #374151;
             margin-bottom: 0.5rem;
         }
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            padding: 1rem;
+        }
+        .modal-content {
+            background: white;
+            border-radius: 1rem;
+            max-width: 900px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+        }
+        .modal-header {
+            background: linear-gradient(135deg, #1e3a8a, #1e40af);
+            color: white;
+            padding: 2rem;
+            border-radius: 1rem 1rem 0 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .modal-title {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        .modal-title h2 {
+            font-size: 1.8rem;
+            margin-bottom: 0.25rem;
+        }
+        .modal-title p {
+            color: #fbbf24;
+            font-size: 1rem;
+        }
+        .modal-close {
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+        }
+        .modal-close:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+        .modal-body {
+            padding: 2rem;
+        }
+        .team-stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        .stat-box {
+            background: #f9fafb;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            text-align: center;
+            border: 2px solid #e5e7eb;
+        }
+        .stat-box-label {
+            color: #6b7280;
+            font-size: 0.875rem;
+            margin-bottom: 0.5rem;
+        }
+        .stat-box-value {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #1e3a8a;
+        }
+        .stat-box.primary {
+            background: linear-gradient(135deg, #dbeafe, #bfdbfe);
+            border-color: #2563eb;
+        }
+        .stat-box.primary .stat-box-value {
+            color: #1e40af;
+        }
+        .match-list-title {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #1e3a8a;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #fbbf24;
+        }
+        .team-match-card {
+            background: white;
+            border: 2px solid #e5e7eb;
+            border-radius: 0.75rem;
+            padding: 1.25rem;
+            margin-bottom: 1rem;
+            transition: all 0.3s;
+        }
+        .team-match-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        .team-match-card.won {
+            background: linear-gradient(135deg, #ecfdf5, #d1fae5);
+            border-color: #10b981;
+        }
+        .team-match-card.drawn {
+            background: linear-gradient(135deg, #fef3c7, #fde68a);
+            border-color: #f59e0b;
+        }
+        .team-match-card.lost {
+            background: linear-gradient(135deg, #fef2f2, #fee2e2);
+            border-color: #ef4444;
+        }
+        .match-result-badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 0.25rem;
+            font-size: 0.875rem;
+            font-weight: 600;
+        }
+        .match-result-badge.won {
+            background: #10b981;
+            color: white;
+        }
+        .match-result-badge.drawn {
+            background: #f59e0b;
+            color: white;
+        }
+        .match-result-badge.lost {
+            background: #ef4444;
+            color: white;
+        }
+        tbody tr {
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
@@ -443,6 +591,27 @@
                 <button onclick="location.reload()" style="margin-top: 1.5rem; padding: 0.75rem 2rem; background: #2563eb; color: white; border: none; border-radius: 0.5rem; font-weight: 600; cursor: pointer;">
                     🔄 Sayfayı Yenile
                 </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Team Details Modal -->
+    <div id="teamModal" class="modal-overlay hidden" onclick="closeTeamModal(event)">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <div class="modal-header">
+                <div class="modal-title">
+                    <img id="modalTeamLogo" src="" alt="" class="team-logo" style="display: none;">
+                    <div>
+                        <h2 id="modalTeamName">Takım Detayları</h2>
+                        <p id="modalTeamCountry"></p>
+                    </div>
+                </div>
+                <button class="modal-close" onclick="closeTeamModal()">×</button>
+            </div>
+            <div class="modal-body">
+                <div class="team-stats-grid" id="teamStatsGrid"></div>
+                <h3 class="match-list-title">📅 Maç Programı</h3>
+                <div id="teamMatchesList"></div>
             </div>
         </div>
     </div>
@@ -646,6 +815,9 @@
             sorted.forEach((s, i) => {
                 const row = tbody.insertRow();
                 row.className = i === 0 ? 'leader-row' : '';
+                row.onclick = () => showTeamDetails(s.team);
+                row.style.cursor = 'pointer';
+                row.title = 'Detayları görmek için tıklayın';
                 row.innerHTML = `
                     <td class="rank">${i === 0 ? '🥇' : i + 1}</td>
                     <td>
@@ -669,6 +841,160 @@
                     <td class="points">${s.points}</td>
                 `;
             });
+        }
+
+        function showTeamDetails(team) {
+            // Modal içeriğini doldur
+            document.getElementById('modalTeamName').textContent = team.name;
+            document.getElementById('modalTeamCountry').textContent = team.country;
+            
+            const logoImg = document.getElementById('modalTeamLogo');
+            if (team.logo) {
+                logoImg.src = team.logo;
+                logoImg.style.display = 'block';
+            } else {
+                logoImg.style.display = 'none';
+            }
+
+            // Takım istatistiklerini hesapla
+            const teamMatches = allFixtures.filter(f => 
+                f.homeTeam.id === team.id || f.awayTeam.id === team.id
+            );
+            
+            const playedMatches = teamMatches.filter(f => f.played);
+            let wins = 0, draws = 0, losses = 0;
+            let goalsFor = 0, goalsAgainst = 0;
+
+            playedMatches.forEach(f => {
+                const isHome = f.homeTeam.id === team.id;
+                const teamScore = isHome ? f.homeScore : f.awayScore;
+                const oppScore = isHome ? f.awayScore : f.homeScore;
+                
+                goalsFor += teamScore;
+                goalsAgainst += oppScore;
+                
+                if (teamScore > oppScore) wins++;
+                else if (teamScore === oppScore) draws++;
+                else losses++;
+            });
+
+            const goalDiff = goalsFor - goalsAgainst;
+            const points = wins * 3 + draws;
+            const winRate = playedMatches.length > 0 ? ((wins / playedMatches.length) * 100).toFixed(0) : 0;
+
+            // İstatistikleri göster
+            const statsGrid = document.getElementById('teamStatsGrid');
+            statsGrid.innerHTML = `
+                <div class="stat-box primary">
+                    <div class="stat-box-label">Puan</div>
+                    <div class="stat-box-value">${points}</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-box-label">Oynanan</div>
+                    <div class="stat-box-value">${playedMatches.length}</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-box-label">Galibiyet</div>
+                    <div class="stat-box-value" style="color: #10b981;">${wins}</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-box-label">Beraberlik</div>
+                    <div class="stat-box-value" style="color: #f59e0b;">${draws}</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-box-label">Mağlubiyet</div>
+                    <div class="stat-box-value" style="color: #ef4444;">${losses}</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-box-label">Atılan Gol</div>
+                    <div class="stat-box-value">${goalsFor}</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-box-label">Yenilen Gol</div>
+                    <div class="stat-box-value">${goalsAgainst}</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-box-label">Averaj</div>
+                    <div class="stat-box-value" style="color: ${goalDiff >= 0 ? '#10b981' : '#ef4444'};">
+                        ${goalDiff > 0 ? '+' : ''}${goalDiff}
+                    </div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-box-label">Galibyet Oranı</div>
+                    <div class="stat-box-value">${winRate}%</div>
+                </div>
+            `;
+
+            // Maçları listele
+            const matchesList = document.getElementById('teamMatchesList');
+            if (teamMatches.length === 0) {
+                matchesList.innerHTML = '<p style="text-align: center; color: #6b7280; padding: 2rem;">Henüz maç yok</p>';
+            } else {
+                let html = '';
+                teamMatches.forEach((match, index) => {
+                    const isHome = match.homeTeam.id === team.id;
+                    const opponent = isHome ? match.awayTeam : match.homeTeam;
+                    const teamScore = isHome ? match.homeScore : match.awayScore;
+                    const oppScore = isHome ? match.awayScore : match.homeScore;
+                    
+                    let resultClass = '';
+                    let resultBadge = '';
+                    let resultText = '';
+                    
+                    if (match.played) {
+                        if (teamScore > oppScore) {
+                            resultClass = 'won';
+                            resultBadge = 'won';
+                            resultText = 'Galibiyet';
+                        } else if (teamScore === oppScore) {
+                            resultClass = 'drawn';
+                            resultBadge = 'drawn';
+                            resultText = 'Beraberlik';
+                        } else {
+                            resultClass = 'lost';
+                            resultBadge = 'lost';
+                            resultText = 'Mağlubiyet';
+                        }
+                    }
+
+                    html += `
+                        <div class="team-match-card ${resultClass}">
+                            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
+                                <div style="display: flex; align-items: center; gap: 1rem;">
+                                    ${match.played ? 
+                                        `<span class="match-result-badge ${resultBadge}">${resultText}</span>` : 
+                                        '<span class="badge badge-info">Oynanacak</span>'
+                                    }
+                                    <span style="font-weight: 600; color: #374151;">${match.date}</span>
+                                    <span style="color: #6b7280;">${match.time}</span>
+                                </div>
+                                <div style="display: flex; align-items: center; gap: 1rem; font-size: 1.1rem;">
+                                    <span style="font-weight: 600; color: #1e3a8a;">
+                                        ${isHome ? '🏠' : '✈️'} ${isHome ? 'vs' : '@'} ${opponent.name}
+                                    </span>
+                                    ${match.played ? 
+                                        `<div style="background: #1e3a8a; color: #fbbf24; padding: 0.5rem 1rem; border-radius: 0.5rem; font-weight: bold; font-size: 1.2rem;">
+                                            ${isHome ? teamScore : oppScore} - ${isHome ? oppScore : teamScore}
+                                        </div>` :
+                                        '<div style="background: #f3f4f6; color: #9ca3af; padding: 0.5rem 1rem; border-radius: 0.5rem;">vs</div>'
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                });
+                matchesList.innerHTML = html;
+            }
+
+            // Modal'ı göster
+            document.getElementById('teamModal').classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeTeamModal(event) {
+            if (event && event.target.id !== 'teamModal') return;
+            document.getElementById('teamModal').classList.add('hidden');
+            document.body.style.overflow = 'auto';
         }
     </script>
 </body>
