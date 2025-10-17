@@ -1,682 +1,491 @@
 {
   "tournamentName": "Avrupa Ligi",
   "season": "2024-25",
-  "teams": [
-    {
-      "id": 1760700519587.0835,
-      "name": "Real Madrid",
-      "country": "İspanya",
-      "logo": ""
-    },
-    {
-      "id": 1760700519588.8096,
-      "name": "Barcelona",
-      "country": "İspanya",
-      "logo": ""
-    },
-    {
-      "id": 1760700519589.6375,
-      "name": "Manchester United",
-      "country": "İngiltere",
-      "logo": ""
-    },
-    {
-      "id": 1760700519590.956,
-      "name": "Bayern München",
-      "country": "Almanya",
-      "logo": ""
-    },
-    {
-      "id": 1760700519591.069,
-      "name": "Paris Saint-Germain",
-      "country": "Fransa",
-      "logo": ""
-    },
-    {
-      "id": 1760700519592.3962,
-      "name": "Juventus",
-      "country": "İtalya",
-      "logo": ""
-    },
-    {
-      "id": 1760700519593.6797,
-      "name": "Liverpool",
-      "country": "İngiltere",
-      "logo": ""
-    },
-    {
-      "id": 1760700519594.5012,
-      "name": "AC Milan",
-      "country": "İtalya",
-      "logo": ""
-    },
-    {
-      "id": 1760700519595.9265,
-      "name": "Galatasaray",
-      "country": "Türkiye",
-      "logo": ""
-    },
-    {
-      "id": 1760700519596.3066,
-      "name": "Fenerbahçe",
-      "country": "Türkiye",
-      "logo": ""
-    },
-    {
-      "id": 1760700519597.3772,
-      "name": "Beşiktaş",
-      "country": "Türkiye",
-      "logo": ""
-    },
-    {
-      "id": 1760700519598.9941,
-      "name": "Trabzonspor",
-      "country": "Türkiye",
-      "logo": ""
-    }
-  ],
+  "totalTeams": 12,
+  "matchesPerTeam": 8,
+  "totalMatches": 48,
   "fixtures": [
     {
-      "id": 1760700579182,
-      "homeTeam": {
-        "id": 1760700519587.0835,
-        "name": "Real Madrid",
-        "country": "İspanya",
-        "logo": ""
-      },
-      "awayTeam": {
-        "id": 1760700519595.9265,
-        "name": "Galatasaray",
-        "country": "Türkiye",
-        "logo": ""
-      },
-      "homeScore": null,
-      "awayScore": null,
-      "played": false,
-      "date": "2025-10-20",
-      "time": "19:00"
-    },
-    {
-      "id": 1760700579183,
-      "homeTeam": {
-        "id": 1760700519587.0835,
-        "name": "Real Madrid",
-        "country": "İspanya",
-        "logo": ""
-      },
-      "awayTeam": {
-        "id": 1760700519593.6797,
-        "name": "Liverpool",
-        "country": "İngiltere",
-        "logo": ""
-      },
-      "homeScore": null,
-      "awayScore": null,
-      "played": false,
-      "date": "2025-10-20",
-      "time": "21:45"
-    },
-    {
-      "id": 1760700579184,
-      "homeTeam": {
-        "id": 1760700519587.0835,
-        "name": "Real Madrid",
-        "country": "İspanya",
-        "logo": ""
-      },
-      "awayTeam": {
-        "id": 1760700519597.3772,
-        "name": "Beşiktaş",
-        "country": "Türkiye",
-        "logo": ""
-      },
-      "homeScore": null,
-      "awayScore": null,
-      "played": false,
+      "homeTeam": "Trabzonspor",
+      "awayTeam": "Manchester United",
+      "round": 1,
       "date": "2025-10-21",
-      "time": "19:00"
+      "time": "19:00",
+      "played": false,
+      "homeScore": null,
+      "awayScore": null
     },
     {
-      "id": 1760700579185,
-      "homeTeam": {
-        "id": 1760700519587.0835,
-        "name": "Real Madrid",
-        "country": "İspanya",
-        "logo": ""
-      },
-      "awayTeam": {
-        "id": 1760700519591.069,
-        "name": "Paris Saint-Germain",
-        "country": "Fransa",
-        "logo": ""
-      },
-      "homeScore": null,
-      "awayScore": null,
-      "played": false,
+      "homeTeam": "Liverpool",
+      "awayTeam": "Real Madrid",
+      "round": 1,
       "date": "2025-10-22",
-      "time": "19:00"
+      "time": "19:00",
+      "played": false,
+      "homeScore": null,
+      "awayScore": null
     },
     {
-      "id": 1760700579186,
-      "homeTeam": {
-        "id": 1760700519587.0835,
-        "name": "Real Madrid",
-        "country": "İspanya",
-        "logo": ""
-      },
-      "awayTeam": {
-        "id": 1760700519588.8096,
-        "name": "Barcelona",
-        "country": "İspanya",
-        "logo": ""
-      },
-      "homeScore": null,
-      "awayScore": null,
-      "played": false,
+      "homeTeam": "Bayern München",
+      "awayTeam": "AC Milan",
+      "round": 1,
       "date": "2025-10-23",
-      "time": "19:00"
+      "time": "19:00",
+      "played": false,
+      "homeScore": null,
+      "awayScore": null
     },
     {
-      "id": 1760700579187,
-      "homeTeam": {
-        "id": 1760700519588.8096,
-        "name": "Barcelona",
-        "country": "İspanya",
-        "logo": ""
-      },
-      "awayTeam": {
-        "id": 1760700519597.3772,
-        "name": "Beşiktaş",
-        "country": "Türkiye",
-        "logo": ""
-      },
-      "homeScore": null,
-      "awayScore": null,
-      "played": false,
+      "homeTeam": "Beşiktaş",
+      "awayTeam": "Juventus",
+      "round": 1,
       "date": "2025-10-24",
-      "time": "19:00"
+      "time": "19:00",
+      "played": false,
+      "homeScore": null,
+      "awayScore": null
     },
     {
-      "id": 1760700579188,
-      "homeTeam": {
-        "id": 1760700519588.8096,
-        "name": "Barcelona",
-        "country": "İspanya",
-        "logo": ""
-      },
-      "awayTeam": {
-        "id": 1760700519598.9941,
-        "name": "Trabzonspor",
-        "country": "Türkiye",
-        "logo": ""
-      },
-      "homeScore": null,
-      "awayScore": null,
-      "played": false,
+      "homeTeam": "Galatasaray",
+      "awayTeam": "Barcelona",
+      "round": 1,
       "date": "2025-10-27",
-      "time": "19:00"
+      "time": "19:00",
+      "played": false,
+      "homeScore": null,
+      "awayScore": null
     },
     {
-      "id": 1760700579189,
-      "homeTeam": {
-        "id": 1760700519588.8096,
-        "name": "Barcelona",
-        "country": "İspanya",
-        "logo": ""
-      },
-      "awayTeam": {
-        "id": 1760700519594.5012,
-        "name": "AC Milan",
-        "country": "İtalya",
-        "logo": ""
-      },
-      "homeScore": null,
-      "awayScore": null,
-      "played": false,
+      "homeTeam": "Paris Saint-Germain",
+      "awayTeam": "Fenerbahçe",
+      "round": 1,
       "date": "2025-10-27",
-      "time": "21:45"
+      "time": "21:45",
+      "played": false,
+      "homeScore": null,
+      "awayScore": null
     },
     {
-      "id": 1760700579190,
-      "homeTeam": {
-        "id": 1760700519592.3962,
-        "name": "Juventus",
-        "country": "İtalya",
-        "logo": ""
-      },
-      "awayTeam": {
-        "id": 1760700519588.8096,
-        "name": "Barcelona",
-        "country": "İspanya",
-        "logo": ""
-      },
-      "homeScore": null,
-      "awayScore": null,
-      "played": false,
+      "homeTeam": "AC Milan",
+      "awayTeam": "Juventus",
+      "round": 2,
       "date": "2025-10-28",
-      "time": "19:00"
+      "time": "19:00",
+      "played": false,
+      "homeScore": null,
+      "awayScore": null
     },
     {
-      "id": 1760700579191,
-      "homeTeam": {
-        "id": 1760700519595.9265,
-        "name": "Galatasaray",
-        "country": "Türkiye",
-        "logo": ""
-      },
-      "awayTeam": {
-        "id": 1760700519589.6375,
-        "name": "Manchester United",
-        "country": "İngiltere",
-        "logo": ""
-      },
-      "homeScore": null,
-      "awayScore": null,
-      "played": false,
+      "homeTeam": "Liverpool",
+      "awayTeam": "Beşiktaş",
+      "round": 2,
       "date": "2025-10-29",
-      "time": "19:00"
+      "time": "19:00",
+      "played": false,
+      "homeScore": null,
+      "awayScore": null
     },
     {
-      "id": 1760700579192,
-      "homeTeam": {
-        "id": 1760700519589.6375,
-        "name": "Manchester United",
-        "country": "İngiltere",
-        "logo": ""
-      },
-      "awayTeam": {
-        "id": 1760700519591.069,
-        "name": "Paris Saint-Germain",
-        "country": "Fransa",
-        "logo": ""
-      },
-      "homeScore": null,
-      "awayScore": null,
-      "played": false,
+      "homeTeam": "Bayern München",
+      "awayTeam": "Barcelona",
+      "round": 2,
       "date": "2025-10-30",
-      "time": "19:00"
+      "time": "19:00",
+      "played": false,
+      "homeScore": null,
+      "awayScore": null
     },
     {
-      "id": 1760700579193,
-      "homeTeam": {
-        "id": 1760700519589.6375,
-        "name": "Manchester United",
-        "country": "İngiltere",
-        "logo": ""
-      },
-      "awayTeam": {
-        "id": 1760700519598.9941,
-        "name": "Trabzonspor",
-        "country": "Türkiye",
-        "logo": ""
-      },
-      "homeScore": null,
-      "awayScore": null,
-      "played": false,
+      "homeTeam": "Trabzonspor",
+      "awayTeam": "Galatasaray",
+      "round": 2,
       "date": "2025-10-31",
-      "time": "19:00"
+      "time": "19:00",
+      "played": false,
+      "homeScore": null,
+      "awayScore": null
     },
     {
-      "id": 1760700579194,
-      "homeTeam": {
-        "id": 1760700519596.3066,
-        "name": "Fenerbahçe",
-        "country": "Türkiye",
-        "logo": ""
-      },
-      "awayTeam": {
-        "id": 1760700519589.6375,
-        "name": "Manchester United",
-        "country": "İngiltere",
-        "logo": ""
-      },
-      "homeScore": null,
-      "awayScore": null,
-      "played": false,
+      "homeTeam": "Fenerbahçe",
+      "awayTeam": "Manchester United",
+      "round": 2,
       "date": "2025-11-03",
-      "time": "19:00"
+      "time": "19:00",
+      "played": false,
+      "homeScore": null,
+      "awayScore": null
     },
     {
-      "id": 1760700579195,
-      "homeTeam": {
-        "id": 1760700519597.3772,
-        "name": "Beşiktaş",
-        "country": "Türkiye",
-        "logo": ""
-      },
-      "awayTeam": {
-        "id": 1760700519589.6375,
-        "name": "Manchester United",
-        "country": "İngiltere",
-        "logo": ""
-      },
-      "homeScore": null,
-      "awayScore": null,
-      "played": false,
+      "homeTeam": "Paris Saint-Germain",
+      "awayTeam": "Real Madrid",
+      "round": 2,
       "date": "2025-11-03",
-      "time": "21:45"
+      "time": "21:45",
+      "played": false,
+      "homeScore": null,
+      "awayScore": null
     },
     {
-      "id": 1760700579196,
-      "homeTeam": {
-        "id": 1760700519590.956,
-        "name": "Bayern München",
-        "country": "Almanya",
-        "logo": ""
-      },
-      "awayTeam": {
-        "id": 1760700519597.3772,
-        "name": "Beşiktaş",
-        "country": "Türkiye",
-        "logo": ""
-      },
-      "homeScore": null,
-      "awayScore": null,
-      "played": false,
+      "homeTeam": "Paris Saint-Germain",
+      "awayTeam": "Manchester United",
+      "round": 3,
       "date": "2025-11-04",
-      "time": "19:00"
+      "time": "19:00",
+      "played": false,
+      "homeScore": null,
+      "awayScore": null
     },
     {
-      "id": 1760700579197,
-      "homeTeam": {
-        "id": 1760700519596.3066,
-        "name": "Fenerbahçe",
-        "country": "Türkiye",
-        "logo": ""
-      },
-      "awayTeam": {
-        "id": 1760700519590.956,
-        "name": "Bayern München",
-        "country": "Almanya",
-        "logo": ""
-      },
-      "homeScore": null,
-      "awayScore": null,
-      "played": false,
+      "homeTeam": "AC Milan",
+      "awayTeam": "Trabzonspor",
+      "round": 3,
       "date": "2025-11-05",
-      "time": "19:00"
+      "time": "19:00",
+      "played": false,
+      "homeScore": null,
+      "awayScore": null
     },
     {
-      "id": 1760700579198,
-      "homeTeam": {
-        "id": 1760700519590.956,
-        "name": "Bayern München",
-        "country": "Almanya",
-        "logo": ""
-      },
-      "awayTeam": {
-        "id": 1760700519594.5012,
-        "name": "AC Milan",
-        "country": "İtalya",
-        "logo": ""
-      },
-      "homeScore": null,
-      "awayScore": null,
-      "played": false,
+      "homeTeam": "Beşiktaş",
+      "awayTeam": "Barcelona",
+      "round": 3,
       "date": "2025-11-06",
-      "time": "19:00"
+      "time": "19:00",
+      "played": false,
+      "homeScore": null,
+      "awayScore": null
     },
     {
-      "id": 1760700579199,
-      "homeTeam": {
-        "id": 1760700519590.956,
-        "name": "Bayern München",
-        "country": "Almanya",
-        "logo": ""
-      },
-      "awayTeam": {
-        "id": 1760700519593.6797,
-        "name": "Liverpool",
-        "country": "İngiltere",
-        "logo": ""
-      },
-      "homeScore": null,
-      "awayScore": null,
-      "played": false,
+      "homeTeam": "Galatasaray",
+      "awayTeam": "Bayern München",
+      "round": 3,
       "date": "2025-11-07",
-      "time": "19:00"
+      "time": "19:00",
+      "played": false,
+      "homeScore": null,
+      "awayScore": null
     },
     {
-      "id": 1760700579200,
-      "homeTeam": {
-        "id": 1760700519591.069,
-        "name": "Paris Saint-Germain",
-        "country": "Fransa",
-        "logo": ""
-      },
-      "awayTeam": {
-        "id": 1760700519590.956,
-        "name": "Bayern München",
-        "country": "Almanya",
-        "logo": ""
-      },
-      "homeScore": null,
-      "awayScore": null,
-      "played": false,
+      "homeTeam": "Juventus",
+      "awayTeam": "Liverpool",
+      "round": 3,
       "date": "2025-11-10",
-      "time": "19:00"
+      "time": "19:00",
+      "played": false,
+      "homeScore": null,
+      "awayScore": null
     },
     {
-      "id": 1760700579201,
-      "homeTeam": {
-        "id": 1760700519597.3772,
-        "name": "Beşiktaş",
-        "country": "Türkiye",
-        "logo": ""
-      },
-      "awayTeam": {
-        "id": 1760700519591.069,
-        "name": "Paris Saint-Germain",
-        "country": "Fransa",
-        "logo": ""
-      },
-      "homeScore": null,
-      "awayScore": null,
-      "played": false,
+      "homeTeam": "Fenerbahçe",
+      "awayTeam": "Real Madrid",
+      "round": 3,
       "date": "2025-11-10",
-      "time": "21:45"
+      "time": "21:45",
+      "played": false,
+      "homeScore": null,
+      "awayScore": null
     },
     {
-      "id": 1760700579202,
-      "homeTeam": {
-        "id": 1760700519594.5012,
-        "name": "AC Milan",
-        "country": "İtalya",
-        "logo": ""
-      },
-      "awayTeam": {
-        "id": 1760700519591.069,
-        "name": "Paris Saint-Germain",
-        "country": "Fransa",
-        "logo": ""
-      },
-      "homeScore": null,
-      "awayScore": null,
-      "played": false,
+      "homeTeam": "Manchester United",
+      "awayTeam": "Juventus",
+      "round": 4,
       "date": "2025-11-11",
-      "time": "19:00"
+      "time": "19:00",
+      "played": false,
+      "homeScore": null,
+      "awayScore": null
     },
     {
-      "id": 1760700579203,
-      "homeTeam": {
-        "id": 1760700519592.3962,
-        "name": "Juventus",
-        "country": "İtalya",
-        "logo": ""
-      },
-      "awayTeam": {
-        "id": 1760700519596.3066,
-        "name": "Fenerbahçe",
-        "country": "Türkiye",
-        "logo": ""
-      },
-      "homeScore": null,
-      "awayScore": null,
-      "played": false,
+      "homeTeam": "Beşiktaş",
+      "awayTeam": "Real Madrid",
+      "round": 4,
       "date": "2025-11-12",
-      "time": "19:00"
+      "time": "19:00",
+      "played": false,
+      "homeScore": null,
+      "awayScore": null
     },
     {
-      "id": 1760700579204,
-      "homeTeam": {
-        "id": 1760700519594.5012,
-        "name": "AC Milan",
-        "country": "İtalya",
-        "logo": ""
-      },
-      "awayTeam": {
-        "id": 1760700519592.3962,
-        "name": "Juventus",
-        "country": "İtalya",
-        "logo": ""
-      },
-      "homeScore": null,
-      "awayScore": null,
-      "played": false,
+      "homeTeam": "Bayern München",
+      "awayTeam": "Fenerbahçe",
+      "round": 4,
       "date": "2025-11-13",
-      "time": "19:00"
+      "time": "19:00",
+      "played": false,
+      "homeScore": null,
+      "awayScore": null
     },
     {
-      "id": 1760700579205,
-      "homeTeam": {
-        "id": 1760700519598.9941,
-        "name": "Trabzonspor",
-        "country": "Türkiye",
-        "logo": ""
-      },
-      "awayTeam": {
-        "id": 1760700519592.3962,
-        "name": "Juventus",
-        "country": "İtalya",
-        "logo": ""
-      },
-      "homeScore": null,
-      "awayScore": null,
-      "played": false,
+      "homeTeam": "Paris Saint-Germain",
+      "awayTeam": "Galatasaray",
+      "round": 4,
       "date": "2025-11-14",
-      "time": "19:00"
+      "time": "19:00",
+      "played": false,
+      "homeScore": null,
+      "awayScore": null
     },
     {
-      "id": 1760700579207,
-      "homeTeam": {
-        "id": 1760700519593.6797,
-        "name": "Liverpool",
-        "country": "İngiltere",
-        "logo": ""
-      },
-      "awayTeam": {
-        "id": 1760700519592.3962,
-        "name": "Juventus",
-        "country": "İtalya",
-        "logo": ""
-      },
-      "homeScore": null,
-      "awayScore": null,
-      "played": false,
+      "homeTeam": "Trabzonspor",
+      "awayTeam": "Barcelona",
+      "round": 4,
       "date": "2025-11-17",
-      "time": "19:00"
+      "time": "19:00",
+      "played": false,
+      "homeScore": null,
+      "awayScore": null
     },
     {
-      "id": 1760700579208,
-      "homeTeam": {
-        "id": 1760700519596.3066,
-        "name": "Fenerbahçe",
-        "country": "Türkiye",
-        "logo": ""
-      },
-      "awayTeam": {
-        "id": 1760700519593.6797,
-        "name": "Liverpool",
-        "country": "İngiltere",
-        "logo": ""
-      },
-      "homeScore": null,
-      "awayScore": null,
-      "played": false,
+      "homeTeam": "Liverpool",
+      "awayTeam": "AC Milan",
+      "round": 4,
       "date": "2025-11-17",
-      "time": "21:45"
+      "time": "21:45",
+      "played": false,
+      "homeScore": null,
+      "awayScore": null
     },
     {
-      "id": 1760700579209,
-      "homeTeam": {
-        "id": 1760700519593.6797,
-        "name": "Liverpool",
-        "country": "İngiltere",
-        "logo": ""
-      },
-      "awayTeam": {
-        "id": 1760700519598.9941,
-        "name": "Trabzonspor",
-        "country": "Türkiye",
-        "logo": ""
-      },
-      "homeScore": null,
-      "awayScore": null,
-      "played": false,
+      "homeTeam": "Beşiktaş",
+      "awayTeam": "Paris Saint-Germain",
+      "round": 5,
       "date": "2025-11-18",
-      "time": "19:00"
+      "time": "19:00",
+      "played": false,
+      "homeScore": null,
+      "awayScore": null
     },
     {
-      "id": 1760700579210,
-      "homeTeam": {
-        "id": 1760700519595.9265,
-        "name": "Galatasaray",
-        "country": "Türkiye",
-        "logo": ""
-      },
-      "awayTeam": {
-        "id": 1760700519594.5012,
-        "name": "AC Milan",
-        "country": "İtalya",
-        "logo": ""
-      },
-      "homeScore": null,
-      "awayScore": null,
-      "played": false,
+      "homeTeam": "Bayern München",
+      "awayTeam": "Real Madrid",
+      "round": 5,
       "date": "2025-11-19",
-      "time": "19:00"
+      "time": "19:00",
+      "played": false,
+      "homeScore": null,
+      "awayScore": null
     },
     {
-      "id": 1760700579211,
-      "homeTeam": {
-        "id": 1760700519596.3066,
-        "name": "Fenerbahçe",
-        "country": "Türkiye",
-        "logo": ""
-      },
-      "awayTeam": {
-        "id": 1760700519595.9265,
-        "name": "Galatasaray",
-        "country": "Türkiye",
-        "logo": ""
-      },
-      "homeScore": null,
-      "awayScore": null,
-      "played": false,
+      "homeTeam": "Trabzonspor",
+      "awayTeam": "Juventus",
+      "round": 5,
       "date": "2025-11-20",
-      "time": "19:00"
+      "time": "19:00",
+      "played": false,
+      "homeScore": null,
+      "awayScore": null
     },
     {
-      "id": 1760700579212,
-      "homeTeam": {
-        "id": 1760700519598.9941,
-        "name": "Trabzonspor",
-        "country": "Türkiye",
-        "logo": ""
-      },
-      "awayTeam": {
-        "id": 1760700519595.9265,
-        "name": "Galatasaray",
-        "country": "Türkiye",
-        "logo": ""
-      },
-      "homeScore": null,
-      "awayScore": null,
-      "played": false,
+      "homeTeam": "Fenerbahçe",
+      "awayTeam": "Galatasaray",
+      "round": 5,
       "date": "2025-11-21",
-      "time": "19:00"
+      "time": "19:00",
+      "played": false,
+      "homeScore": null,
+      "awayScore": null
+    },
+    {
+      "homeTeam": "Barcelona",
+      "awayTeam": "Liverpool",
+      "round": 5,
+      "date": "2025-11-24",
+      "time": "19:00",
+      "played": false,
+      "homeScore": null,
+      "awayScore": null
+    },
+    {
+      "homeTeam": "Manchester United",
+      "awayTeam": "AC Milan",
+      "round": 5,
+      "date": "2025-11-24",
+      "time": "21:45",
+      "played": false,
+      "homeScore": null,
+      "awayScore": null
+    },
+    {
+      "homeTeam": "Galatasaray",
+      "awayTeam": "Real Madrid",
+      "round": 6,
+      "date": "2025-11-25",
+      "time": "19:00",
+      "played": false,
+      "homeScore": null,
+      "awayScore": null
+    },
+    {
+      "homeTeam": "Barcelona",
+      "awayTeam": "Manchester United",
+      "round": 6,
+      "date": "2025-11-26",
+      "time": "19:00",
+      "played": false,
+      "homeScore": null,
+      "awayScore": null
+    },
+    {
+      "homeTeam": "Paris Saint-Germain",
+      "awayTeam": "Trabzonspor",
+      "round": 6,
+      "date": "2025-11-27",
+      "time": "19:00",
+      "played": false,
+      "homeScore": null,
+      "awayScore": null
+    },
+    {
+      "homeTeam": "Beşiktaş",
+      "awayTeam": "AC Milan",
+      "round": 6,
+      "date": "2025-11-28",
+      "time": "19:00",
+      "played": false,
+      "homeScore": null,
+      "awayScore": null
+    },
+    {
+      "homeTeam": "Bayern München",
+      "awayTeam": "Juventus",
+      "round": 6,
+      "date": "2025-12-01",
+      "time": "19:00",
+      "played": false,
+      "homeScore": null,
+      "awayScore": null
+    },
+    {
+      "homeTeam": "Liverpool",
+      "awayTeam": "Fenerbahçe",
+      "round": 6,
+      "date": "2025-12-01",
+      "time": "21:45",
+      "played": false,
+      "homeScore": null,
+      "awayScore": null
+    },
+    {
+      "homeTeam": "Galatasaray",
+      "awayTeam": "AC Milan",
+      "round": 7,
+      "date": "2025-12-02",
+      "time": "19:00",
+      "played": false,
+      "homeScore": null,
+      "awayScore": null
+    },
+    {
+      "homeTeam": "Beşiktaş",
+      "awayTeam": "Trabzonspor",
+      "round": 7,
+      "date": "2025-12-03",
+      "time": "19:00",
+      "played": false,
+      "homeScore": null,
+      "awayScore": null
+    },
+    {
+      "homeTeam": "Juventus",
+      "awayTeam": "Real Madrid",
+      "round": 7,
+      "date": "2025-12-04",
+      "time": "19:00",
+      "played": false,
+      "homeScore": null,
+      "awayScore": null
+    },
+    {
+      "homeTeam": "Paris Saint-Germain",
+      "awayTeam": "Bayern München",
+      "round": 7,
+      "date": "2025-12-05",
+      "time": "19:00",
+      "played": false,
+      "homeScore": null,
+      "awayScore": null
+    },
+    {
+      "homeTeam": "Liverpool",
+      "awayTeam": "Manchester United",
+      "round": 7,
+      "date": "2025-12-08",
+      "time": "19:00",
+      "played": false,
+      "homeScore": null,
+      "awayScore": null
+    },
+    {
+      "homeTeam": "Fenerbahçe",
+      "awayTeam": "Barcelona",
+      "round": 7,
+      "date": "2025-12-08",
+      "time": "21:45",
+      "played": false,
+      "homeScore": null,
+      "awayScore": null
+    },
+    {
+      "homeTeam": "Real Madrid",
+      "awayTeam": "Manchester United",
+      "round": 8,
+      "date": "2025-12-09",
+      "time": "19:00",
+      "played": false,
+      "homeScore": null,
+      "awayScore": null
+    },
+    {
+      "homeTeam": "Juventus",
+      "awayTeam": "Paris Saint-Germain",
+      "round": 8,
+      "date": "2025-12-10",
+      "time": "19:00",
+      "played": false,
+      "homeScore": null,
+      "awayScore": null
+    },
+    {
+      "homeTeam": "Fenerbahçe",
+      "awayTeam": "Trabzonspor",
+      "round": 8,
+      "date": "2025-12-11",
+      "time": "19:00",
+      "played": false,
+      "homeScore": null,
+      "awayScore": null
+    },
+    {
+      "homeTeam": "AC Milan",
+      "awayTeam": "Barcelona",
+      "round": 8,
+      "date": "2025-12-12",
+      "time": "19:00",
+      "played": false,
+      "homeScore": null,
+      "awayScore": null
+    },
+    {
+      "homeTeam": "Liverpool",
+      "awayTeam": "Galatasaray",
+      "round": 8,
+      "date": "2025-12-15",
+      "time": "19:00",
+      "played": false,
+      "homeScore": null,
+      "awayScore": null
+    },
+    {
+      "homeTeam": "Bayern München",
+      "awayTeam": "Beşiktaş",
+      "round": 8,
+      "date": "2025-12-15",
+      "time": "21:45",
+      "played": false,
+      "homeScore": null,
+      "awayScore": null
     }
   ],
-  "exportDate": "2025-10-17T11:29:57.335Z",
-  "version": "1.0"
+  "exportDate": "2025-10-17T13:24:49.568Z",
+  "version": "3.0"
 }
