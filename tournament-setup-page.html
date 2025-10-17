@@ -606,20 +606,19 @@
         }
 
         function performDraw() {
-            matchCount = 5; // 12 takım, her biri 5 maç
+            matchCount = parseInt(document.getElementById('inputMatchCount').value) || 5;
             tournamentName = document.getElementById('inputTournamentName').value;
             season = document.getElementById('inputSeason').value;
         
             document.getElementById('drawContent').innerHTML =
-                '<div class="spinner"></div><p style="text-align:center;font-size:1.2rem;color:#374151;">⏳ Fikstür hesaplanıyor...</p>';
+                '<div class="spinner"></div><p style="text-align:center;font-size:1.2rem;color:#374151;">⏳ Kura çekimi yapılıyor...</p>';
         
             setTimeout(() => {
                 matches = [];
                 const teamIds = teams.map(t => t.id);
                 const usedPairs = new Set();
         
-                // 5 tur oluştur
-                for (let round = 1; round <= 5; round++) {
+                for (let round = 1; round <= matchCount; round++) {
                     let available = [...teamIds];
                     const roundMatches = [];
                     let safety = 0;
@@ -627,7 +626,7 @@
                     while (available.length >= 2 && safety < 1000) {
                         safety++;
                         const t1 = available[Math.floor(Math.random() * available.length)];
-                        // potansiyel rakipleri bul
+        
                         const possible = available.filter(t2 =>
                             t2 !== t1 &&
                             !usedPairs.has(`${t1}-${t2}`) &&
@@ -635,7 +634,7 @@
                         );
         
                         if (possible.length === 0) {
-                            // çıkmazda kaldıysak round’u yeniden başlat
+                            // Çıkmaz durum — round yeniden oluşturulsun
                             available = [...teamIds];
                             roundMatches.length = 0;
                             continue;
@@ -650,18 +649,18 @@
                             id: Date.now() + matches.length,
                             homeTeam: isHome ? teamA : teamB,
                             awayTeam: isHome ? teamB : teamA,
-                            round
+                            round,
+                            played: false,
+                            homeScore: null,
+                            awayScore: null
                         });
         
                         usedPairs.add(`${t1}-${t2}`);
                         usedPairs.add(`${t2}-${t1}`);
-        
-                        // listeden çıkar
                         available = available.filter(id => id !== t1 && id !== t2);
                     }
         
-                    // round 6 maçtan azsa (örneğin çakışma nedeniyle) yeniden oluştur
-                    if (roundMatches.length < 6) {
+                    if (roundMatches.length < teams.length / 2) {
                         round--;
                         continue;
                     }
@@ -719,30 +718,43 @@
         function generateFixtures() {
             const startDate = document.getElementById('inputStartDate').value;
             if (!startDate) return;
-
+        
             fixtures = [];
-            let current = new Date(startDate);
-            let idx = 0;
-
-            while (idx < matches.length) {
-                const day = current.getDay();
-                if (day === 0 || day === 6) {
-                    current.setDate(current.getDate() + 1);
-                    continue;
+            let baseDate = new Date(startDate);
+        
+            // Her tur (round) için ayrı hafta
+            for (let round = 1; round <= matchCount; round++) {
+                const roundMatches = matches.filter(m => m.round === round);
+                let roundDate = new Date(baseDate);
+                let matchIndex = 0;
+        
+                while (matchIndex < roundMatches.length) {
+                    const currentDate = new Date(roundDate);
+                    const day = currentDate.getDay(); // 0= Pazar, 1= Pazartesi ...
+        
+                    if (day === 0 || day === 6) {
+                        roundDate.setDate(roundDate.getDate() + 1);
+                        continue;
+                    }
+        
+                    const matchPerDay = (day === 1 ? 2 : 1);
+                    for (let i = 0; i < matchPerDay && matchIndex < roundMatches.length; i++) {
+                        const match = roundMatches[matchIndex];
+                        fixtures.push({
+                            ...match,
+                            date: currentDate.toISOString().split('T')[0],
+                            time: i === 0 ? '19:00' : '21:45'
+                        });
+                        matchIndex++;
+                    }
+        
+                    roundDate.setDate(roundDate.getDate() + 1);
                 }
-
-                const count = day === 1 ? 2 : 1;
-                for (let i = 0; i < count && idx < matches.length; i++) {
-                    fixtures.push({
-                        ...matches[idx],
-                        date: current.toISOString().split('T')[0],
-                        time: i === 0 ? '19:00' : '21:45'
-                    });
-                    idx++;
-                }
-                current.setDate(current.getDate() + 1);
+        
+                // Sonraki tur için haftayı atla (7 gün)
+                baseDate.setDate(baseDate.getDate() + 7);
             }
-            
+        
             renderFixturePreview();
             document.getElementById('exportSection').style.display = 'block';
             updateSteps();
@@ -778,16 +790,27 @@
                 alert('❌ Önce fikstür oluşturmalısınız!');
                 return;
             }
-
+        
             const exportData = {
                 tournamentName,
                 season,
-                teams,
-                fixtures,
+                totalTeams: teams.length,
+                matchesPerTeam: matchCount,
+                totalMatches: fixtures.length,
+                fixtures: fixtures.map(f => ({
+                    homeTeam: f.homeTeam.name,
+                    awayTeam: f.awayTeam.name,
+                    round: f.round,
+                    date: f.date,
+                    time: f.time,
+                    played: f.played,
+                    homeScore: f.homeScore,
+                    awayScore: f.awayScore
+                })),
                 exportDate: new Date().toISOString(),
-                version: '1.0'
+                version: '3.0'
             };
-
+        
             const dataStr = JSON.stringify(exportData, null, 2);
             const blob = new Blob([dataStr], { type: 'application/json' });
             const url = URL.createObjectURL(blob);
@@ -796,8 +819,8 @@
             link.download = 'tournament_data.json';
             link.click();
             URL.revokeObjectURL(url);
-
-            alert('✅ tournament_data.json başarıyla indirildi!\n\nBu dosyayı GitHub repo\'nuzun ana dizinine yükleyin.\nGörüntüleme sayfası bu dosyayı otomatik okuyacak.');
+        
+            alert(`✅ ${exportData.totalMatches} maçlık fikstür başarıyla dışa aktarıldı!`);
         }
 
         // Başlangıç
