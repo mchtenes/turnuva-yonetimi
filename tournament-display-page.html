@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Turnuva Görüntüleme - Fikstür ve Puan Durumu</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+            background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 50%, #1e3a8a 100%);
+            min-height: 100vh;
+        }
+        .header {
+            background: #0c1e4a;
+            border-bottom: 4px solid #fbbf24;
+            padding: 2rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+        }
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+        }
+        .title-section h1 {
+            color: white;
+            font-size: 2.5rem;
+            margin-bottom: 0.25rem;
+        }
+        .title-section p {
+            color: #fbbf24;
+            font-size: 1.1rem;
+        }
+        .stats {
+            display: flex;
+            gap: 2rem;
+            color: white;
+        }
+        .stat-item {
+            text-align: center;
+        }
+        .stat-value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #fbbf24;
+        }
+        .stat-label {
+            font-size: 0.875rem;
+            margin-top: 0.25rem;
+        }
+        .nav {
+            background: #1e40af;
+            border-bottom: 2px solid #1e3a8a;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        }
+        .nav-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            gap: 0.25rem;
+        }
+        .nav-btn {
+            padding: 1.25rem 2rem;
+            border: none;
+            background: none;
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 1rem;
+        }
+        .nav-btn:hover {
+            background: rgba(30, 64, 175, 0.5);
+        }
+        .nav-btn.active {
+            background: #1e3a8a;
+            color: #fbbf24;
+            border-bottom: 4px solid #fbbf24;
+        }
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+        .card {
+            background: white;
+            border-radius: 1rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+        .card-title {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #1e3a8a;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 3px solid #fbbf24;
+        }
+        .upload-zone {
+            border: 3px dashed #cbd5e1;
+            border-radius: 1rem;
+            padding: 3rem;
+            text-align: center;
+            background: #f8fafc;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+        .upload-zone:hover {
+            border-color: #2563eb;
+            background: #eff6ff;
+        }
+        .upload-zone.drag-over {
+            border-color: #10b981;
+            background: #ecfdf5;
+        }
+        .btn {
+            padding: 0.75rem 2rem;
+            border: none;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 1rem;
+        }
+        .btn-primary {
+            background: #2563eb;
+            color: white;
+        }
+        .btn-primary:hover {
+            background: #1d4ed8;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(37, 99, 235, 0.4);
+        }
+        .match-card {
+            background: white;
+            border: 2px solid #e5e7eb;
+            border-radius: 0.75rem;
+            padding: 1.25rem;
+            margin-bottom: 1rem;
+            transition: all 0.3s;
+        }
+        .match-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        .match-card.played {
+            background: linear-gradient(135deg, #ecfdf5, #d1fae5);
+            border-color: #10b981;
+        }
+        .match-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        .match-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        .match-date {
+            font-weight: 600;
+            color: #374151;
+            min-width: 100px;
+        }
+        .match-time {
+            color: #6b7280;
+            min-width: 60px;
+        }
+        .match-teams {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            font-size: 1.1rem;
+        }
+        .team-name {
+            font-weight: 600;
+            color: #1e3a8a;
+            min-width: 150px;
+        }
+        .team-home {
+            text-align: right;
+        }
+        .score-display {
+            background: #1e3a8a;
+            color: #fbbf24;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            font-weight: bold;
+            font-size: 1.5rem;
+            min-width: 100px;
+            text-align: center;
+        }
+        .score-pending {
+            background: #f3f4f6;
+            color: #9ca3af;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            font-size: 0.95rem;
+            font-style: italic;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        thead {
+            background: linear-gradient(135deg, #1e3a8a, #1e40af);
+            color: white;
+        }
+        th, td {
+            padding: 1rem;
+            text-align: left;
+        }
+        th {
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+        tbody tr {
+            border-bottom: 1px solid #e5e7eb;
+            transition: all 0.2s;
+        }
+        tbody tr:hover {
+            background: #f9fafb;
+        }
+        .leader-row {
+            background: linear-gradient(135deg, #fef3c7, #fde68a) !important;
+        }
+        .leader-row:hover {
+            background: linear-gradient(135deg, #fde68a, #fcd34d) !important;
+        }
+        .rank {
+            font-weight: bold;
+            font-size: 1.2rem;
+            color: #6b7280;
+            text-align: center;
+            width: 60px;
+        }
+        .leader-row .rank {
+            color: #d97706;
+        }
+        .team-info {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        .team-logo {
+            width: 32px;
+            height: 32px;
+            object-fit: contain;
+        }
+        .points {
+            font-weight: bold;
+            font-size: 1.3rem;
+            color: #1e3a8a;
+            text-align: center;
+        }
+        .hidden {
+            display: none;
+        }
+        .empty-state {
+            text-align: center;
+            padding: 4rem 2rem;
+            color: #6b7280;
+        }
+        .empty-state-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+        }
+        .badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 0.25rem;
+            font-size: 0.875rem;
+            font-weight: 600;
+        }
+        .badge-success {
+            background: #d1fae5;
+            color: #065f46;
+        }
+        .badge-info {
+            background: #dbeafe;
+            color: #1e40af;
+        }
+        .filter-section {
+            background: #f9fafb;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        .filter-label {
+            font-weight: 600;
+            color: #374151;
+        }
+        select {
+            padding: 0.5rem 1rem;
+            border: 2px solid #d1d5db;
+            border-radius: 0.5rem;
+            font-size: 0.95rem;
+            background: white;
+            cursor: pointer;
+        }
+        select:focus {
+            outline: none;
+            border-color: #2563eb;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="header-content">
+            <div class="title-section">
+                <h1 id="tournamentTitle">Turnuva Görüntüleme</h1>
+                <p id="seasonText">Veri yükleyin</p>
+            </div>
+            <div class="stats">
+                <div class="stat-item">
+                    <div class="stat-value" id="statMatches">0</div>
+                    <div class="stat-label">Toplam Maç</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value" id="statPlayed">0</div>
+                    <div class="stat-label">Oynanan</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value" id="statGoals">0</div>
+                    <div class="stat-label">Toplam Gol</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value" id="statAvg">0</div>
+                    <div class="stat-label">Ort. Gol</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="nav">
+        <div class="nav-content">
+            <button class="nav-btn active" onclick="showTab('fixtures')">📅 Fikstür</button>
+            <button class="nav-btn" onclick="showTab('standings')">🏆 Puan Durumu</button>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- Upload Section -->
+        <div id="uploadSection">
+            <div class="card">
+                <h2 class="card-title">📥 Turnuva Verilerini İçe Aktar</h2>
+                <div class="upload-zone" id="uploadZone" onclick="document.getElementById('fileInput').click()">
+                    <div class="empty-state-icon">📂</div>
+                    <h3 style="color: #1e3a8a; margin-bottom: 0.5rem;">JSON Dosyasını Yükleyin</h3>
+                    <p style="color: #6b7280; margin-bottom: 1rem;">
+                        Turnuva kurulum sayfasından indirdiğiniz dosyayı buraya sürükleyin veya tıklayın
+                    </p>
+                    <button class="btn btn-primary">📁 Dosya Seç</button>
+                    <input type="file" id="fileInput" accept=".json" style="display: none;" onchange="handleFileUpload(event)">
+                </div>
+            </div>
+        </div>
+
+        <!-- Content Sections -->
+        <div id="contentSection" class="hidden">
+            <!-- Fixtures Tab -->
+            <div id="tab-fixtures">
+                <div class="card">
+                    <h2 class="card-title">📅 Maç Fikstürü</h2>
+                    
+                    <div class="filter-section">
+                        <span class="filter-label">Filtrele:</span>
+                        <select id="filterStatus" onchange="filterFixtures()">
+                            <option value="all">Tüm Maçlar</option>
+                            <option value="played">Oynanan Maçlar</option>
+                            <option value="upcoming">Oynanacak Maçlar</option>
+                        </select>
+                        <select id="filterTeam" onchange="filterFixtures()">
+                            <option value="all">Tüm Takımlar</option>
+                        </select>
+                    </div>
+
+                    <div id="fixturesContent"></div>
+                </div>
+            </div>
+
+            <!-- Standings Tab -->
+            <div id="tab-standings" class="hidden">
+                <div class="card">
+                    <div style="background: linear-gradient(135deg, #1e3a8a, #1e40af); color: white; padding: 1.5rem; border-radius: 0.75rem; margin: -2rem -2rem 2rem -2rem;">
+                        <h2 style="font-size: 2rem; margin-bottom: 0.5rem;">🏆 Puan Durumu</h2>
+                        <p style="color: #fbbf24; font-size: 1rem;">Güncel sıralama ve istatistikler</p>
+                    </div>
+                    
+                    <div style="overflow-x: auto;">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th style="text-align: center;">Sıra</th>
+                                    <th>Takım</th>
+                                    <th style="text-align: center;">O</th>
+                                    <th style="text-align: center;">G</th>
+                                    <th style="text-align: center;">B</th>
+                                    <th style="text-align: center;">M</th>
+                                    <th style="text-align: center;">A</th>
+                                    <th style="text-align: center;">Y</th>
+                                    <th style="text-align: center;">Av</th>
+                                    <th style="text-align: center;">Puan</th>
+                                </tr>
+                            </thead>
+                            <tbody id="standingsBody"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let tournamentData = null;
+        let allFixtures = [];
+        let filteredFixtures = [];
+
+        // Drag & Drop
+        const uploadZone = document.getElementById('uploadZone');
+        uploadZone.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            uploadZone.classList.add('drag-over');
+        });
+        uploadZone.addEventListener('dragleave', () => {
+            uploadZone.classList.remove('drag-over');
+        });
+        uploadZone.addEventListener('drop', (e) => {
+            e.preventDefault();
+            uploadZone.classList.remove('drag-over');
+            const file = e.dataTransfer.files[0];
+            if (file && file.type === 'application/json') {
+                loadFile(file);
+            } else {
+                alert('❌ Lütfen geçerli bir JSON dosyası yükleyin!');
+            }
+        });
+
+        function handleFileUpload(event) {
+            const file = event.target.files[0];
+            if (file) {
+                loadFile(file);
+            }
+        }
+
+        function loadFile(file) {
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                try {
+                    tournamentData = JSON.parse(e.target.result);
+                    
+                    if (!tournamentData.fixtures || !tournamentData.teams) {
+                        throw new Error('Geçersiz dosya formatı');
+                    }
+
+                    allFixtures = tournamentData.fixtures;
+                    initializeDisplay();
+                    
+                } catch (err) {
+                    alert('❌ Dosya yükleme hatası: ' + err.message);
+                }
+            };
+            reader.readAsText(file);
+        }
+
+        function initializeDisplay() {
+            document.getElementById('uploadSection').classList.add('hidden');
+            document.getElementById('contentSection').classList.remove('hidden');
+
+            document.getElementById('tournamentTitle').textContent = tournamentData.tournamentName || 'Turnuva';
+            document.getElementById('seasonText').textContent = (tournamentData.season || '2024-25') + ' Sezonu';
+
+            // Populate team filter
+            const teamFilter = document.getElementById('filterTeam');
+            teamFilter.innerHTML = '<option value="all">Tüm Takımlar</option>';
+            tournamentData.teams.forEach(team => {
+                teamFilter.innerHTML += `<option value="${team.id}">${team.name}</option>`;
+            });
+
+            updateStats();
+            filterFixtures();
+            renderStandings();
+        }
+
+        function showTab(tab) {
+            ['fixtures', 'standings'].forEach(t => {
+                document.getElementById('tab-' + t).classList.add('hidden');
+            });
+            document.getElementById('tab-' + tab).classList.remove('hidden');
+            
+            document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+        }
+
+        function updateStats() {
+            const played = allFixtures.filter(f => f.played).length;
+            const goals = allFixtures.filter(f => f.played).reduce((sum, f) => 
+                sum + (f.homeScore || 0) + (f.awayScore || 0), 0
+            );
+            const avg = played > 0 ? (goals / played).toFixed(2) : 0;
+
+            document.getElementById('statMatches').textContent = allFixtures.length;
+            document.getElementById('statPlayed').textContent = played;
+            document.getElementById('statGoals').textContent = goals;
+            document.getElementById('statAvg').textContent = avg;
+        }
+
+        function filterFixtures() {
+            const status = document.getElementById('filterStatus').value;
+            const teamId = parseInt(document.getElementById('filterTeam').value);
+
+            filteredFixtures = allFixtures.filter(f => {
+                let statusMatch = true;
+                if (status === 'played') statusMatch = f.played;
+                if (status === 'upcoming') statusMatch = !f.played;
+
+                let teamMatch = true;
+                if (teamId && !isNaN(teamId)) {
+                    teamMatch = f.homeTeam.id === teamId || f.awayTeam.id === teamId;
+                }
+
+                return statusMatch && teamMatch;
+            });
+
+            renderFixtures();
+        }
+
+        function renderFixtures() {
+            const content = document.getElementById('fixturesContent');
+            
+            if (filteredFixtures.length === 0) {
+                content.innerHTML = `
+                    <div class="empty-state">
+                        <div class="empty-state-icon">🔍</div>
+                        <h3>Maç Bulunamadı</h3>
+                        <p>Seçilen filtrelere uygun maç bulunmuyor.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            let html = '<div style="max-height: 700px; overflow-y: auto;">';
+            
+            filteredFixtures.forEach((f, i) => {
+                html += `
+                    <div class="match-card ${f.played ? 'played' : ''}">
+                        <div class="match-row">
+                            <div class="match-info">
+                                ${f.played ? '<span class="badge badge-success">✓ Oynanmış</span>' : '<span class="badge badge-info">Oynanacak</span>'}
+                                <span class="match-date">${f.date}</span>
+                                <span class="match-time">${f.time}</span>
+                            </div>
+                            <div class="match-teams">
+                                <span class="team-name team-home">${f.homeTeam.name}</span>
+                                ${f.played ? 
+                                    `<div class="score-display">${f.homeScore} - ${f.awayScore}</div>` :
+                                    `<div class="score-pending">vs</div>`
+                                }
+                                <span class="team-name">${f.awayTeam.name}</span>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            html += '</div>';
+            content.innerHTML = html;
+        }
+
+        function renderStandings() {
+            const standings = {};
+            
+            tournamentData.teams.forEach(team => {
+                standings[team.id] = {
+                    team: team,
+                    played: 0,
+                    won: 0,
+                    drawn: 0,
+                    lost: 0,
+                    goalsFor: 0,
+                    goalsAgainst: 0,
+                    goalDifference: 0,
+                    points: 0
+                };
+            });
+
+            allFixtures.forEach(f => {
+                if (f.played && f.homeScore !== null && f.awayScore !== null) {
+                    const home = standings[f.homeTeam.id];
+                    const away = standings[f.awayTeam.id];
+
+                    home.played++;
+                    away.played++;
+                    home.goalsFor += f.homeScore;
+                    home.goalsAgainst += f.awayScore;
+                    away.goalsFor += f.awayScore;
+                    away.goalsAgainst += f.homeScore;
+
+                    if (f.homeScore > f.awayScore) {
+                        home.won++;
+                        home.points += 3;
+                        away.lost++;
+                    } else if (f.homeScore < f.awayScore) {
+                        away.won++;
+                        away.points += 3;
+                        home.lost++;
+                    } else {
+                        home.drawn++;
+                        away.drawn++;
+                        home.points++;
+                        away.points++;
+                    }
+
+                    home.goalDifference = home.goalsFor - home.goalsAgainst;
+                    away.goalDifference = away.goalsFor - away.goalsAgainst;
+                }
+            });
+
+            const sorted = Object.values(standings).sort((a, b) => {
+                if (b.points !== a.points) return b.points - a.points;
+                if (b.goalDifference !== a.goalDifference) return b.goalDifference - a.goalDifference;
+                return b.goalsFor - a.goalsFor;
+            });
+
+            const tbody = document.getElementById('standingsBody');
+            tbody.innerHTML = '';
+            
+            sorted.forEach((s, i) => {
+                const row = tbody.insertRow();
+                row.className = i === 0 ? 'leader-row' : '';
+                row.innerHTML = `
+                    <td class="rank">${i === 0 ? '🥇' : i + 1}</td>
+                    <td>
+                        <div class="team-info">
+                            ${s.team.logo ? `<img src="${s.team.logo}" class="team-logo" alt="${s.team.name}">` : ''}
+                            <div>
+                                <strong style="color: #1e3a8a; font-size: 1.05rem;">${s.team.name}</strong>
+                                <div style="color: #6b7280; font-size: 0.875rem;">${s.team.country}</div>
+                            </div>
+                        </div>
+                    </td>
+                    <td style="text-align: center;">${s.played}</td>
+                    <td style="text-align: center; color: #059669; font-weight: 600;">${s.won}</td>
+                    <td style="text-align: center; color: #d97706; font-weight: 600;">${s.drawn}</td>
+                    <td style="text-align: center; color: #dc2626; font-weight: 600;">${s.lost}</td>
+                    <td style="text-align: center; font-weight: 600;">${s.goalsFor}</td>
+                    <td style="text-align: center; font-weight: 600;">${s.goalsAgainst}</td>
+                    <td style="text-align: center; font-weight: bold; color: ${s.goalDifference >= 0 ? '#059669' : '#dc2626'};">
+                        ${s.goalDifference > 0 ? '+' : ''}${s.goalDifference}
+                    </td>
+                    <td class="points">${s.points}</td>
+                `;
+            });
+        }
+    </script>
+</body>
+</html>
