@@ -608,53 +608,85 @@
         }
 
         function performDraw() {
-            matchCount = parseInt(document.getElementById('inputMatchCount').value);
+            // 12 takım kontrolü
+            if (teams.length !== 12) {
+                alert('⚠️ Bu sistem 12 takım için tasarlanmıştır. Şu anda ' + teams.length + ' takım var.');
+                return;
+            }
+            
+            matchCount = 5;
             tournamentName = document.getElementById('inputTournamentName').value;
             season = document.getElementById('inputSeason').value;
             
-            document.getElementById('drawContent').innerHTML = '<div class="spinner"></div><p style="text-align: center; font-size: 1.2rem; color: #374151;">⏳ Eşleşmeler oluşturuluyor...</p>';
+            document.getElementById('drawContent').innerHTML = '<div class="spinner"></div><p style="text-align: center; font-size: 1.2rem; color: #374151;">⏳ Eşleştirmeler oluşturuluyor...</p>';
             
             setTimeout(() => {
                 matches = [];
-                const opponents = {};
-                teams.forEach(team => opponents[team.id] = []);
-
-                teams.forEach(team => {
-                    const available = teams.filter(t => 
-                        t.id !== team.id && 
-                        opponents[team.id].length < matchCount &&
-                        !opponents[team.id].includes(t.id) &&
-                        opponents[t.id].length < matchCount &&
-                        !opponents[t.id].includes(team.id)
-                    );
-
-                    while (opponents[team.id].length < matchCount && available.length > 0) {
-                        const idx = Math.floor(Math.random() * available.length);
-                        const opp = available[idx];
-                        
-                        if (!opponents[team.id].includes(opp.id) && 
-                            !opponents[opp.id].includes(team.id) &&
-                            opponents[opp.id].length < matchCount) {
-                            
-                            const isHome = Math.random() > 0.5;
-                            matches.push({
-                                id: Date.now() + matches.length,
-                                homeTeam: isHome ? team : opp,
-                                awayTeam: isHome ? opp : team,
-                                homeScore: null,
-                                awayScore: null,
-                                played: false
-                            });
-                            opponents[team.id].push(opp.id);
-                            opponents[opp.id].push(team.id);
-                        }
-                        available.splice(idx, 1);
-                    }
+                
+                // Round-Robin schedule oluştur (5 tur)
+                const schedule = createRoundRobinSchedule(teams, 5);
+                
+                // Schedule'ı flatten et ve matches array'ine ekle
+                schedule.forEach(round => {
+                    round.forEach(match => {
+                        matches.push({
+                            id: Date.now() + matches.length,
+                            homeTeam: match.homeTeam,
+                            awayTeam: match.awayTeam,
+                            homeScore: null,
+                            awayScore: null,
+                            played: false
+                        });
+                    });
                 });
-
+                
                 renderDrawResult();
                 updateSteps();
             }, 2500);
+        }
+
+        function createRoundRobinSchedule(teamsArray, numRounds) {
+            const schedule = [];
+            let teamsWorking = teamsArray.slice();
+            const n = teamsWorking.length;
+            
+            for (let round = 0; round < numRounds; round++) {
+                const roundMatches = [];
+                
+                // Sabit takım (son takım)
+                const fixedTeam = teamsWorking[n - 1];
+                const rotatingTeams = teamsWorking.slice(0, n - 1);
+                
+                // Eşleştirmeler (Berger algoritması)
+                for (let i = 0; i < rotatingTeams.length / 2; i++) {
+                    const team1 = rotatingTeams[i];
+                    const team2 = rotatingTeams[rotatingTeams.length - 1 - i];
+                    
+                    // Home/Away belirleme (çift turlar farklı)
+                    if (round % 2 === 0) {
+                        roundMatches.push({ homeTeam: team1, awayTeam: team2 });
+                    } else {
+                        roundMatches.push({ homeTeam: team2, awayTeam: team1 });
+                    }
+                }
+                
+                // Sabit takımın maçı (ortadaki dönen takımla)
+                const middleTeam = rotatingTeams[Math.floor(rotatingTeams.length / 2)];
+                if (round % 2 === 0) {
+                    roundMatches.push({ homeTeam: fixedTeam, awayTeam: middleTeam });
+                } else {
+                    roundMatches.push({ homeTeam: middleTeam, awayTeam: fixedTeam });
+                }
+                
+                schedule.push(roundMatches);
+                
+                // Rotasyon (sabit takım hariç) - sonraki tur için hazırla
+                const lastTeam = rotatingTeams.pop();
+                rotatingTeams.unshift(lastTeam);
+                teamsWorking = [...rotatingTeams, fixedTeam];
+            }
+            
+            return schedule;
         }
 
         function renderDrawResult() {
@@ -728,120 +760,72 @@
         function generateFixtures() {
             const startDate = document.getElementById('inputStartDate').value;
             if (!startDate) return;
-
-            fixtures = [];
             
-            // ADIM 1: Her takım için maçlarını numaralandır (1. maç, 2. maç, vb.)
-            const teamMatchNumbers = {};
-            teams.forEach(team => teamMatchNumbers[team.id] = 0);
-            
-            // Her maça tur numarası ata (her takımın kaçıncı maçı olduğuna göre)
-            const matchesWithRounds = matches.map(match => {
-                teamMatchNumbers[match.homeTeam.id]++;
-                teamMatchNumbers[match.awayTeam.id]++;
-                
-                // İki takımın da kaçıncı maçı olduğunu kontrol et
-                // En büyük olan tur numarası olur
-                const homeMatchNum = teamMatchNumbers[match.homeTeam.id];
-                const awayMatchNum = teamMatchNumbers[match.awayTeam.id];
-                const roundNumber = Math.max(homeMatchNum, awayMatchNum);
-                
-                return {
-                    ...match,
-                    round: roundNumber
-                };
-            });
-            
-            // ADIM 2: Turları organize et
-            const rounds = [];
-            for (let r = 1; r <= matchCount; r++) {
-                rounds[r] = matchesWithRounds.filter(m => m.round === r);
+            if (matches.length === 0) {
+                alert('❌ Önce kura çekimi yapmalısınız!');
+                return;
             }
             
-            // ADIM 3: Her takımın son oynadığı tarihi takip et
-            const teamLastMatchDate = {};
-            let currentDate = new Date(startDate);
+            if (matches.length !== 30) {
+                alert('⚠️ Toplam 30 maç olmalıdır. Şu anda ' + matches.length + ' maç var.');
+                return;
+            }
             
-            // Her turu sırayla işle
-            for (let roundNum = 1; roundNum <= matchCount; roundNum++) {
-                const roundMatches = [...rounds[roundNum]]; // Kopyasını al
-                let matchesScheduledInRound = 0;
+            fixtures = [];
+            
+            let currentDate = new Date(startDate);
+            let fixtureId = 0;
+            
+            // matches'i turlar halinde grupla (her tur 6 maç = 12 takım / 2)
+            const turCount = 5;
+            const matchesPerTur = 6;
+            
+            for (let turIdx = 0; turIdx < turCount; turIdx++) {
+                // Bu tur için başlangıç tarihini belirle (Pazartesi'ye kadar ilerle)
+                let weekStart = new Date(currentDate);
+                while (weekStart.getDay() !== 1) { // 1 = Pazartesi
+                    weekStart.setDate(weekStart.getDate() + 1);
+                }
                 
-                while (matchesScheduledInRound < roundMatches.length) {
-                    const dayOfWeek = currentDate.getDay();
+                // Bu turdaki 6 maçı al
+                const turMatches = matches.slice(turIdx * matchesPerTur, (turIdx + 1) * matchesPerTur);
+                
+                // 6 maçı hafta içine dağıt
+                const matchSchedule = [
+                    { dayOffset: 0, times: ['19:00', '21:45'] },    // Pazartesi: 2 maç
+                    { dayOffset: 1, times: ['19:00'] },             // Salı: 1 maç
+                    { dayOffset: 2, times: ['19:00'] },             // Çarşamba: 1 maç
+                    { dayOffset: 3, times: ['19:00'] },             // Perşembe: 1 maç
+                    { dayOffset: 4, times: ['19:00'] }              // Cuma: 1 maç
+                ];
+                
+                let matchIdx = 0;
+                
+                matchSchedule.forEach(dayInfo => {
+                    let matchDate = new Date(weekStart);
+                    matchDate.setDate(matchDate.getDate() + dayInfo.dayOffset);
                     
-                    // Cumartesi-Pazar atla
-                    if (dayOfWeek === 0 || dayOfWeek === 6) {
-                        currentDate.setDate(currentDate.getDate() + 1);
-                        continue;
-                    }
-                    
-                    // Pazartesi 2, diğer günler 1 maç
-                    const maxMatchesPerDay = dayOfWeek === 1 ? 2 : 1;
-                    let matchesScheduledToday = 0;
-                    
-                    // Bu gün için uygun maçları bul
-                    for (let i = 0; i < roundMatches.length && matchesScheduledToday < maxMatchesPerDay; i++) {
-                        const match = roundMatches[i];
-                        if (!match) continue; // Zaten işlendi
-                        
-                        const homeTeamId = match.homeTeam.id;
-                        const awayTeamId = match.awayTeam.id;
-                        
-                        // Her iki takım için de son maçtan 5 gün geçmiş mi kontrol et
-                        const currentDateMs = currentDate.getTime();
-                        const homeLastMatch = teamLastMatchDate[homeTeamId];
-                        const awayLastMatch = teamLastMatchDate[awayTeamId];
-                        
-                        let canSchedule = true;
-                        
-                        // Ev sahibi takım için kontrol
-                        if (homeLastMatch) {
-                            const daysSinceHome = (currentDateMs - homeLastMatch) / (1000 * 60 * 60 * 24);
-                            if (daysSinceHome < 5) {
-                                canSchedule = false;
-                            }
-                        }
-                        
-                        // Deplasman takımı için kontrol
-                        if (awayLastMatch && canSchedule) {
-                            const daysSinceAway = (currentDateMs - awayLastMatch) / (1000 * 60 * 60 * 24);
-                            if (daysSinceAway < 5) {
-                                canSchedule = false;
-                            }
-                        }
-                        
-                        // Eğer bu maç bu gün oynanabiliyorsa
-                        if (canSchedule) {
+                    dayInfo.times.forEach(time => {
+                        if (matchIdx < turMatches.length) {
+                            const match = turMatches[matchIdx];
+                            
                             fixtures.push({
-                                ...match,
-                                date: new Date(currentDate).toISOString().split('T')[0],
-                                time: matchesScheduledToday === 0 ? '19:00' : '21:45',
-                                round: roundNum
+                                id: fixtureId++,
+                                homeTeam: match.homeTeam,
+                                awayTeam: match.awayTeam,
+                                date: matchDate.toISOString().split('T')[0],
+                                time: time,
+                                played: false
                             });
                             
-                            // Son maç tarihlerini güncelle
-                            teamLastMatchDate[homeTeamId] = currentDateMs;
-                            teamLastMatchDate[awayTeamId] = currentDateMs;
-                            
-                            matchesScheduledToday++;
-                            matchesScheduledInRound++;
-                            
-                            // Bu maçı listeden çıkar
-                            roundMatches[i] = null;
+                            matchIdx++;
                         }
-                    }
-                    
-                    // Filtreleme - null olanları temizle
-                    for (let i = roundMatches.length - 1; i >= 0; i--) {
-                        if (roundMatches[i] === null) {
-                            roundMatches.splice(i, 1);
-                        }
-                    }
-                    
-                    // Bir sonraki güne geç
-                    currentDate.setDate(currentDate.getDate() + 1);
-                }
+                    });
+                });
+                
+                // Sonraki turda başla (7 gün sonra)
+                currentDate = new Date(weekStart);
+                currentDate.setDate(currentDate.getDate() + 7);
             }
             
             renderFixturePreview();
