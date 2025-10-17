@@ -432,24 +432,29 @@
             });
         }
 
-        async function loadTournamentData(event) {
-            const file = event.target.files[0];
-            if (!file) return alert("Lütfen bir turnuva JSON dosyası seçin.");
+        async function loadTournamentData() {
+            const loadingElement = document.getElementById("loadingScreen");
+            const contentElement = document.getElementById("mainContent");
         
             try {
-                const text = await file.text();
-                const data = JSON.parse(text);
+                const response = await fetch("tournament_data.json?" + new Date().getTime());
         
-                if (!data.fixtures || !Array.isArray(data.fixtures)) {
-                    alert("❌ Geçersiz dosya yapısı. 'fixtures' listesi bulunamadı.");
-                    return;
+                if (!response.ok) {
+                    throw new Error(`JSON dosyası yüklenemedi: ${response.status} ${response.statusText}`);
                 }
         
-                // Üst bilgi alanlarını doldur
+                const data = await response.json();
+        
+                // Veri yapısını doğrula
+                if (!data || !Array.isArray(data.fixtures)) {
+                    throw new Error("Geçersiz veri yapısı. 'fixtures' alanı bulunamadı.");
+                }
+        
+                // Sayfadaki bilgileri güncelle
                 document.getElementById("tournamentName").textContent = data.tournamentName || "Bilinmeyen Turnuva";
                 document.getElementById("season").textContent = data.season || "-";
-                document.getElementById("teamCount").textContent = data.totalTeams || (data.teams?.length || "-");
-                document.getElementById("matchCount").textContent = data.totalMatches || data.fixtures.length;
+                document.getElementById("teamCount").textContent = data.totalTeams || data.teams?.length || "-";
+                document.getElementById("matchCount").textContent = data.totalMatches || data.fixtures.length || "-";
                 document.getElementById("matchesPerTeam").textContent = data.matchesPerTeam || "-";
                 document.getElementById("importDate").textContent = data.exportDate
                     ? new Date(data.exportDate).toLocaleString("tr-TR")
@@ -458,10 +463,8 @@
                 // Fikstür tablosunu oluştur
                 const tbody = document.getElementById("fixturesBody");
                 tbody.innerHTML = "";
-        
                 data.fixtures.forEach((f, i) => {
                     const row = document.createElement("tr");
-        
                     row.innerHTML = `
                         <td>${i + 1}</td>
                         <td>${f.round ?? "-"}</td>
@@ -480,13 +483,20 @@
                     tbody.appendChild(row);
                 });
         
-                // Sonuçları göster
-                document.getElementById("importResult").style.display = "block";
-                alert(`✅ ${data.fixtures.length} maç başarıyla yüklendi!`);
+                // Görünüm: yükleme kalksın, içerik gelsin
+                loadingElement.style.display = "none";
+                contentElement.style.display = "block";
         
             } catch (err) {
-                console.error(err);
-                alert("❌ JSON okuma hatası: " + err.message);
+                console.error("JSON yükleme hatası:", err);
+                alert("❌ Turnuva verileri yüklenemedi:\n" + err.message);
+                loadingElement.innerHTML = `
+                    <div style="color:#f87171;text-align:center;padding:2rem;">
+                        <h3>❌ Turnuva Yükleme Hatası</h3>
+                        <p>${err.message}</p>
+                        <p style="margin-top:1rem;font-size:0.9rem;">Lütfen "tournament_data.json" dosyasının bu sayfa ile aynı dizinde olduğundan emin olun.</p>
+                    </div>
+                `;
             }
         }
 
