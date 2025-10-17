@@ -77,6 +77,22 @@
             border-color: #2563eb;
             box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
         }
+        input[type="file"] {
+            padding: 0.5rem;
+        }
+        input[type="file"]::file-selector-button {
+            padding: 0.5rem 1rem;
+            background: #2563eb;
+            color: white;
+            border: none;
+            border-radius: 0.375rem;
+            font-weight: 600;
+            cursor: pointer;
+            margin-right: 1rem;
+        }
+        input[type="file"]::file-selector-button:hover {
+            background: #1d4ed8;
+        }
         .grid-2 {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -350,8 +366,11 @@
 
             <div class="form-group">
                 <label class="form-label">Excel/CSV ile Toplu İçe Aktar</label>
-                <input type="file" accept=".xlsx,.xls,.csv" onchange="handleFileUpload(event)" class="form-input">
-                <p class="small-text">📊 Excel sütunları: "Takım Adı", "Ülke", "Logo" (opsiyonel)</p>
+                <input type="file" id="excelFile" accept=".xlsx,.xls,.csv" onchange="handleFileUpload(event)" class="form-input">
+                <p class="small-text">
+                    📊 Excel sütunları: <strong>"Takım Adı"</strong>, <strong>"Ülke"</strong>, <strong>"Logo"</strong> (opsiyonel)<br>
+                    💡 <a href="#" onclick="event.preventDefault(); downloadSampleExcel();" style="color: #2563eb; font-weight: 600; text-decoration: underline;">Örnek Excel dosyasını indir</a>
+                </p>
             </div>
 
             <div class="form-group">
@@ -400,10 +419,11 @@
                 Turnuva fikstürü hazır. Aşağıdaki butona tıklayarak maç programını dışa aktarın.
             </p>
             <button class="btn btn-export" onclick="exportTournament()">
-                📥 Turnuva Verilerini İndir (JSON)
+                📥 Turnuva Verilerini İndir (tournament_data.json)
             </button>
             <p class="small-text" style="margin-top: 1rem; color: #047857;">
-                Bu dosyayı <strong>Turnuva Görüntüleme</strong> sayfasında içe aktarabilirsiniz.
+                İndirilen <strong>tournament_data.json</strong> dosyasını GitHub repo'nuzun ana dizinine yükleyin.<br>
+                Görüntüleme sayfası bu dosyayı otomatik okuyacak.
             </p>
         </div>
     </div>
@@ -457,13 +477,19 @@
             } else {
                 teams.forEach(team => {
                     const row = tbody.insertRow();
-                    row.innerHTML = `
-                        <td><strong style="color: #1e3a8a;">${team.name}</strong></td>
-                        <td>${team.country}</td>
-                        <td style="text-align: center;">
-                            <button class="btn btn-danger" onclick="removeTeam(${team.id})">🗑️ Sil</button>
-                        </td>
-                    `;
+                    const nameCell = row.insertCell();
+                    const countryCell = row.insertCell();
+                    const actionCell = row.insertCell();
+                    
+                    nameCell.innerHTML = `<strong style="color: #1e3a8a;">${team.name}</strong>`;
+                    countryCell.innerHTML = team.country;
+                    actionCell.style.textAlign = 'center';
+                    
+                    const deleteBtn = document.createElement('button');
+                    deleteBtn.className = 'btn btn-danger';
+                    deleteBtn.textContent = '🗑️ Sil';
+                    deleteBtn.onclick = () => removeTeam(team.id);
+                    actionCell.appendChild(deleteBtn);
                 });
             }
             
@@ -471,9 +497,59 @@
             updateSteps();
         }
 
+        function downloadSampleExcel() {
+            // XLSX kontrolü
+            if (typeof XLSX === 'undefined') {
+                alert('⚠️ Excel kütüphanesi yüklenemedi. Lütfen sayfayı yenileyin.');
+                console.error('XLSX library not loaded');
+                return;
+            }
+
+            const sampleData = [
+                { "Takım Adı": "Real Madrid", "Ülke": "İspanya", "Logo": "" },
+                { "Takım Adı": "Barcelona", "Ülke": "İspanya", "Logo": "" },
+                { "Takım Adı": "Manchester United", "Ülke": "İngiltere", "Logo": "" },
+                { "Takım Adı": "Bayern München", "Ülke": "Almanya", "Logo": "" },
+                { "Takım Adı": "Paris Saint-Germain", "Ülke": "Fransa", "Logo": "" },
+                { "Takım Adı": "Juventus", "Ülke": "İtalya", "Logo": "" },
+                { "Takım Adı": "Liverpool", "Ülke": "İngiltere", "Logo": "" },
+                { "Takım Adı": "AC Milan", "Ülke": "İtalya", "Logo": "" },
+                { "Takım Adı": "Galatasaray", "Ülke": "Türkiye", "Logo": "" },
+                { "Takım Adı": "Fenerbahçe", "Ülke": "Türkiye", "Logo": "" },
+                { "Takım Adı": "Beşiktaş", "Ülke": "Türkiye", "Logo": "" },
+                { "Takım Adı": "Trabzonspor", "Ülke": "Türkiye", "Logo": "" }
+            ];
+
+            try {
+                const ws = XLSX.utils.json_to_sheet(sampleData);
+                const wb = XLSX.utils.book_new();
+                XLSX.utils.book_append_sheet(wb, ws, "Takımlar");
+
+                ws['!cols'] = [
+                    { wch: 25 },
+                    { wch: 15 },
+                    { wch: 30 }
+                ];
+
+                XLSX.writeFile(wb, "ornek_takimlar.xlsx");
+                alert("✅ Örnek Excel dosyası indirildi!\n\nBu dosyayı düzenleyip kendi takımlarınızı ekleyebilirsiniz.");
+            } catch (err) {
+                alert('❌ Excel oluşturma hatası: ' + err.message);
+                console.error('Excel generation error:', err);
+            }
+        }
+
         function handleFileUpload(event) {
             const file = event.target.files[0];
             if (!file) return;
+
+            // XLSX kontrolü
+            if (typeof XLSX === 'undefined') {
+                alert('⚠️ Excel kütüphanesi yüklenemedi. Lütfen sayfayı yenileyin veya farklı bir tarayıcı deneyin.');
+                console.error('XLSX library not loaded');
+                event.target.value = '';
+                return;
+            }
 
             const reader = new FileReader();
             reader.onload = (e) => {
@@ -484,12 +560,17 @@
                     const json = XLSX.utils.sheet_to_json(sheet);
                     
                     let imported = 0;
-                    json.forEach(row => {
-                        const name = row['Takım Adı'] || row['Team Name'] || row['Name'] || '';
-                        const country = row['Ülke'] || row['Country'] || '';
+                    json.forEach((row, index) => {
+                        const name = row['Takım Adı'] || row['Team Name'] || row['Name'] || row['Takım'] || '';
+                        const country = row['Ülke'] || row['Country'] || row['Ulke'] || '';
                         const logo = row['Logo'] || '';
                         if (name && country) {
-                            teams.push({ id: Date.now() + imported, name, country, logo });
+                            teams.push({ 
+                                id: Date.now() + imported + Math.random(), 
+                                name: name.toString().trim(), 
+                                country: country.toString().trim(), 
+                                logo: logo.toString().trim() 
+                            });
                             imported++;
                         }
                     });
@@ -497,8 +578,13 @@
                     renderTeams();
                     updateDrawButton();
                     alert(`✅ ${imported} takım başarıyla içe aktarıldı!`);
+                    
+                    // Reset file input
+                    event.target.value = '';
                 } catch (err) {
                     alert('❌ Dosya okuma hatası: ' + err.message);
+                    console.error('Excel okuma hatası:', err);
+                    event.target.value = '';
                 }
             };
             reader.readAsArrayBuffer(file);
@@ -688,11 +774,11 @@
             const url = URL.createObjectURL(blob);
             const link = document.createElement('a');
             link.href = url;
-            link.download = `turnuva_${tournamentName.replace(/\s+/g, '_')}_${Date.now()}.json`;
+            link.download = 'tournament_data.json';
             link.click();
             URL.revokeObjectURL(url);
 
-            alert('✅ Turnuva verileri başarıyla indirildi!\n\nBu dosyayı "Turnuva Görüntüleme" sayfasında içe aktarabilirsiniz.');
+            alert('✅ tournament_data.json başarıyla indirildi!\n\nBu dosyayı GitHub repo\'nuzun ana dizinine yükleyin.\nGörüntüleme sayfası bu dosyayı otomatik okuyacak.');
         }
 
         // Başlangıç
