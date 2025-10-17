@@ -432,67 +432,171 @@
             });
         }
 
+        function normalizeTournamentData(raw) {
+          const toStr = (v) => (typeof v === 'string' ? v.trim() : v);
+          const byId = new Map();
+          const byName = new Map();
+          let nextId = 1;
+        
+          // 1) Var olan teams'i topla
+          if (Array.isArray(raw.teams)) {
+            raw.teams.forEach(t => {
+              if (!t) return;
+              const id = typeof t.id === 'number' ? t.id : (typeof t.id === 'string' ? parseInt(t.id,10) : undefined);
+              const name = toStr(t.name || '');
+              if (!name) return;
+              const teamObj = {
+                id: Number.isFinite(id) ? id : undefined,
+                name,
+                logo: t.logo || '',
+                country: t.country || ''
+              };
+              if (!Number.isFinite(teamObj.id)) teamObj.id = nextId++;
+              byId.set(teamObj.id, teamObj);
+              byName.set(name.toLowerCase(), teamObj);
+              if (teamObj.id >= nextId) nextId = teamObj.id + 1;
+            });
+          }
+        
+          // 2) Bir değerden takım nesnesi üret
+          function ensureTeam(val) {
+            // a) Nesne ise
+            if (val && typeof val === 'object') {
+              const name = toStr(val.name || '');
+              let id = val.id;
+              if (!Number.isFinite(id)) {
+                // id yoksa mevcut ada göre bul / oluştur
+                if (name && byName.has(name.toLowerCase())) {
+                  id = byName.get(name.toLowerCase()).id;
+                } else {
+                  id = nextId++;
+                }
+              }
+              // kayıt altına al / güncelle
+              let existing = byId.get(id);
+              if (!existing) {
+                existing = { id, name, logo: val.logo || '', country: val.country || '' };
+                byId.set(id, existing);
+                if (name) byName.set(name.toLowerCase(), existing);
+              } else {
+                // eksik alanları tamamla
+                existing.name = existing.name || name;
+                existing.logo = existing.logo || val.logo || '';
+                existing.country = existing.country || val.country || '';
+                if (existing.name && !byName.has(existing.name.toLowerCase())) {
+                  byName.set(existing.name.toLowerCase(), existing);
+                }
+              }
+              return existing;
+            }
+        
+            // b) String ise: isimden bul / oluştur
+            if (typeof val === 'string') {
+              const name = val.trim();
+              if (name) {
+                const key = name.toLowerCase();
+                if (byName.has(key)) return byName.get(key);
+                const t = { id: nextId++, name, logo: '', country: '' };
+                byId.set(t.id, t);
+                byName.set(key, t);
+                return t;
+              }
+            }
+        
+            // c) Sayı/id ise
+            if (Number.isFinite(val)) {
+              if (byId.has(val)) return byId.get(val);
+              const t = { id: val, name: `Team ${val}`, logo: '', country: '' };
+              byId.set(val, t);
+              byName.set(t.name.toLowerCase(), t);
+              if (val >= nextId) nextId = val + 1;
+              return t;
+            }
+        
+            // d) Tanımsız/bozuk ise dummy takım
+            const t = { id: nextId++, name: `Team ${nextId - 1}`, logo: '', country: '' };
+            byId.set(t.id, t);
+            byName.set(t.name.toLowerCase(), t);
+            return t;
+          }
+        
+          // 3) Fikstürleri normalize et (homeTeam / awayTeam mutlaka NESNE olsun)
+          const fixtures = (raw.fixtures || []).map((f, i) => {
+            const home = ensureTeam(f.homeTeam ?? f.home ?? f.homeTeamName);
+            const away = ensureTeam(f.awayTeam ?? f.away ?? f.awayTeamName);
+            return {
+              id: f.id ?? (Date.now() + i),
+              round: f.round ?? null,
+              date: f.date ?? '',
+              time: f.time ?? '',
+              homeTeam: home,
+              awayTeam: away,
+              played: !!f.played,
+              homeScore: f.homeScore ?? null,
+              awayScore: f.awayScore ?? null
+            };
+          });
+        
+          // 4) Takım listesini yeniden üret (byId -> dizi)
+          const teams = Array.from(byId.values()).sort((a,b)=>a.id-b.id);
+        
+          return {
+            tournamentName: raw.tournamentName || 'Turnuva',
+            season: raw.season || '2024-25',
+            matchesPerTeam: raw.matchesPerTeam ?? null,
+            teams,
+            fixtures,
+            exportDate: raw.exportDate || null,
+            totalMatches: fixtures.length
+          };
+        }
+        
         async function loadTournamentData() {
             const loadingElement = document.getElementById("loadingOverlay");
             const contentElement = document.getElementById("contentSection");
             const errorElement = document.getElementById("errorSection");
         
             try {
-                const response = await fetch("tournament_data.json?" + new Date().getTime());
-                if (!response.ok) throw new Error("tournament_data.json bulunamadı veya okunamadı.");
+                const res = await fetch("tournament_data.json?" + Date.now());
+                if (!res.ok) throw new Error("tournament_data.json bulunamadı veya okunamadı.");
+                const raw = await res.json();
         
-                const data = await response.json();
-                if (!data || !Array.isArray(data.fixtures))
-                    throw new Error("Geçersiz veri yapısı: 'fixtures' listesi bulunamadı.");
+                // 🔧 burada normalize ediyoruz
+                const normalized = normalizeTournamentData(raw);
         
-                // Global değişkenleri doldur
-                tournamentData = data;
-                allFixtures = data.fixtures;
-                filteredFixtures = data.fixtures;
+                // global state
+                tournamentData = normalized;
+                allFixtures = normalized.fixtures.slice();
+                filteredFixtures = allFixtures.slice();
         
-                // Başlık ve sezon bilgileri
-                document.getElementById("tournamentTitle").textContent = data.tournamentName || "Turnuva Görüntüleme";
-                document.getElementById("seasonText").textContent = (data.season || "2025") + " Sezonu";
+                // başlık ve sezon
+                document.getElementById("tournamentTitle").textContent = normalized.tournamentName || "Turnuva Görüntüleme";
+                document.getElementById("seasonText").textContent = (normalized.season || "2025") + " Sezonu";
         
-                // Genel istatistikler
-                const totalMatches = data.fixtures.length;
-                const playedMatches = data.fixtures.filter(f => f.played).length;
-                const totalGoals = data.fixtures.filter(f => f.played).reduce((sum, f) => sum + (f.homeScore || 0) + (f.awayScore || 0), 0);
-                const avgGoals = playedMatches > 0 ? (totalGoals / playedMatches).toFixed(2) : "0.00";
-        
-                document.getElementById("statMatches").textContent = totalMatches;
-                document.getElementById("statPlayed").textContent = playedMatches;
-                document.getElementById("statGoals").textContent = totalGoals;
-                document.getElementById("statAvg").textContent = avgGoals;
-        
-                // Takım filtresi doldur
+                // takım filtresi
                 const teamSelect = document.getElementById("filterTeam");
                 teamSelect.innerHTML = '<option value="all">Tüm Takımlar</option>';
-                if (data.teams && Array.isArray(data.teams)) {
-                    data.teams.forEach(team => {
-                        teamSelect.innerHTML += `<option value="${team.id}">${team.name}</option>`;
-                    });
-                }
+                normalized.teams.forEach(t => {
+                    teamSelect.innerHTML += `<option value="${t.id}">${t.name}</option>`;
+                });
         
-                // Fikstürü oluştur
-                renderFixtures();
+                // mevcut akışı kullan
+                updateStats();
+                filterFixtures();     // renderFixtures çağırır
+                renderStandings();
         
-                // Sayfayı göster
+                // görünürlük
                 loadingElement.style.display = "none";
                 contentElement.style.display = "block";
                 errorElement.classList.add("hidden");
-        
-                console.log("✅ Turnuva verileri başarıyla yüklendi.");
         
             } catch (err) {
                 console.error("Yükleme hatası:", err);
                 if (loadingElement) loadingElement.style.display = "none";
                 if (errorElement) errorElement.classList.remove("hidden");
-        
                 alert("❌ Turnuva verileri yüklenemedi:\n" + err.message);
             }
         }
-
         function initializeDisplay() {
             document.getElementById('tournamentTitle').textContent = tournamentData.tournamentName || 'Turnuva';
             document.getElementById('seasonText').textContent = (tournamentData.season || '2024-25') + ' Sezonu';
