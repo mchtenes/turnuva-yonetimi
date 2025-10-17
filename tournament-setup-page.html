@@ -355,6 +355,16 @@
             <h2 class="card-title">👥 Takım Yönetimi</h2>
             
             <div class="form-group">
+                <label class="form-label">Manuel Takım Ekle</label>
+                <div class="grid-4">
+                    <input type="text" class="form-input" id="inputTeamName" placeholder="Takım Adı">
+                    <input type="text" class="form-input" id="inputTeamCountry" placeholder="Ülke">
+                    <input type="text" class="form-input" id="inputTeamLogo" placeholder="Logo URL (opsiyonel)">
+                    <button class="btn btn-primary" onclick="addTeam()">➕ Takım Ekle</button>
+                </div>
+            </div>
+
+            <div class="form-group">
                 <label class="form-label">Excel/CSV ile Toplu İçe Aktar</label>
                 <input type="file" id="excelFile" accept=".xlsx,.xls,.csv" onchange="handleFileUpload(event)" class="form-input">
                 <p class="small-text">
@@ -365,11 +375,10 @@
 
             <div class="form-group">
                 <label class="form-label">Her Takım Kaç Maç Oynayacak?</label>
-                <input type="number" class="form-input" id="inputMatchCount" value="8" min="2" max="20" style="width: 150px;" onchange="updateDrawButton()">
-                <p class="small-text">⚠️ Maç sayısı takım sayısından az olmalıdır</p>
+                <input type="number" class="form-input" id="inputMatchCount" value="8" min="2" max="20" style="width: 150px;">
             </div>
 
-            <h3 class="card-title">Kayıtlı Takımlar (<span id="teamCount">0</span>)</h3>
+            <h3 style="color: #1e3a8a; margin: 1.5rem 0 1rem;">Kayıtlı Takımlar (<span id="teamCount">0</span>)</h3>
             <table>
                 <thead>
                     <tr>
@@ -398,11 +407,7 @@
             <div class="form-group">
                 <label class="form-label">Başlangıç Tarihi</label>
                 <input type="date" class="form-input" id="inputStartDate" onchange="generateFixtures()" style="width: 200px;">
-                <p class="small-text">
-                    📌 <strong>Haftalık Program:</strong> Pazartesi 2 maç, Salı-Cuma 1 maç, Cumartesi-Pazar boş<br>
-                    🏆 <strong>Tur Sistemi:</strong> Her takım X maç oynayacaksa tam X tur oluşur (örn: 5 maç = 5 tur)<br>
-                    ⏱️ <strong>Dinlenme Kuralı:</strong> Her takımın iki maçı arasında minimum 5 gün olmalıdır
-                </p>
+                <p class="small-text">📌 Kurallar: Pazartesi 2 maç, Salı-Cuma 1 maç, Cumartesi-Pazar boş</p>
             </div>
             <div id="fixturePreview"></div>
         </div>
@@ -436,6 +441,24 @@
             document.getElementById('step2').className = teams.length >= 2 && matches.length > 0 ? 'step completed' : 'step';
             document.getElementById('step3').className = fixtures.length > 0 ? 'step completed' : 'step';
             document.getElementById('step4').className = fixtures.length > 0 ? 'step active' : 'step';
+        }
+
+        function addTeam() {
+            const name = document.getElementById('inputTeamName').value.trim();
+            const country = document.getElementById('inputTeamCountry').value.trim();
+            const logo = document.getElementById('inputTeamLogo').value.trim();
+            
+            if (!name || !country) {
+                alert('Takım adı ve ülke zorunludur!');
+                return;
+            }
+            
+            teams.push({ id: Date.now(), name, country, logo });
+            document.getElementById('inputTeamName').value = '';
+            document.getElementById('inputTeamCountry').value = '';
+            document.getElementById('inputTeamLogo').value = '';
+            renderTeams();
+            updateDrawButton();
         }
 
         function removeTeam(id) {
@@ -569,157 +592,93 @@
 
         function updateDrawButton() {
             const content = document.getElementById('drawContent');
-            matchCount = parseInt(document.getElementById('inputMatchCount').value);
-            
             if (teams.length < 2) {
                 content.innerHTML = '<div class="alert alert-info">ℹ️ Kura çekimi yapmak için en az 2 takım eklemelisiniz.</div>';
             } else if (matches.length === 0) {
-                const expectedMatches = (teams.length * matchCount) / 2;
-                const isValid = matchCount < teams.length && Number.isInteger(expectedMatches);
-                
-                if (!isValid) {
-                    content.innerHTML = `
-                        <div class="alert alert-info" style="background: #fef2f2; border-left-color: #dc2626; color: #991b1b;">
-                            ⚠️ <strong>Uyarı:</strong> ${teams.length} takım ile her takım ${matchCount} maç oynayamaz!<br><br>
-                            ${matchCount >= teams.length ? 
-                                `• Her takım en fazla <strong>${teams.length - 1}</strong> farklı rakiple oynayabilir.<br>` : 
-                                `• Matematiksel olarak imkansız kombinasyon.<br>`
-                            }
-                            • Lütfen maç sayısını değiştirin.
-                        </div>
-                    `;
-                } else {
-                    content.innerHTML = `
-                        <p style="font-size: 1.1rem; margin-bottom: 1.5rem; color: #374151;">
-                            <strong>${teams.length}</strong> takım kayıtlı. Her takım <strong>${matchCount}</strong> farklı rakiple karşılaşacak.
-                        </p>
-                        <div style="background: #f0fdf4; border: 2px solid #10b981; border-radius: 0.5rem; padding: 1rem; margin-bottom: 1.5rem;">
-                            <div style="color: #065f46; font-weight: 600; margin-bottom: 0.5rem;">📊 Beklenen Sonuç:</div>
-                            <div style="color: #047857;">
-                                • Toplam Maç: <strong>${expectedMatches}</strong><br>
-                                • Her Takım: <strong>${matchCount}</strong> maç<br>
-                                • Formül: (${teams.length} × ${matchCount}) ÷ 2 = ${expectedMatches}
-                            </div>
-                        </div>
-                        <button class="btn btn-primary btn-large" onclick="performDraw()">🎲 Kura Çekimini Başlat</button>
-                    `;
-                }
+                matchCount = parseInt(document.getElementById('inputMatchCount').value);
+                content.innerHTML = `
+                    <p style="font-size: 1.1rem; margin-bottom: 1.5rem; color: #374151;">
+                        <strong>${teams.length}</strong> takım kayıtlı. Her takım <strong>${matchCount}</strong> farklı rakiple karşılaşacak.
+                    </p>
+                    <button class="btn btn-primary btn-large" onclick="performDraw()">🎲 Kura Çekimini Başlat</button>
+                `;
             }
         }
 
         function performDraw() {
-            // 12 takım kontrolü
-            if (teams.length !== 12) {
-                alert('⚠️ Bu sistem 12 takım için tasarlanmıştır. Şu anda ' + teams.length + ' takım var.');
-                return;
-            }
-            
-            matchCount = 5;
+            matchCount = 5; // 12 takım, her biri 5 maç
             tournamentName = document.getElementById('inputTournamentName').value;
             season = document.getElementById('inputSeason').value;
-            
-            document.getElementById('drawContent').innerHTML = '<div class="spinner"></div><p style="text-align: center; font-size: 1.2rem; color: #374151;">⏳ Eşleştirmeler oluşturuluyor...</p>';
-            
+        
+            document.getElementById('drawContent').innerHTML =
+                '<div class="spinner"></div><p style="text-align:center;font-size:1.2rem;color:#374151;">⏳ Fikstür hesaplanıyor...</p>';
+        
             setTimeout(() => {
                 matches = [];
-                
-                // Round-Robin schedule oluştur (5 tur)
-                const schedule = createRoundRobinSchedule(teams, 5);
-                
-                // Schedule'ı flatten et ve matches array'ine ekle
-                schedule.forEach(round => {
-                    round.forEach(match => {
-                        matches.push({
+                const teamIds = teams.map(t => t.id);
+                const usedPairs = new Set();
+        
+                // 5 tur oluştur
+                for (let round = 1; round <= 5; round++) {
+                    let available = [...teamIds];
+                    const roundMatches = [];
+                    let safety = 0;
+        
+                    while (available.length >= 2 && safety < 1000) {
+                        safety++;
+                        const t1 = available[Math.floor(Math.random() * available.length)];
+                        // potansiyel rakipleri bul
+                        const possible = available.filter(t2 =>
+                            t2 !== t1 &&
+                            !usedPairs.has(`${t1}-${t2}`) &&
+                            !usedPairs.has(`${t2}-${t1}`)
+                        );
+        
+                        if (possible.length === 0) {
+                            // çıkmazda kaldıysak round’u yeniden başlat
+                            available = [...teamIds];
+                            roundMatches.length = 0;
+                            continue;
+                        }
+        
+                        const t2 = possible[Math.floor(Math.random() * possible.length)];
+                        const teamA = teams.find(t => t.id === t1);
+                        const teamB = teams.find(t => t.id === t2);
+                        const isHome = Math.random() > 0.5;
+        
+                        roundMatches.push({
                             id: Date.now() + matches.length,
-                            homeTeam: match.homeTeam,
-                            awayTeam: match.awayTeam,
-                            homeScore: null,
-                            awayScore: null,
-                            played: false
+                            homeTeam: isHome ? teamA : teamB,
+                            awayTeam: isHome ? teamB : teamA,
+                            round
                         });
-                    });
-                });
-                
+        
+                        usedPairs.add(`${t1}-${t2}`);
+                        usedPairs.add(`${t2}-${t1}`);
+        
+                        // listeden çıkar
+                        available = available.filter(id => id !== t1 && id !== t2);
+                    }
+        
+                    // round 6 maçtan azsa (örneğin çakışma nedeniyle) yeniden oluştur
+                    if (roundMatches.length < 6) {
+                        round--;
+                        continue;
+                    }
+        
+                    matches.push(...roundMatches);
+                }
+        
                 renderDrawResult();
                 updateSteps();
-            }, 2500);
-        }
-
-        function createRoundRobinSchedule(teamsArray, numRounds) {
-            const schedule = [];
-            let teamsWorking = teamsArray.slice();
-            const n = teamsWorking.length;
-            
-            for (let round = 0; round < numRounds; round++) {
-                const roundMatches = [];
-                
-                // Sabit takım (son takım)
-                const fixedTeam = teamsWorking[n - 1];
-                const rotatingTeams = teamsWorking.slice(0, n - 1);
-                
-                // Eşleştirmeler (Berger algoritması)
-                for (let i = 0; i < rotatingTeams.length / 2; i++) {
-                    const team1 = rotatingTeams[i];
-                    const team2 = rotatingTeams[rotatingTeams.length - 1 - i];
-                    
-                    // Home/Away belirleme (çift turlar farklı)
-                    if (round % 2 === 0) {
-                        roundMatches.push({ homeTeam: team1, awayTeam: team2 });
-                    } else {
-                        roundMatches.push({ homeTeam: team2, awayTeam: team1 });
-                    }
-                }
-                
-                // Sabit takımın maçı (ortadaki dönen takımla)
-                const middleTeam = rotatingTeams[Math.floor(rotatingTeams.length / 2)];
-                if (round % 2 === 0) {
-                    roundMatches.push({ homeTeam: fixedTeam, awayTeam: middleTeam });
-                } else {
-                    roundMatches.push({ homeTeam: middleTeam, awayTeam: fixedTeam });
-                }
-                
-                schedule.push(roundMatches);
-                
-                // Rotasyon (sabit takım hariç) - sonraki tur için hazırla
-                const lastTeam = rotatingTeams.pop();
-                rotatingTeams.unshift(lastTeam);
-                teamsWorking = [...rotatingTeams, fixedTeam];
-            }
-            
-            return schedule;
+            }, 2000);
         }
 
         function renderDrawResult() {
-            const expectedMatches = (teams.length * matchCount) / 2;
-            
             let html = `
                 <div class="success-box">
                     <h3 style="color: #059669; font-size: 1.8rem; margin-bottom: 0.5rem;">✅ Kura Çekimi Tamamlandı!</h3>
-                    <p style="color: #047857; font-size: 1.1rem; margin-bottom: 1rem;">
-                        <strong>${matches.length}</strong> maç başarıyla oluşturuldu
-                    </p>
-                    <div style="background: white; border-radius: 0.5rem; padding: 1rem; margin-top: 1rem;">
-                        <div style="display: flex; justify-content: space-around; flex-wrap: wrap; gap: 1rem;">
-                            <div style="text-align: center;">
-                                <div style="font-size: 1.5rem; font-weight: bold; color: #1e3a8a;">${teams.length}</div>
-                                <div style="font-size: 0.875rem; color: #6b7280;">Takım</div>
-                            </div>
-                            <div style="text-align: center;">
-                                <div style="font-size: 1.5rem; font-weight: bold; color: #1e3a8a;">${matchCount}</div>
-                                <div style="font-size: 0.875rem; color: #6b7280;">Takım Başı Maç</div>
-                            </div>
-                            <div style="text-align: center;">
-                                <div style="font-size: 1.5rem; font-weight: bold; color: #1e3a8a;">${matches.length}</div>
-                                <div style="font-size: 0.875rem; color: #6b7280;">Toplam Maç</div>
-                            </div>
-                            <div style="text-align: center;">
-                                <div style="font-size: 1.5rem; font-weight: bold; color: ${matches.length === expectedMatches ? '#10b981' : '#ef4444'};">
-                                    ${matches.length === expectedMatches ? '✓' : '✗'}
-                                </div>
-                                <div style="font-size: 0.875rem; color: #6b7280;">Doğrulama</div>
-                            </div>
-                        </div>
-                    </div>
+                    <p style="color: #047857; font-size: 1.1rem;"><strong>${matches.length}</strong> maç başarıyla oluşturuldu</p>
                 </div>
                 <div class="match-grid">
             `;
@@ -760,72 +719,28 @@
         function generateFixtures() {
             const startDate = document.getElementById('inputStartDate').value;
             if (!startDate) return;
-            
-            if (matches.length === 0) {
-                alert('❌ Önce kura çekimi yapmalısınız!');
-                return;
-            }
-            
-            if (matches.length !== 30) {
-                alert('⚠️ Toplam 30 maç olmalıdır. Şu anda ' + matches.length + ' maç var.');
-                return;
-            }
-            
+
             fixtures = [];
-            
-            let currentDate = new Date(startDate);
-            let fixtureId = 0;
-            
-            // matches'i turlar halinde grupla (her tur 6 maç = 12 takım / 2)
-            const turCount = 5;
-            const matchesPerTur = 6;
-            
-            for (let turIdx = 0; turIdx < turCount; turIdx++) {
-                // Bu tur için başlangıç tarihini belirle (Pazartesi'ye kadar ilerle)
-                let weekStart = new Date(currentDate);
-                while (weekStart.getDay() !== 1) { // 1 = Pazartesi
-                    weekStart.setDate(weekStart.getDate() + 1);
+            let current = new Date(startDate);
+            let idx = 0;
+
+            while (idx < matches.length) {
+                const day = current.getDay();
+                if (day === 0 || day === 6) {
+                    current.setDate(current.getDate() + 1);
+                    continue;
                 }
-                
-                // Bu turdaki 6 maçı al
-                const turMatches = matches.slice(turIdx * matchesPerTur, (turIdx + 1) * matchesPerTur);
-                
-                // 6 maçı hafta içine dağıt
-                const matchSchedule = [
-                    { dayOffset: 0, times: ['19:00', '21:45'] },    // Pazartesi: 2 maç
-                    { dayOffset: 1, times: ['19:00'] },             // Salı: 1 maç
-                    { dayOffset: 2, times: ['19:00'] },             // Çarşamba: 1 maç
-                    { dayOffset: 3, times: ['19:00'] },             // Perşembe: 1 maç
-                    { dayOffset: 4, times: ['19:00'] }              // Cuma: 1 maç
-                ];
-                
-                let matchIdx = 0;
-                
-                matchSchedule.forEach(dayInfo => {
-                    let matchDate = new Date(weekStart);
-                    matchDate.setDate(matchDate.getDate() + dayInfo.dayOffset);
-                    
-                    dayInfo.times.forEach(time => {
-                        if (matchIdx < turMatches.length) {
-                            const match = turMatches[matchIdx];
-                            
-                            fixtures.push({
-                                id: fixtureId++,
-                                homeTeam: match.homeTeam,
-                                awayTeam: match.awayTeam,
-                                date: matchDate.toISOString().split('T')[0],
-                                time: time,
-                                played: false
-                            });
-                            
-                            matchIdx++;
-                        }
+
+                const count = day === 1 ? 2 : 1;
+                for (let i = 0; i < count && idx < matches.length; i++) {
+                    fixtures.push({
+                        ...matches[idx],
+                        date: current.toISOString().split('T')[0],
+                        time: i === 0 ? '19:00' : '21:45'
                     });
-                });
-                
-                // Sonraki turda başla (7 gün sonra)
-                currentDate = new Date(weekStart);
-                currentDate.setDate(currentDate.getDate() + 7);
+                    idx++;
+                }
+                current.setDate(current.getDate() + 1);
             }
             
             renderFixturePreview();
@@ -834,45 +749,15 @@
         }
 
         function renderFixturePreview() {
-            const totalRounds = matchCount;
-            const expectedMatches = (teams.length * matchCount) / 2;
-            
             let html = '<h3 style="color: #1e3a8a; margin-bottom: 1rem;">📋 Oluşturulan Fikstür</h3>';
-            
-            // Doğrulama mesajı
-            if (fixtures.length === expectedMatches) {
-                html += '<p style="color: #047857; background: #ecfdf5; padding: 1rem; border-radius: 0.5rem; border-left: 4px solid #10b981; margin-bottom: 1rem;">';
-                html += `✅ <strong>Başarılı:</strong> Tüm ${expectedMatches} maç fikstüre eklendi<br>`;
-                html += `🏆 <strong>Tur Sistemi:</strong> Her takım ${matchCount} maç oynar, toplamda ${totalRounds} tur vardır<br>`;
-                html += '⏱️ <strong>Dinlenme Kuralı:</strong> Her takımın iki maçı arasında minimum 5 gün vardır<br>';
-                html += '📅 <strong>Program:</strong> Pazartesi 2 maç, Salı-Cuma 1 maç, hafta sonu boş';
-                html += '</p>';
-            } else {
-                html += '<p style="color: #dc2626; background: #fef2f2; padding: 1rem; border-radius: 0.5rem; border-left: 4px solid #dc2626; margin-bottom: 1rem;">';
-                html += `⚠️ <strong>Uyarı:</strong> Sadece ${fixtures.length} maç fikstüre eklendi, beklenen ${expectedMatches} maç!<br>`;
-                html += 'Bazı maçlar fikstüre sığmamış olabilir.';
-                html += '</p>';
-            }
-            
             html += '<div style="max-height: 400px; overflow-y: auto; background: #f9fafb; padding: 1rem; border-radius: 0.5rem;">';
             
-            let currentRound = 0;
             fixtures.forEach((f, i) => {
-                // Yeni tur başlıyorsa başlık göster
-                if (f.round !== currentRound) {
-                    currentRound = f.round;
-                    html += `
-                        <div style="background: linear-gradient(135deg, #1e3a8a, #1e40af); color: white; padding: 0.75rem 1rem; border-radius: 0.5rem; margin: 1rem 0 0.75rem 0; font-weight: bold; font-size: 1.1rem;">
-                            🏆 ${currentRound}. TUR
-                        </div>
-                    `;
-                }
-                
                 html += `
                     <div style="background: white; border: 2px solid #e5e7eb; border-radius: 0.5rem; padding: 1rem; margin-bottom: 0.75rem;">
                         <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
                             <div>
-                                <span class="badge badge-info">Tur ${f.round}</span>
+                                <span class="badge badge-info">Maç #${i + 1}</span>
                                 <strong style="margin-left: 1rem; color: #374151;">${f.date}</strong>
                                 <span style="margin-left: 0.5rem; color: #6b7280;">${f.time}</span>
                             </div>
@@ -885,30 +770,6 @@
             });
             
             html += '</div>';
-            
-            // İstatistikler
-            const actualRounds = Math.max(...fixtures.map(f => f.round));
-            html += `
-                <div style="margin-top: 1.5rem; padding: 1rem; background: #f3f4f6; border-radius: 0.5rem; display: flex; gap: 2rem; justify-content: center; flex-wrap: wrap;">
-                    <div style="text-align: center;">
-                        <div style="font-size: 2rem; font-weight: bold; color: ${actualRounds === totalRounds ? '#10b981' : '#dc2626'};">${actualRounds}</div>
-                        <div style="font-size: 0.875rem; color: #6b7280;">Oluşan Tur (Beklenen: ${totalRounds})</div>
-                    </div>
-                    <div style="text-align: center;">
-                        <div style="font-size: 2rem; font-weight: bold; color: ${fixtures.length === expectedMatches ? '#10b981' : '#dc2626'};">${fixtures.length}</div>
-                        <div style="font-size: 0.875rem; color: #6b7280;">Toplam Maç (Beklenen: ${expectedMatches})</div>
-                    </div>
-                    <div style="text-align: center;">
-                        <div style="font-size: 2rem; font-weight: bold; color: #1e3a8a;">${fixtures[0].date}</div>
-                        <div style="font-size: 0.875rem; color: #6b7280;">Başlangıç</div>
-                    </div>
-                    <div style="text-align: center;">
-                        <div style="font-size: 2rem; font-weight: bold; color: #1e3a8a;">${fixtures[fixtures.length-1].date}</div>
-                        <div style="font-size: 0.875rem; color: #6b7280;">Bitiş</div>
-                    </div>
-                </div>
-            `;
-            
             document.getElementById('fixturePreview').innerHTML = html;
         }
 
