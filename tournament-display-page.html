@@ -5,11 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Turnuva Görüntüleme - Fikstür ve Puan Durumu</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
             background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 50%, #1e3a8a 100%);
@@ -30,43 +26,14 @@
             flex-wrap: wrap;
             gap: 1.5rem;
         }
-        .title-section h1 {
-            color: white;
-            font-size: 2.5rem;
-            margin-bottom: 0.25rem;
-        }
-        .title-section p {
-            color: #fbbf24;
-            font-size: 1.1rem;
-        }
-        .stats {
-            display: flex;
-            gap: 2rem;
-            color: white;
-        }
-        .stat-item {
-            text-align: center;
-        }
-        .stat-value {
-            font-size: 2rem;
-            font-weight: bold;
-            color: #fbbf24;
-        }
-        .stat-label {
-            font-size: 0.875rem;
-            margin-top: 0.25rem;
-        }
-        .nav {
-            background: #1e40af;
-            border-bottom: 2px solid #1e3a8a;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
-        }
-        .nav-content {
-            max-width: 1400px;
-            margin: 0 auto;
-            display: flex;
-            gap: 0.25rem;
-        }
+        .title-section h1 { color: white; font-size: 2.5rem; margin-bottom: 0.25rem; }
+        .title-section p { color: #fbbf24; font-size: 1.1rem; }
+        .stats { display: flex; gap: 2rem; color: white; }
+        .stat-item { text-align: center; }
+        .stat-value { font-size: 2rem; font-weight: bold; color: #fbbf24; }
+        .stat-label { font-size: 0.875rem; margin-top: 0.25rem; }
+        .nav { background: #1e40af; border-bottom: 2px solid #1e3a8a; box-shadow: 0 2px 10px rgba(0,0,0,0.3); }
+        .nav-content { max-width: 1400px; margin: 0 auto; display: flex; gap: 0.25rem; }
         .nav-btn {
             padding: 1.25rem 2rem;
             border: none;
@@ -77,19 +44,9 @@
             transition: all 0.3s;
             font-size: 1rem;
         }
-        .nav-btn:hover {
-            background: rgba(30, 64, 175, 0.5);
-        }
-        .nav-btn.active {
-            background: #1e3a8a;
-            color: #fbbf24;
-            border-bottom: 4px solid #fbbf24;
-        }
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 2rem 1rem;
-        }
+        .nav-btn:hover { background: rgba(30, 64, 175, 0.5); }
+        .nav-btn.active { background: #1e3a8a; color: #fbbf24; border-bottom: 4px solid #fbbf24; }
+        .container { max-width: 1400px; margin: 0 auto; padding: 2rem 1rem; }
         .card {
             background: white;
             border-radius: 1rem;
@@ -113,49 +70,15 @@
             margin-bottom: 1rem;
             transition: all 0.3s;
         }
-        .match-card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-        }
-        .match-card.played {
-            background: linear-gradient(135deg, #ecfdf5, #d1fae5);
-            border-color: #10b981;
-        }
-        .match-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 1rem;
-        }
-        .match-info {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-        .match-date {
-            font-weight: 600;
-            color: #374151;
-            min-width: 100px;
-        }
-        .match-time {
-            color: #6b7280;
-            min-width: 60px;
-        }
-        .match-teams {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            font-size: 1.1rem;
-        }
-        .team-name {
-            font-weight: 600;
-            color: #1e3a8a;
-            min-width: 150px;
-        }
-        .team-home {
-            text-align: right;
-        }
+        .match-card:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+        .match-card.played { background: linear-gradient(135deg, #ecfdf5, #d1fae5); border-color: #10b981; }
+        .match-row { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
+        .match-info { display: flex; align-items: center; gap: 1rem; }
+        .match-date { font-weight: 600; color: #374151; min-width: 100px; }
+        .match-time { color: #6b7280; min-width: 60px; }
+        .match-teams { display: flex; align-items: center; gap: 1rem; font-size: 1.1rem; }
+        .team-name { font-weight: 600; color: #1e3a8a; min-width: 150px; }
+        .team-home { text-align: right; }
         .score-display {
             background: #1e3a8a;
             color: #fbbf24;
@@ -174,73 +97,20 @@
             font-size: 0.95rem;
             font-style: italic;
         }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-        thead {
-            background: linear-gradient(135deg, #1e3a8a, #1e40af);
-            color: white;
-        }
-        th, td {
-            padding: 1rem;
-            text-align: left;
-        }
-        th {
-            font-weight: 600;
-            font-size: 0.95rem;
-        }
-        tbody tr {
-            border-bottom: 1px solid #e5e7eb;
-            transition: all 0.2s;
-        }
-        tbody tr:hover {
-            background: #f9fafb;
-        }
-        .leader-row {
-            background: linear-gradient(135deg, #fef3c7, #fde68a) !important;
-        }
-        .leader-row:hover {
-            background: linear-gradient(135deg, #fde68a, #fcd34d) !important;
-        }
-        .rank {
-            font-weight: bold;
-            font-size: 1.2rem;
-            color: #6b7280;
-            text-align: center;
-            width: 60px;
-        }
-        .leader-row .rank {
-            color: #d97706;
-        }
-        .team-info {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-        }
-        .team-logo {
-            width: 32px;
-            height: 32px;
-            object-fit: contain;
-        }
-        .points {
-            font-weight: bold;
-            font-size: 1.3rem;
-            color: #1e3a8a;
-            text-align: center;
-        }
-        .hidden {
-            display: none;
-        }
-        .empty-state {
-            text-align: center;
-            padding: 4rem 2rem;
-            color: #6b7280;
-        }
-        .empty-state-icon {
-            font-size: 4rem;
-            margin-bottom: 1rem;
-        }
+        table { width: 100%; border-collapse: collapse; }
+        thead { background: linear-gradient(135deg, #1e3a8a, #1e40af); color: white; }
+        th, td { padding: 1rem; text-align: left; }
+        th { font-weight: 600; font-size: 0.95rem; }
+        tbody tr { border-bottom: 1px solid #e5e7eb; transition: all 0.2s; cursor: pointer; }
+        tbody tr:hover { background: #f9fafb; }
+        .leader-row { background: linear-gradient(135deg, #fef3c7, #fde68a) !important; }
+        .leader-row:hover { background: linear-gradient(135deg, #fde68a, #fcd34d) !important; }
+        .rank { font-weight: bold; font-size: 1.2rem; color: #6b7280; text-align: center; width: 60px; }
+        .leader-row .rank { color: #d97706; }
+        .team-info { display: flex; align-items: center; gap: 0.75rem; }
+        .team-logo { width: 32px; height: 32px; object-fit: contain; }
+        .points { font-weight: bold; font-size: 1.3rem; color: #1e3a8a; text-align: center; }
+        .hidden { display: none !important; }
         .badge {
             display: inline-block;
             padding: 0.25rem 0.75rem;
@@ -248,14 +118,8 @@
             font-size: 0.875rem;
             font-weight: 600;
         }
-        .badge-success {
-            background: #d1fae5;
-            color: #065f46;
-        }
-        .badge-info {
-            background: #dbeafe;
-            color: #1e40af;
-        }
+        .badge-success { background: #d1fae5; color: #065f46; }
+        .badge-info { background: #dbeafe; color: #1e40af; }
         .filter-section {
             background: #f9fafb;
             padding: 1rem;
@@ -266,10 +130,7 @@
             align-items: center;
             flex-wrap: wrap;
         }
-        .filter-label {
-            font-weight: 600;
-            color: #374151;
-        }
+        .filter-label { font-weight: 600; color: #374151; }
         select {
             padding: 0.5rem 1rem;
             border: 2px solid #d1d5db;
@@ -278,55 +139,9 @@
             background: white;
             cursor: pointer;
         }
-        select:focus {
-            outline: none;
-            border-color: #2563eb;
-        }
-        .loading-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(30, 58, 138, 0.95);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 9999;
-        }
-        .loading-content {
-            text-align: center;
-            color: white;
-        }
-        .spinner {
-            border: 5px solid rgba(255, 255, 255, 0.3);
-            border-top: 5px solid #fbbf24;
-            border-radius: 50%;
-            width: 80px;
-            height: 80px;
-            animation: spin 1s linear infinite;
-            margin: 0 auto 1.5rem;
-        }
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-        .error-box {
-            background: #fef2f2;
-            border: 3px solid #dc2626;
-            border-radius: 1rem;
-            padding: 2rem;
-            margin: 2rem;
-            text-align: center;
-        }
-        .error-box h2 {
-            color: #dc2626;
-            margin-bottom: 1rem;
-        }
-        .error-box p {
-            color: #374151;
-            margin-bottom: 0.5rem;
-        }
+        select:focus { outline: none; border-color: #2563eb; }
+        
+        /* Modal Styles */
         .modal-overlay {
             position: fixed;
             top: 0;
@@ -358,19 +173,9 @@
             justify-content: space-between;
             align-items: center;
         }
-        .modal-title {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-        .modal-title h2 {
-            font-size: 1.8rem;
-            margin-bottom: 0.25rem;
-        }
-        .modal-title p {
-            color: #fbbf24;
-            font-size: 1rem;
-        }
+        .modal-title { display: flex; align-items: center; gap: 1rem; }
+        .modal-title h2 { font-size: 1.8rem; margin-bottom: 0.25rem; }
+        .modal-title p { color: #fbbf24; font-size: 1rem; }
         .modal-close {
             background: rgba(255, 255, 255, 0.2);
             border: none;
@@ -385,12 +190,8 @@
             justify-content: center;
             transition: all 0.3s;
         }
-        .modal-close:hover {
-            background: rgba(255, 255, 255, 0.3);
-        }
-        .modal-body {
-            padding: 2rem;
-        }
+        .modal-close:hover { background: rgba(255, 255, 255, 0.3); }
+        .modal-body { padding: 2rem; }
         .team-stats-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
@@ -404,23 +205,10 @@
             text-align: center;
             border: 2px solid #e5e7eb;
         }
-        .stat-box-label {
-            color: #6b7280;
-            font-size: 0.875rem;
-            margin-bottom: 0.5rem;
-        }
-        .stat-box-value {
-            font-size: 1.8rem;
-            font-weight: bold;
-            color: #1e3a8a;
-        }
-        .stat-box.primary {
-            background: linear-gradient(135deg, #dbeafe, #bfdbfe);
-            border-color: #2563eb;
-        }
-        .stat-box.primary .stat-box-value {
-            color: #1e40af;
-        }
+        .stat-box-label { color: #6b7280; font-size: 0.875rem; margin-bottom: 0.5rem; }
+        .stat-box-value { font-size: 1.8rem; font-weight: bold; color: #1e3a8a; }
+        .stat-box.primary { background: linear-gradient(135deg, #dbeafe, #bfdbfe); border-color: #2563eb; }
+        .stat-box.primary .stat-box-value { color: #1e40af; }
         .match-list-title {
             font-size: 1.3rem;
             font-weight: bold;
@@ -435,24 +223,10 @@
             border-radius: 0.75rem;
             padding: 1.25rem;
             margin-bottom: 1rem;
-            transition: all 0.3s;
         }
-        .team-match-card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-        }
-        .team-match-card.won {
-            background: linear-gradient(135deg, #ecfdf5, #d1fae5);
-            border-color: #10b981;
-        }
-        .team-match-card.drawn {
-            background: linear-gradient(135deg, #fef3c7, #fde68a);
-            border-color: #f59e0b;
-        }
-        .team-match-card.lost {
-            background: linear-gradient(135deg, #fef2f2, #fee2e2);
-            border-color: #ef4444;
-        }
+        .team-match-card.won { background: linear-gradient(135deg, #ecfdf5, #d1fae5); border-color: #10b981; }
+        .team-match-card.drawn { background: linear-gradient(135deg, #fef3c7, #fde68a); border-color: #f59e0b; }
+        .team-match-card.lost { background: linear-gradient(135deg, #fef2f2, #fee2e2); border-color: #ef4444; }
         .match-result-badge {
             display: inline-block;
             padding: 0.25rem 0.75rem;
@@ -460,21 +234,46 @@
             font-size: 0.875rem;
             font-weight: 600;
         }
-        .match-result-badge.won {
-            background: #10b981;
-            color: white;
+        .match-result-badge.won { background: #10b981; color: white; }
+        .match-result-badge.drawn { background: #f59e0b; color: white; }
+        .match-result-badge.lost { background: #ef4444; color: white; }
+        
+        /* Loading */
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(30, 58, 138, 0.95);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
         }
-        .match-result-badge.drawn {
-            background: #f59e0b;
-            color: white;
+        .loading-content { text-align: center; color: white; }
+        .spinner {
+            border: 5px solid rgba(255, 255, 255, 0.3);
+            border-top: 5px solid #fbbf24;
+            border-radius: 50%;
+            width: 80px;
+            height: 80px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 1.5rem;
         }
-        .match-result-badge.lost {
-            background: #ef4444;
-            color: white;
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        .empty-state { text-align: center; padding: 4rem 2rem; color: #6b7280; }
+        .empty-state-icon { font-size: 4rem; margin-bottom: 1rem; }
+        .error-box {
+            background: #fef2f2;
+            border: 3px solid #dc2626;
+            border-radius: 1rem;
+            padding: 2rem;
+            margin: 2rem;
+            text-align: center;
         }
-        tbody tr {
-            cursor: pointer;
-        }
+        .error-box h2 { color: #dc2626; margin-bottom: 1rem; }
+        .error-box p { color: #374151; margin-bottom: 0.5rem; }
     </style>
 </head>
 <body>
@@ -516,31 +315,28 @@
 
     <div class="nav">
         <div class="nav-content">
-            <button class="nav-btn active" onclick="showTab('fixtures')">📅 Fikstür</button>
-            <button class="nav-btn" onclick="showTab('standings')">🏆 Puan Durumu</button>
+            <button class="nav-btn active" id="btnFixtures">📅 Fikstür</button>
+            <button class="nav-btn" id="btnStandings">🏆 Puan Durumu</button>
         </div>
     </div>
 
     <div class="container">
-        <!-- Content Sections -->
         <div id="contentSection">
             <!-- Fixtures Tab -->
             <div id="tab-fixtures">
                 <div class="card">
                     <h2 class="card-title">📅 Maç Fikstürü</h2>
-                    
                     <div class="filter-section">
                         <span class="filter-label">Filtrele:</span>
-                        <select id="filterStatus" onchange="filterFixtures()">
+                        <select id="filterStatus">
                             <option value="all">Tüm Maçlar</option>
                             <option value="played">Oynanan Maçlar</option>
                             <option value="upcoming">Oynanacak Maçlar</option>
                         </select>
-                        <select id="filterTeam" onchange="filterFixtures()">
+                        <select id="filterTeam">
                             <option value="all">Tüm Takımlar</option>
                         </select>
                     </div>
-
                     <div id="fixturesContent"></div>
                 </div>
             </div>
@@ -550,9 +346,8 @@
                 <div class="card">
                     <div style="background: linear-gradient(135deg, #1e3a8a, #1e40af); color: white; padding: 1.5rem; border-radius: 0.75rem; margin: -2rem -2rem 2rem -2rem;">
                         <h2 style="font-size: 2rem; margin-bottom: 0.5rem;">🏆 Puan Durumu</h2>
-                        <p style="color: #fbbf24; font-size: 1rem;">Güncel sıralama ve istatistikler</p>
+                        <p style="color: #fbbf24; font-size: 1rem;">Güncel sıralama ve istatistikler - Detaylar için takıma tıklayın</p>
                     </div>
-                    
                     <div style="overflow-x: auto;">
                         <table>
                             <thead>
@@ -581,23 +376,14 @@
             <div class="error-box">
                 <h2>❌ Veri Yükleme Hatası</h2>
                 <p><strong>tournament_data.json</strong> dosyası bulunamadı veya okunamadı.</p>
-                <p style="margin-top: 1rem;">Lütfen aşağıdaki adımları kontrol edin:</p>
-                <ul style="text-align: left; max-width: 600px; margin: 1rem auto; color: #6b7280;">
-                    <li style="margin: 0.5rem 0;">✓ <strong>tournament_data.json</strong> dosyası GitHub repo'nuzun ana dizininde olmalı</li>
-                    <li style="margin: 0.5rem 0;">✓ Dosya adı tam olarak <strong>tournament_data.json</strong> olmalı (küçük harf)</li>
-                    <li style="margin: 0.5rem 0;">✓ Dosyayı "Turnuva Kurulum" sayfasından indirip repo'ya yüklediğinizden emin olun</li>
-                    <li style="margin: 0.5rem 0;">✓ GitHub Pages'in dosyayı yayınlaması için 2-3 dakika bekleyin</li>
-                </ul>
-                <button onclick="location.reload()" style="margin-top: 1.5rem; padding: 0.75rem 2rem; background: #2563eb; color: white; border: none; border-radius: 0.5rem; font-weight: 600; cursor: pointer;">
-                    🔄 Sayfayı Yenile
-                </button>
+                <button onclick="location.reload()" style="margin-top: 1.5rem; padding: 0.75rem 2rem; background: #2563eb; color: white; border: none; border-radius: 0.5rem; font-weight: 600; cursor: pointer;">🔄 Sayfayı Yenile</button>
             </div>
         </div>
     </div>
 
     <!-- Team Details Modal -->
-    <div id="teamModal" class="modal-overlay hidden" onclick="closeTeamModal(event)">
-        <div class="modal-content" onclick="event.stopPropagation()">
+    <div id="teamModal" class="modal-overlay hidden">
+        <div class="modal-content">
             <div class="modal-header">
                 <div class="modal-title">
                     <img id="modalTeamLogo" src="" alt="" class="team-logo" style="display: none;">
@@ -606,7 +392,7 @@
                         <p id="modalTeamCountry"></p>
                     </div>
                 </div>
-                <button class="modal-close" onclick="closeTeamModal()">×</button>
+                <button class="modal-close" id="modalCloseBtn">×</button>
             </div>
             <div class="modal-body">
                 <div class="team-stats-grid" id="teamStatsGrid"></div>
@@ -621,30 +407,44 @@
         let allFixtures = [];
         let filteredFixtures = [];
 
-        // Sayfa yüklendiğinde otomatik veri yükle
-        window.addEventListener('DOMContentLoaded', loadTournamentData);
+        // Sayfa yüklendiğinde
+        document.addEventListener('DOMContentLoaded', function() {
+            loadTournamentData();
+            initEventListeners();
+        });
+
+        function initEventListeners() {
+            // Navigation
+            document.getElementById('btnFixtures').addEventListener('click', () => showTab('fixtures'));
+            document.getElementById('btnStandings').addEventListener('click', () => showTab('standings'));
+            
+            // Filters
+            document.getElementById('filterStatus').addEventListener('change', filterFixtures);
+            document.getElementById('filterTeam').addEventListener('change', filterFixtures);
+            
+            // Modal close
+            document.getElementById('modalCloseBtn').addEventListener('click', closeModal);
+            document.getElementById('teamModal').addEventListener('click', function(e) {
+                if (e.target.id === 'teamModal') closeModal();
+            });
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') closeModal();
+            });
+        }
 
         async function loadTournamentData() {
             try {
-                // GitHub Pages'te aynı dizindeki tournament_data.json dosyasını oku
                 const response = await fetch('./tournament_data.json');
+                if (!response.ok) throw new Error('Dosya bulunamadı');
                 
-                if (!response.ok) {
-                    throw new Error('Dosya bulunamadı');
-                }
-
                 tournamentData = await response.json();
-                
                 if (!tournamentData.fixtures || !tournamentData.teams) {
                     throw new Error('Geçersiz dosya formatı');
                 }
 
                 allFixtures = tournamentData.fixtures;
                 initializeDisplay();
-                
-                // Loading overlay'i kaldır
                 document.getElementById('loadingOverlay').style.display = 'none';
-                
             } catch (error) {
                 console.error('Veri yükleme hatası:', error);
                 document.getElementById('loadingOverlay').style.display = 'none';
@@ -657,7 +457,6 @@
             document.getElementById('tournamentTitle').textContent = tournamentData.tournamentName || 'Turnuva';
             document.getElementById('seasonText').textContent = (tournamentData.season || '2024-25') + ' Sezonu';
 
-            // Populate team filter
             const teamFilter = document.getElementById('filterTeam');
             teamFilter.innerHTML = '<option value="all">Tüm Takımlar</option>';
             tournamentData.teams.forEach(team => {
@@ -670,13 +469,11 @@
         }
 
         function showTab(tab) {
-            ['fixtures', 'standings'].forEach(t => {
-                document.getElementById('tab-' + t).classList.add('hidden');
-            });
-            document.getElementById('tab-' + tab).classList.remove('hidden');
+            document.getElementById('tab-fixtures').classList.toggle('hidden', tab !== 'fixtures');
+            document.getElementById('tab-standings').classList.toggle('hidden', tab !== 'standings');
             
-            document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
-            event.target.classList.add('active');
+            document.getElementById('btnFixtures').classList.toggle('active', tab === 'fixtures');
+            document.getElementById('btnStandings').classList.toggle('active', tab === 'standings');
         }
 
         function updateStats() {
@@ -716,33 +513,31 @@
             const content = document.getElementById('fixturesContent');
             
             if (filteredFixtures.length === 0) {
-                content.innerHTML = `
-                    <div class="empty-state">
-                        <div class="empty-state-icon">🔍</div>
-                        <h3>Maç Bulunamadı</h3>
-                        <p>Seçilen filtrelere uygun maç bulunmuyor.</p>
-                    </div>
-                `;
+                content.innerHTML = '<div class="empty-state"><div class="empty-state-icon">🔍</div><h3>Maç Bulunamadı</h3></div>';
                 return;
             }
 
             let html = '<div style="max-height: 700px; overflow-y: auto;">';
+            let currentRound = 0;
             
-            filteredFixtures.forEach((f, i) => {
+            filteredFixtures.forEach(f => {
+                if (f.round && f.round !== currentRound) {
+                    currentRound = f.round;
+                    html += `<div style="background: linear-gradient(135deg, #1e3a8a, #1e40af); color: white; padding: 1rem 1.5rem; border-radius: 0.75rem; margin: 1.5rem 0 1rem 0; font-weight: bold; font-size: 1.2rem;">🏆 ${currentRound}. TUR</div>`;
+                }
+                
                 html += `
                     <div class="match-card ${f.played ? 'played' : ''}">
                         <div class="match-row">
                             <div class="match-info">
                                 ${f.played ? '<span class="badge badge-success">✓ Oynanmış</span>' : '<span class="badge badge-info">Oynanacak</span>'}
+                                ${f.round ? `<span class="badge" style="background: #dbeafe; color: #1e40af;">Tur ${f.round}</span>` : ''}
                                 <span class="match-date">${f.date}</span>
                                 <span class="match-time">${f.time}</span>
                             </div>
                             <div class="match-teams">
                                 <span class="team-name team-home">${f.homeTeam.name}</span>
-                                ${f.played ? 
-                                    `<div class="score-display">${f.homeScore} - ${f.awayScore}</div>` :
-                                    `<div class="score-pending">vs</div>`
-                                }
+                                ${f.played ? `<div class="score-display">${f.homeScore} - ${f.awayScore}</div>` : `<div class="score-pending">vs</div>`}
                                 <span class="team-name">${f.awayTeam.name}</span>
                             </div>
                         </div>
@@ -759,15 +554,8 @@
             
             tournamentData.teams.forEach(team => {
                 standings[team.id] = {
-                    team: team,
-                    played: 0,
-                    won: 0,
-                    drawn: 0,
-                    lost: 0,
-                    goalsFor: 0,
-                    goalsAgainst: 0,
-                    goalDifference: 0,
-                    points: 0
+                    team: team, played: 0, won: 0, drawn: 0, lost: 0,
+                    goalsFor: 0, goalsAgainst: 0, goalDifference: 0, points: 0
                 };
             });
 
@@ -776,26 +564,19 @@
                     const home = standings[f.homeTeam.id];
                     const away = standings[f.awayTeam.id];
 
-                    home.played++;
-                    away.played++;
+                    home.played++; away.played++;
                     home.goalsFor += f.homeScore;
                     home.goalsAgainst += f.awayScore;
                     away.goalsFor += f.awayScore;
                     away.goalsAgainst += f.homeScore;
 
                     if (f.homeScore > f.awayScore) {
-                        home.won++;
-                        home.points += 3;
-                        away.lost++;
+                        home.won++; home.points += 3; away.lost++;
                     } else if (f.homeScore < f.awayScore) {
-                        away.won++;
-                        away.points += 3;
-                        home.lost++;
+                        away.won++; away.points += 3; home.lost++;
                     } else {
-                        home.drawn++;
-                        away.drawn++;
-                        home.points++;
-                        away.points++;
+                        home.drawn++; away.drawn++;
+                        home.points++; away.points++;
                     }
 
                     home.goalDifference = home.goalsFor - home.goalsAgainst;
@@ -815,9 +596,7 @@
             sorted.forEach((s, i) => {
                 const row = tbody.insertRow();
                 row.className = i === 0 ? 'leader-row' : '';
-                row.onclick = () => showTeamDetails(s.team);
-                row.style.cursor = 'pointer';
-                row.title = 'Detayları görmek için tıklayın';
+                row.addEventListener('click', () => showTeamDetails(s.team));
                 row.innerHTML = `
                     <td class="rank">${i === 0 ? '🥇' : i + 1}</td>
                     <td>
@@ -844,7 +623,6 @@
         }
 
         function showTeamDetails(team) {
-            // Modal içeriğini doldur
             document.getElementById('modalTeamName').textContent = team.name;
             document.getElementById('modalTeamCountry').textContent = team.country;
             
@@ -856,14 +634,9 @@
                 logoImg.style.display = 'none';
             }
 
-            // Takım istatistiklerini hesapla
-            const teamMatches = allFixtures.filter(f => 
-                f.homeTeam.id === team.id || f.awayTeam.id === team.id
-            );
-            
+            const teamMatches = allFixtures.filter(f => f.homeTeam.id === team.id || f.awayTeam.id === team.id);
             const playedMatches = teamMatches.filter(f => f.played);
-            let wins = 0, draws = 0, losses = 0;
-            let goalsFor = 0, goalsAgainst = 0;
+            let wins = 0, draws = 0, losses = 0, goalsFor = 0, goalsAgainst = 0;
 
             playedMatches.forEach(f => {
                 const isHome = f.homeTeam.id === team.id;
@@ -882,117 +655,71 @@
             const points = wins * 3 + draws;
             const winRate = playedMatches.length > 0 ? ((wins / playedMatches.length) * 100).toFixed(0) : 0;
 
-            // İstatistikleri göster
-            const statsGrid = document.getElementById('teamStatsGrid');
-            statsGrid.innerHTML = `
-                <div class="stat-box primary">
-                    <div class="stat-box-label">Puan</div>
-                    <div class="stat-box-value">${points}</div>
-                </div>
-                <div class="stat-box">
-                    <div class="stat-box-label">Oynanan</div>
-                    <div class="stat-box-value">${playedMatches.length}</div>
-                </div>
-                <div class="stat-box">
-                    <div class="stat-box-label">Galibiyet</div>
-                    <div class="stat-box-value" style="color: #10b981;">${wins}</div>
-                </div>
-                <div class="stat-box">
-                    <div class="stat-box-label">Beraberlik</div>
-                    <div class="stat-box-value" style="color: #f59e0b;">${draws}</div>
-                </div>
-                <div class="stat-box">
-                    <div class="stat-box-label">Mağlubiyet</div>
-                    <div class="stat-box-value" style="color: #ef4444;">${losses}</div>
-                </div>
-                <div class="stat-box">
-                    <div class="stat-box-label">Atılan Gol</div>
-                    <div class="stat-box-value">${goalsFor}</div>
-                </div>
-                <div class="stat-box">
-                    <div class="stat-box-label">Yenilen Gol</div>
-                    <div class="stat-box-value">${goalsAgainst}</div>
-                </div>
-                <div class="stat-box">
-                    <div class="stat-box-label">Averaj</div>
-                    <div class="stat-box-value" style="color: ${goalDiff >= 0 ? '#10b981' : '#ef4444'};">
-                        ${goalDiff > 0 ? '+' : ''}${goalDiff}
-                    </div>
-                </div>
-                <div class="stat-box">
-                    <div class="stat-box-label">Galibyet Oranı</div>
-                    <div class="stat-box-value">${winRate}%</div>
-                </div>
+            document.getElementById('teamStatsGrid').innerHTML = `
+                <div class="stat-box primary"><div class="stat-box-label">Puan</div><div class="stat-box-value">${points}</div></div>
+                <div class="stat-box"><div class="stat-box-label">Oynanan</div><div class="stat-box-value">${playedMatches.length}</div></div>
+                <div class="stat-box"><div class="stat-box-label">Galibiyet</div><div class="stat-box-value" style="color: #10b981;">${wins}</div></div>
+                <div class="stat-box"><div class="stat-box-label">Beraberlik</div><div class="stat-box-value" style="color: #f59e0b;">${draws}</div></div>
+                <div class="stat-box"><div class="stat-box-label">Mağlubiyet</div><div class="stat-box-value" style="color: #ef4444;">${losses}</div></div>
+                <div class="stat-box"><div class="stat-box-label">Atılan Gol</div><div class="stat-box-value">${goalsFor}</div></div>
+                <div class="stat-box"><div class="stat-box-label">Yenilen Gol</div><div class="stat-box-value">${goalsAgainst}</div></div>
+                <div class="stat-box"><div class="stat-box-label">Averaj</div><div class="stat-box-value" style="color: ${goalDiff >= 0 ? '#10b981' : '#ef4444'};">${goalDiff > 0 ? '+' : ''}${goalDiff}</div></div>
+                <div class="stat-box"><div class="stat-box-label">Galibyet Oranı</div><div class="stat-box-value">${winRate}%</div></div>
             `;
 
-            // Maçları listele
-            const matchesList = document.getElementById('teamMatchesList');
-            if (teamMatches.length === 0) {
-                matchesList.innerHTML = '<p style="text-align: center; color: #6b7280; padding: 2rem;">Henüz maç yok</p>';
-            } else {
-                let html = '';
-                teamMatches.forEach((match, index) => {
-                    const isHome = match.homeTeam.id === team.id;
-                    const opponent = isHome ? match.awayTeam : match.homeTeam;
-                    const teamScore = isHome ? match.homeScore : match.awayScore;
-                    const oppScore = isHome ? match.awayScore : match.homeScore;
-                    
-                    let resultClass = '';
-                    let resultBadge = '';
-                    let resultText = '';
-                    
-                    if (match.played) {
-                        if (teamScore > oppScore) {
-                            resultClass = 'won';
-                            resultBadge = 'won';
-                            resultText = 'Galibiyet';
-                        } else if (teamScore === oppScore) {
-                            resultClass = 'drawn';
-                            resultBadge = 'drawn';
-                            resultText = 'Beraberlik';
-                        } else {
-                            resultClass = 'lost';
-                            resultBadge = 'lost';
-                            resultText = 'Mağlubiyet';
-                        }
+            let html = '';
+            let currentRound = 0;
+            
+            teamMatches.forEach(match => {
+                if (match.round && match.round !== currentRound) {
+                    currentRound = match.round;
+                    html += `<div style="background: linear-gradient(135deg, #1e3a8a, #1e40af); color: white; padding: 0.75rem 1rem; border-radius: 0.5rem; margin: 1rem 0 0.75rem 0; font-weight: bold; text-align: center;">🏆 ${currentRound}. TUR</div>`;
+                }
+                
+                const isHome = match.homeTeam.id === team.id;
+                const opponent = isHome ? match.awayTeam : match.homeTeam;
+                const teamScore = isHome ? match.homeScore : match.awayScore;
+                const oppScore = isHome ? match.awayScore : match.homeScore;
+                
+                let resultClass = '', resultBadge = '', resultText = '';
+                
+                if (match.played) {
+                    if (teamScore > oppScore) {
+                        resultClass = 'won'; resultBadge = 'won'; resultText = 'Galibiyet';
+                    } else if (teamScore === oppScore) {
+                        resultClass = 'drawn'; resultBadge = 'drawn'; resultText = 'Beraberlik';
+                    } else {
+                        resultClass = 'lost'; resultBadge = 'lost'; resultText = 'Mağlubiyet';
                     }
+                }
 
-                    html += `
-                        <div class="team-match-card ${resultClass}">
-                            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
-                                <div style="display: flex; align-items: center; gap: 1rem;">
-                                    ${match.played ? 
-                                        `<span class="match-result-badge ${resultBadge}">${resultText}</span>` : 
-                                        '<span class="badge badge-info">Oynanacak</span>'
-                                    }
-                                    <span style="font-weight: 600; color: #374151;">${match.date}</span>
-                                    <span style="color: #6b7280;">${match.time}</span>
-                                </div>
-                                <div style="display: flex; align-items: center; gap: 1rem; font-size: 1.1rem;">
-                                    <span style="font-weight: 600; color: #1e3a8a;">
-                                        ${isHome ? '🏠' : '✈️'} ${isHome ? 'vs' : '@'} ${opponent.name}
-                                    </span>
-                                    ${match.played ? 
-                                        `<div style="background: #1e3a8a; color: #fbbf24; padding: 0.5rem 1rem; border-radius: 0.5rem; font-weight: bold; font-size: 1.2rem;">
-                                            ${isHome ? teamScore : oppScore} - ${isHome ? oppScore : teamScore}
-                                        </div>` :
-                                        '<div style="background: #f3f4f6; color: #9ca3af; padding: 0.5rem 1rem; border-radius: 0.5rem;">vs</div>'
-                                    }
-                                </div>
+                html += `
+                    <div class="team-match-card ${resultClass}">
+                        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
+                            <div style="display: flex; align-items: center; gap: 1rem;">
+                                ${match.played ? `<span class="match-result-badge ${resultBadge}">${resultText}</span>` : '<span class="badge badge-info">Oynanacak</span>'}
+                                ${match.round ? `<span class="badge" style="background: #dbeafe; color: #1e40af;">Tur ${match.round}</span>` : ''}
+                                <span style="font-weight: 600; color: #374151;">${match.date}</span>
+                                <span style="color: #6b7280;">${match.time}</span>
+                            </div>
+                            <div style="display: flex; align-items: center; gap: 1rem; font-size: 1.1rem;">
+                                <span style="font-weight: 600; color: #1e3a8a;">${isHome ? '🏠' : '✈️'} ${isHome ? 'vs' : '@'} ${opponent.name}</span>
+                                ${match.played ? 
+                                    `<div style="background: #1e3a8a; color: #fbbf24; padding: 0.5rem 1rem; border-radius: 0.5rem; font-weight: bold; font-size: 1.2rem;">${isHome ? teamScore : oppScore} - ${isHome ? oppScore : teamScore}</div>` :
+                                    '<div style="background: #f3f4f6; color: #9ca3af; padding: 0.5rem 1rem; border-radius: 0.5rem;">vs</div>'
+                                }
                             </div>
                         </div>
-                    `;
-                });
-                matchesList.innerHTML = html;
-            }
-
-            // Modal'ı göster
+                    </div>
+                `;
+            });
+            
+            document.getElementById('teamMatchesList').innerHTML = html;
             document.getElementById('teamModal').classList.remove('hidden');
             document.body.style.overflow = 'hidden';
         }
 
-        function closeTeamModal(event) {
-            if (event && event.target.id !== 'teamModal') return;
+        function closeModal() {
             document.getElementById('teamModal').classList.add('hidden');
             document.body.style.overflow = 'auto';
         }
