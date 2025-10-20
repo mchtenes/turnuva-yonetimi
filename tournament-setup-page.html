@@ -659,101 +659,125 @@
             }
         
             document.getElementById('drawContent').innerHTML =
-                '<div class="spinner"></div><p style="text-align:center;font-size:1.2rem;color:#374151;">Kura çekimi yapılıyor...</p>';
+                '<div class="spinner"></div><p style="text-align:center;font-size:1.2rem;color:#374151;">Kura çekimi yapılıyor... (10000 deneme)</p>';
         
             setTimeout(() => {
                 matches = [];
-                const usedPairs = new Set();
-                const teamsBySeed = {};
-                
-                // Takımları torba değerine göre grupla
-                for (let i = 1; i <= matchCount; i++) {
-                    teamsBySeed[i] = teams.filter(t => t.seed === i);
-                }
-                
-                // Her takımın torba koşullarını izle
-                const opponentsByTorba = {};
-                teams.forEach(team => {
-                    opponentsByTorba[team.id] = {};
-                    for (let i = 1; i <= matchCount; i++) {
-                        opponentsByTorba[team.id][i] = [];
-                    }
-                });
+                let drawSuccess = false;
+                let attempt = 0;
+                const maxAttempts = 10000;
+
+                while (!drawSuccess && attempt < maxAttempts) {
+                    attempt++;
+                    matches = [];
+                    const usedPairs = new Set();
+                    const opponentsByTorba = {};
+                    
+                    // Her takımın torba koşullarını izle
+                    teams.forEach(team => {
+                        opponentsByTorba[team.id] = {};
+                        for (let i = 1; i <= matchCount; i++) {
+                            opponentsByTorba[team.id][i] = [];
+                        }
+                    });
+
+                    let allRoundsSuccess = true;
+
+                    for (let round = 1; round <= matchCount; round++) {
+                        const roundMatches = [];
+                        let teamIds = teams.map(t => t.id);
         
-                for (let round = 1; round <= matchCount; round++) {
-                    const roundMatches = [];
-                    let teamIds = teams.map(t => t.id);
+                        let roundSuccess = false;
+                        for (let roundAttempt = 0; roundAttempt < 100; roundAttempt++) {
+                            roundMatches.length = 0;
+                            let available = [...teamIds];
+                            let pairingSuccess = true;
         
-                    for (let attempt = 0; attempt < 100; attempt++) {
-                        roundMatches.length = 0;
-                        let available = [...teamIds];
-                        let success = true;
+                            while (available.length >= 2) {
+                                const t1Id = available.shift();
+                                const t1 = teams.find(t => t.id === t1Id);
+                                
+                                // t1'in oynayabileceği rakipleri bul
+                                const possibleOpponents = available.filter(t2Id => {
+                                    const t2 = teams.find(t => t.id === t2Id);
+                                    const pairKey1 = `${t1Id}-${t2Id}`;
+                                    const pairKey2 = `${t2Id}-${t1Id}`;
+                                    
+                                    if (usedPairs.has(pairKey1) || usedPairs.has(pairKey2)) {
+                                        return false;
+                                    }
+                                    
+                                    // t1 bu torba değerinden daha maç yapmış mı?
+                                    if (opponentsByTorba[t1Id][t2.seed] && 
+                                        opponentsByTorba[t1Id][t2.seed].length > 0) {
+                                        return false;
+                                    }
+                                    
+                                    // t2 bu torba değerinden daha maç yapmış mı?
+                                    if (opponentsByTorba[t2Id][t1.seed] && 
+                                        opponentsByTorba[t2Id][t1.seed].length > 0) {
+                                        return false;
+                                    }
+                                    
+                                    return true;
+                                });
         
-                        while (available.length >= 2) {
-                            const t1Id = available.shift();
-                            const t1 = teams.find(t => t.id === t1Id);
-                            
-                            // t1'in oynayabileceği rakipleri bul
-                            const possibleOpponents = available.filter(t2Id => {
+                                if (possibleOpponents.length === 0) {
+                                    pairingSuccess = false;
+                                    break;
+                                }
+        
+                                const t2Id = possibleOpponents[Math.floor(Math.random() * possibleOpponents.length)];
                                 const t2 = teams.find(t => t.id === t2Id);
-                                const pairKey1 = `${t1Id}-${t2Id}`;
-                                const pairKey2 = `${t2Id}-${t1Id}`;
-                                
-                                if (usedPairs.has(pairKey1) || usedPairs.has(pairKey2)) {
-                                    return false;
-                                }
-                                
-                                // t1 bu torba değerinden daha maç yapmış mı?
-                                if (opponentsByTorba[t1Id][t2.seed] && 
-                                    opponentsByTorba[t1Id][t2.seed].length > 0) {
-                                    return false;
-                                }
-                                
-                                // t2 bu torba değerinden daha maç yapmış mı?
-                                if (opponentsByTorba[t2Id][t1.seed] && 
-                                    opponentsByTorba[t2Id][t1.seed].length > 0) {
-                                    return false;
-                                }
-                                
-                                return true;
-                            });
+                                const isHome = Math.random() > 0.5;
         
-                            if (possibleOpponents.length === 0) {
-                                success = false;
-                                break;
+                                roundMatches.push({
+                                    id: Date.now() + matches.length + Math.random(),
+                                    homeTeam: isHome ? t1 : t2,
+                                    awayTeam: isHome ? t2 : t1,
+                                    round,
+                                    played: false,
+                                    homeScore: null,
+                                    awayScore: null
+                                });
+        
+                                usedPairs.add(`${t1Id}-${t2Id}`);
+                                usedPairs.add(`${t2Id}-${t1Id}`);
+                                opponentsByTorba[t1Id][t2.seed].push(t2Id);
+                                opponentsByTorba[t2Id][t1.seed].push(t1Id);
+                                
+                                available = available.filter(id => id !== t2Id);
                             }
         
-                            const t2Id = possibleOpponents[Math.floor(Math.random() * possibleOpponents.length)];
-                            const t2 = teams.find(t => t.id === t2Id);
-                            const isHome = Math.random() > 0.5;
-        
-                            roundMatches.push({
-                                id: Date.now() + matches.length + Math.random(),
-                                homeTeam: isHome ? t1 : t2,
-                                awayTeam: isHome ? t2 : t1,
-                                round,
-                                played: false,
-                                homeScore: null,
-                                awayScore: null
-                            });
-        
-                            usedPairs.add(`${t1Id}-${t2Id}`);
-                            usedPairs.add(`${t2Id}-${t1Id}`);
-                            opponentsByTorba[t1Id][t2.seed].push(t2Id);
-                            opponentsByTorba[t2Id][t1.seed].push(t1Id);
-                            
-                            available = available.filter(id => id !== t2Id);
+                            if (pairingSuccess && roundMatches.length === teams.length / 2) {
+                                roundSuccess = true;
+                                break;
+                            }
                         }
-        
-                        if (success) break;
+
+                        if (!roundSuccess) {
+                            allRoundsSuccess = false;
+                            break;
+                        }
+
+                        matches.push(...roundMatches);
                     }
-        
-                    matches.push(...roundMatches);
+
+                    if (allRoundsSuccess && matches.length === matchCount * (teams.length / 2)) {
+                        drawSuccess = true;
+                    }
                 }
-        
-                renderDrawResult();
+
+                if (!drawSuccess) {
+                    alert('Uyarı: Kura çekimi 10000 deneme sonunda başarısız oldu. Takım ve torba ayarlamalarını kontrol edin.');
+                    matches = [];
+                    renderDrawResult();
+                } else {
+                    renderDrawResult();
+                }
+                
                 updateSteps();
-            }, 2000);
+            }, 100);
         }
 
         function renderDrawResult() {
