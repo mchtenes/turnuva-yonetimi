@@ -1,13 +1,83 @@
 {
   "tournamentName": "Avrupa Ligi",
   "season": "2024-25",
-  "totalTeams": 26,
-  "matchesPerTeam": 5,
-  "totalMatches": 65,
+  "totalTeams": 12,
+  "matchesPerTeam": 3,
+  "totalMatches": 18,
+  "teams": [
+    {
+      "id": 1760962521756.831,
+      "name": "Real Madrid",
+      "seed": 1
+    },
+    {
+      "id": 1760962521757.5427,
+      "name": "Barcelona",
+      "seed": 1
+    },
+    {
+      "id": 1760962521758.0994,
+      "name": "Manchester United",
+      "seed": 1
+    },
+    {
+      "id": 1760962521759.664,
+      "name": "Bayern Münih",
+      "seed": 1
+    },
+    {
+      "id": 1760962521760.8298,
+      "name": "Paris Saint-Germain",
+      "seed": 2
+    },
+    {
+      "id": 1760962521761.9736,
+      "name": "Juventus",
+      "seed": 2
+    },
+    {
+      "id": 1760962521762.9348,
+      "name": "Liverpool",
+      "seed": 2
+    },
+    {
+      "id": 1760962521763.0076,
+      "name": "AC Milan",
+      "seed": 2
+    },
+    {
+      "id": 1760962521764.558,
+      "name": "Galatasaray",
+      "seed": 3
+    },
+    {
+      "id": 1760962521765.1497,
+      "name": "Fenerbahçe",
+      "seed": 3
+    },
+    {
+      "id": 1760962521766.2678,
+      "name": "Beşiktaş",
+      "seed": 3
+    },
+    {
+      "id": 1760962521767.3894,
+      "name": "Trabzonspor",
+      "seed": 3
+    }
+  ],
   "fixtures": [
     {
-      "homeTeam": "Takım 11",
-      "awayTeam": "Takım 22",
+      "homeTeam": {
+        "id": 1760962521756.831,
+        "name": "Real Madrid",
+        "seed": 1
+      },
+      "awayTeam": {
+        "id": 1760962521761.9736,
+        "name": "Juventus",
+        "seed": 2
+      },
       "round": 1,
       "date": "2025-10-20",
       "time": "19:00",
@@ -16,8 +86,16 @@
       "awayScore": null
     },
     {
-      "homeTeam": "Takım 21",
-      "awayTeam": "Takım 13",
+      "homeTeam": {
+        "id": 1760962521759.664,
+        "name": "Bayern Münih",
+        "seed": 1
+      },
+      "awayTeam": {
+        "id": 1760962521757.5427,
+        "name": "Barcelona",
+        "seed": 1
+      },
       "round": 1,
       "date": "2025-10-20",
       "time": "21:45",
@@ -26,8 +104,16 @@
       "awayScore": null
     },
     {
-      "homeTeam": "Takım 12",
-      "awayTeam": "Takım 5",
+      "homeTeam": {
+        "id": 1760962521758.0994,
+        "name": "Manchester United",
+        "seed": 1
+      },
+      "awayTeam": {
+        "id": 1760962521767.3894,
+        "name": "Trabzonspor",
+        "seed": 3
+      },
       "round": 1,
       "date": "2025-10-21",
       "time": "19:00",
@@ -36,8 +122,16 @@
       "awayScore": null
     },
     {
-      "homeTeam": "Takım 6",
-      "awayTeam": "Takım 9",
+      "homeTeam": {
+        "id": 1760962521760.8298,
+        "name": "Paris Saint-Germain",
+        "seed": 2
+      },
+      "awayTeam": {
+        "id": 1760962521765.1497,
+        "name": "Fenerbahçe",
+        "seed": 3
+      },
       "round": 1,
       "date": "2025-10-22",
       "time": "19:00",
@@ -46,8 +140,16 @@
       "awayScore": null
     },
     {
-      "homeTeam": "Takım 23",
-      "awayTeam": "Takım 17",
+      "homeTeam": {
+        "id": 1760962521762.9348,
+        "name": "Liverpool",
+        "seed": 2
+      },
+      "awayTeam": {
+        "id": 1760962521764.558,
+        "name": "Galatasaray",
+        "seed": 3
+      },
       "round": 1,
       "date": "2025-10-23",
       "time": "19:00",
@@ -56,8 +158,16 @@
       "awayScore": null
     },
     {
-      "homeTeam": "Takım 1",
-      "awayTeam": "Takım 18",
+      "homeTeam": {
+        "id": 1760962521766.2678,
+        "name": "Beşiktaş",
+        "seed": 3
+      },
+      "awayTeam": {
+        "id": 1760962521763.0076,
+        "name": "AC Milan",
+        "seed": 2
+      },
       "round": 1,
       "date": "2025-10-24",
       "time": "19:00",
@@ -66,78 +176,16 @@
       "awayScore": null
     },
     {
-      "homeTeam": "Takım 7",
-      "awayTeam": "Takım 2",
-      "round": 1,
-      "date": "2025-10-27",
-      "time": "19:00",
-      "played": false,
-      "homeScore": null,
-      "awayScore": null
-    },
-    {
-      "homeTeam": "Takım 10",
-      "awayTeam": "Takım 14",
-      "round": 1,
-      "date": "2025-10-27",
-      "time": "21:45",
-      "played": false,
-      "homeScore": null,
-      "awayScore": null
-    },
-    {
-      "homeTeam": "Takım 24",
-      "awayTeam": "Takım 20",
-      "round": 1,
-      "date": "2025-10-28",
-      "time": "19:00",
-      "played": false,
-      "homeScore": null,
-      "awayScore": null
-    },
-    {
-      "homeTeam": "Takım 4",
-      "awayTeam": "Takım 15",
-      "round": 1,
-      "date": "2025-10-29",
-      "time": "19:00",
-      "played": false,
-      "homeScore": null,
-      "awayScore": null
-    },
-    {
-      "homeTeam": "Takım 8",
-      "awayTeam": "Takım 19",
-      "round": 1,
-      "date": "2025-10-30",
-      "time": "19:00",
-      "played": false,
-      "homeScore": null,
-      "awayScore": null
-    },
-    {
-      "homeTeam": "Takım 26",
-      "awayTeam": "Takım 3",
-      "round": 1,
-      "date": "2025-10-31",
-      "time": "19:00",
-      "played": false,
-      "homeScore": null,
-      "awayScore": null
-    },
-    {
-      "homeTeam": "Takım 16",
-      "awayTeam": "Takım 25",
-      "round": 1,
-      "date": "2025-11-03",
-      "time": "19:00",
-      "played": false,
-      "homeScore": null,
-      "awayScore": null
-    },
-    {
-      "homeTeam": "Takım 19",
-      "awayTeam": "Takım 1",
+      "homeTeam": {
+        "id": 1760962521764.558,
+        "name": "Galatasaray",
+        "seed": 3
+      },
+      "awayTeam": {
+        "id": 1760962521756.831,
+        "name": "Real Madrid",
+        "seed": 1
+      },
       "round": 2,
       "date": "2025-10-27",
       "time": "19:00",
@@ -146,8 +194,16 @@
       "awayScore": null
     },
     {
-      "homeTeam": "Takım 6",
-      "awayTeam": "Takım 10",
+      "homeTeam": {
+        "id": 1760962521757.5427,
+        "name": "Barcelona",
+        "seed": 1
+      },
+      "awayTeam": {
+        "id": 1760962521765.1497,
+        "name": "Fenerbahçe",
+        "seed": 3
+      },
       "round": 2,
       "date": "2025-10-27",
       "time": "21:45",
@@ -156,8 +212,16 @@
       "awayScore": null
     },
     {
-      "homeTeam": "Takım 26",
-      "awayTeam": "Takım 15",
+      "homeTeam": {
+        "id": 1760962521758.0994,
+        "name": "Manchester United",
+        "seed": 1
+      },
+      "awayTeam": {
+        "id": 1760962521760.8298,
+        "name": "Paris Saint-Germain",
+        "seed": 2
+      },
       "round": 2,
       "date": "2025-10-28",
       "time": "19:00",
@@ -166,8 +230,16 @@
       "awayScore": null
     },
     {
-      "homeTeam": "Takım 18",
-      "awayTeam": "Takım 24",
+      "homeTeam": {
+        "id": 1760962521759.664,
+        "name": "Bayern Münih",
+        "seed": 1
+      },
+      "awayTeam": {
+        "id": 1760962521762.9348,
+        "name": "Liverpool",
+        "seed": 2
+      },
       "round": 2,
       "date": "2025-10-29",
       "time": "19:00",
@@ -176,8 +248,16 @@
       "awayScore": null
     },
     {
-      "homeTeam": "Takım 14",
-      "awayTeam": "Takım 3",
+      "homeTeam": {
+        "id": 1760962521761.9736,
+        "name": "Juventus",
+        "seed": 2
+      },
+      "awayTeam": {
+        "id": 1760962521763.0076,
+        "name": "AC Milan",
+        "seed": 2
+      },
       "round": 2,
       "date": "2025-10-30",
       "time": "19:00",
@@ -186,8 +266,16 @@
       "awayScore": null
     },
     {
-      "homeTeam": "Takım 9",
-      "awayTeam": "Takım 5",
+      "homeTeam": {
+        "id": 1760962521766.2678,
+        "name": "Beşiktaş",
+        "seed": 3
+      },
+      "awayTeam": {
+        "id": 1760962521767.3894,
+        "name": "Trabzonspor",
+        "seed": 3
+      },
       "round": 2,
       "date": "2025-10-31",
       "time": "19:00",
@@ -196,78 +284,16 @@
       "awayScore": null
     },
     {
-      "homeTeam": "Takım 11",
-      "awayTeam": "Takım 17",
-      "round": 2,
-      "date": "2025-11-03",
-      "time": "19:00",
-      "played": false,
-      "homeScore": null,
-      "awayScore": null
-    },
-    {
-      "homeTeam": "Takım 25",
-      "awayTeam": "Takım 8",
-      "round": 2,
-      "date": "2025-11-03",
-      "time": "21:45",
-      "played": false,
-      "homeScore": null,
-      "awayScore": null
-    },
-    {
-      "homeTeam": "Takım 21",
-      "awayTeam": "Takım 23",
-      "round": 2,
-      "date": "2025-11-04",
-      "time": "19:00",
-      "played": false,
-      "homeScore": null,
-      "awayScore": null
-    },
-    {
-      "homeTeam": "Takım 4",
-      "awayTeam": "Takım 22",
-      "round": 2,
-      "date": "2025-11-05",
-      "time": "19:00",
-      "played": false,
-      "homeScore": null,
-      "awayScore": null
-    },
-    {
-      "homeTeam": "Takım 13",
-      "awayTeam": "Takım 20",
-      "round": 2,
-      "date": "2025-11-06",
-      "time": "19:00",
-      "played": false,
-      "homeScore": null,
-      "awayScore": null
-    },
-    {
-      "homeTeam": "Takım 2",
-      "awayTeam": "Takım 12",
-      "round": 2,
-      "date": "2025-11-07",
-      "time": "19:00",
-      "played": false,
-      "homeScore": null,
-      "awayScore": null
-    },
-    {
-      "homeTeam": "Takım 16",
-      "awayTeam": "Takım 7",
-      "round": 2,
-      "date": "2025-11-10",
-      "time": "19:00",
-      "played": false,
-      "homeScore": null,
-      "awayScore": null
-    },
-    {
-      "homeTeam": "Takım 17",
-      "awayTeam": "Takım 8",
+      "homeTeam": {
+        "id": 1760962521758.0994,
+        "name": "Manchester United",
+        "seed": 1
+      },
+      "awayTeam": {
+        "id": 1760962521756.831,
+        "name": "Real Madrid",
+        "seed": 1
+      },
       "round": 3,
       "date": "2025-11-03",
       "time": "19:00",
@@ -276,8 +302,16 @@
       "awayScore": null
     },
     {
-      "homeTeam": "Takım 15",
-      "awayTeam": "Takım 18",
+      "homeTeam": {
+        "id": 1760962521763.0076,
+        "name": "AC Milan",
+        "seed": 2
+      },
+      "awayTeam": {
+        "id": 1760962521757.5427,
+        "name": "Barcelona",
+        "seed": 1
+      },
       "round": 3,
       "date": "2025-11-03",
       "time": "21:45",
@@ -286,8 +320,16 @@
       "awayScore": null
     },
     {
-      "homeTeam": "Takım 24",
-      "awayTeam": "Takım 21",
+      "homeTeam": {
+        "id": 1760962521759.664,
+        "name": "Bayern Münih",
+        "seed": 1
+      },
+      "awayTeam": {
+        "id": 1760962521766.2678,
+        "name": "Beşiktaş",
+        "seed": 3
+      },
       "round": 3,
       "date": "2025-11-04",
       "time": "19:00",
@@ -296,8 +338,16 @@
       "awayScore": null
     },
     {
-      "homeTeam": "Takım 6",
-      "awayTeam": "Takım 26",
+      "homeTeam": {
+        "id": 1760962521762.9348,
+        "name": "Liverpool",
+        "seed": 2
+      },
+      "awayTeam": {
+        "id": 1760962521760.8298,
+        "name": "Paris Saint-Germain",
+        "seed": 2
+      },
       "round": 3,
       "date": "2025-11-05",
       "time": "19:00",
@@ -306,8 +356,16 @@
       "awayScore": null
     },
     {
-      "homeTeam": "Takım 14",
-      "awayTeam": "Takım 22",
+      "homeTeam": {
+        "id": 1760962521761.9736,
+        "name": "Juventus",
+        "seed": 2
+      },
+      "awayTeam": {
+        "id": 1760962521767.3894,
+        "name": "Trabzonspor",
+        "seed": 3
+      },
       "round": 3,
       "date": "2025-11-06",
       "time": "19:00",
@@ -316,346 +374,24 @@
       "awayScore": null
     },
     {
-      "homeTeam": "Takım 19",
-      "awayTeam": "Takım 9",
+      "homeTeam": {
+        "id": 1760962521764.558,
+        "name": "Galatasaray",
+        "seed": 3
+      },
+      "awayTeam": {
+        "id": 1760962521765.1497,
+        "name": "Fenerbahçe",
+        "seed": 3
+      },
       "round": 3,
       "date": "2025-11-07",
-      "time": "19:00",
-      "played": false,
-      "homeScore": null,
-      "awayScore": null
-    },
-    {
-      "homeTeam": "Takım 4",
-      "awayTeam": "Takım 7",
-      "round": 3,
-      "date": "2025-11-10",
-      "time": "19:00",
-      "played": false,
-      "homeScore": null,
-      "awayScore": null
-    },
-    {
-      "homeTeam": "Takım 3",
-      "awayTeam": "Takım 25",
-      "round": 3,
-      "date": "2025-11-10",
-      "time": "21:45",
-      "played": false,
-      "homeScore": null,
-      "awayScore": null
-    },
-    {
-      "homeTeam": "Takım 5",
-      "awayTeam": "Takım 20",
-      "round": 3,
-      "date": "2025-11-11",
-      "time": "19:00",
-      "played": false,
-      "homeScore": null,
-      "awayScore": null
-    },
-    {
-      "homeTeam": "Takım 1",
-      "awayTeam": "Takım 10",
-      "round": 3,
-      "date": "2025-11-12",
-      "time": "19:00",
-      "played": false,
-      "homeScore": null,
-      "awayScore": null
-    },
-    {
-      "homeTeam": "Takım 13",
-      "awayTeam": "Takım 11",
-      "round": 3,
-      "date": "2025-11-13",
-      "time": "19:00",
-      "played": false,
-      "homeScore": null,
-      "awayScore": null
-    },
-    {
-      "homeTeam": "Takım 23",
-      "awayTeam": "Takım 2",
-      "round": 3,
-      "date": "2025-11-14",
-      "time": "19:00",
-      "played": false,
-      "homeScore": null,
-      "awayScore": null
-    },
-    {
-      "homeTeam": "Takım 12",
-      "awayTeam": "Takım 16",
-      "round": 3,
-      "date": "2025-11-17",
-      "time": "19:00",
-      "played": false,
-      "homeScore": null,
-      "awayScore": null
-    },
-    {
-      "homeTeam": "Takım 8",
-      "awayTeam": "Takım 13",
-      "round": 4,
-      "date": "2025-11-10",
-      "time": "19:00",
-      "played": false,
-      "homeScore": null,
-      "awayScore": null
-    },
-    {
-      "homeTeam": "Takım 1",
-      "awayTeam": "Takım 5",
-      "round": 4,
-      "date": "2025-11-10",
-      "time": "21:45",
-      "played": false,
-      "homeScore": null,
-      "awayScore": null
-    },
-    {
-      "homeTeam": "Takım 2",
-      "awayTeam": "Takım 19",
-      "round": 4,
-      "date": "2025-11-11",
-      "time": "19:00",
-      "played": false,
-      "homeScore": null,
-      "awayScore": null
-    },
-    {
-      "homeTeam": "Takım 12",
-      "awayTeam": "Takım 4",
-      "round": 4,
-      "date": "2025-11-12",
-      "time": "19:00",
-      "played": false,
-      "homeScore": null,
-      "awayScore": null
-    },
-    {
-      "homeTeam": "Takım 6",
-      "awayTeam": "Takım 3",
-      "round": 4,
-      "date": "2025-11-13",
-      "time": "19:00",
-      "played": false,
-      "homeScore": null,
-      "awayScore": null
-    },
-    {
-      "homeTeam": "Takım 25",
-      "awayTeam": "Takım 9",
-      "round": 4,
-      "date": "2025-11-14",
-      "time": "19:00",
-      "played": false,
-      "homeScore": null,
-      "awayScore": null
-    },
-    {
-      "homeTeam": "Takım 26",
-      "awayTeam": "Takım 23",
-      "round": 4,
-      "date": "2025-11-17",
-      "time": "19:00",
-      "played": false,
-      "homeScore": null,
-      "awayScore": null
-    },
-    {
-      "homeTeam": "Takım 10",
-      "awayTeam": "Takım 16",
-      "round": 4,
-      "date": "2025-11-17",
-      "time": "21:45",
-      "played": false,
-      "homeScore": null,
-      "awayScore": null
-    },
-    {
-      "homeTeam": "Takım 15",
-      "awayTeam": "Takım 17",
-      "round": 4,
-      "date": "2025-11-18",
-      "time": "19:00",
-      "played": false,
-      "homeScore": null,
-      "awayScore": null
-    },
-    {
-      "homeTeam": "Takım 14",
-      "awayTeam": "Takım 21",
-      "round": 4,
-      "date": "2025-11-19",
-      "time": "19:00",
-      "played": false,
-      "homeScore": null,
-      "awayScore": null
-    },
-    {
-      "homeTeam": "Takım 22",
-      "awayTeam": "Takım 7",
-      "round": 4,
-      "date": "2025-11-20",
-      "time": "19:00",
-      "played": false,
-      "homeScore": null,
-      "awayScore": null
-    },
-    {
-      "homeTeam": "Takım 11",
-      "awayTeam": "Takım 24",
-      "round": 4,
-      "date": "2025-11-21",
-      "time": "19:00",
-      "played": false,
-      "homeScore": null,
-      "awayScore": null
-    },
-    {
-      "homeTeam": "Takım 20",
-      "awayTeam": "Takım 18",
-      "round": 4,
-      "date": "2025-11-24",
-      "time": "19:00",
-      "played": false,
-      "homeScore": null,
-      "awayScore": null
-    },
-    {
-      "homeTeam": "Takım 16",
-      "awayTeam": "Takım 6",
-      "round": 5,
-      "date": "2025-11-17",
-      "time": "19:00",
-      "played": false,
-      "homeScore": null,
-      "awayScore": null
-    },
-    {
-      "homeTeam": "Takım 13",
-      "awayTeam": "Takım 19",
-      "round": 5,
-      "date": "2025-11-17",
-      "time": "21:45",
-      "played": false,
-      "homeScore": null,
-      "awayScore": null
-    },
-    {
-      "homeTeam": "Takım 25",
-      "awayTeam": "Takım 7",
-      "round": 5,
-      "date": "2025-11-18",
-      "time": "19:00",
-      "played": false,
-      "homeScore": null,
-      "awayScore": null
-    },
-    {
-      "homeTeam": "Takım 15",
-      "awayTeam": "Takım 23",
-      "round": 5,
-      "date": "2025-11-19",
-      "time": "19:00",
-      "played": false,
-      "homeScore": null,
-      "awayScore": null
-    },
-    {
-      "homeTeam": "Takım 24",
-      "awayTeam": "Takım 14",
-      "round": 5,
-      "date": "2025-11-20",
-      "time": "19:00",
-      "played": false,
-      "homeScore": null,
-      "awayScore": null
-    },
-    {
-      "homeTeam": "Takım 4",
-      "awayTeam": "Takım 1",
-      "round": 5,
-      "date": "2025-11-21",
-      "time": "19:00",
-      "played": false,
-      "homeScore": null,
-      "awayScore": null
-    },
-    {
-      "homeTeam": "Takım 2",
-      "awayTeam": "Takım 8",
-      "round": 5,
-      "date": "2025-11-24",
-      "time": "19:00",
-      "played": false,
-      "homeScore": null,
-      "awayScore": null
-    },
-    {
-      "homeTeam": "Takım 10",
-      "awayTeam": "Takım 17",
-      "round": 5,
-      "date": "2025-11-24",
-      "time": "21:45",
-      "played": false,
-      "homeScore": null,
-      "awayScore": null
-    },
-    {
-      "homeTeam": "Takım 9",
-      "awayTeam": "Takım 18",
-      "round": 5,
-      "date": "2025-11-25",
-      "time": "19:00",
-      "played": false,
-      "homeScore": null,
-      "awayScore": null
-    },
-    {
-      "homeTeam": "Takım 20",
-      "awayTeam": "Takım 11",
-      "round": 5,
-      "date": "2025-11-26",
-      "time": "19:00",
-      "played": false,
-      "homeScore": null,
-      "awayScore": null
-    },
-    {
-      "homeTeam": "Takım 22",
-      "awayTeam": "Takım 26",
-      "round": 5,
-      "date": "2025-11-27",
-      "time": "19:00",
-      "played": false,
-      "homeScore": null,
-      "awayScore": null
-    },
-    {
-      "homeTeam": "Takım 3",
-      "awayTeam": "Takım 5",
-      "round": 5,
-      "date": "2025-11-28",
-      "time": "19:00",
-      "played": false,
-      "homeScore": null,
-      "awayScore": null
-    },
-    {
-      "homeTeam": "Takım 12",
-      "awayTeam": "Takım 21",
-      "round": 5,
-      "date": "2025-12-01",
       "time": "19:00",
       "played": false,
       "homeScore": null,
       "awayScore": null
     }
   ],
-  "exportDate": "2025-10-17T13:38:45.893Z",
-  "version": "3.0"
+  "exportDate": "2025-10-20T12:16:14.412Z",
+  "version": "4.0"
 }
