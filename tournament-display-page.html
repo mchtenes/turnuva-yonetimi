@@ -699,10 +699,16 @@
             
             sorted.forEach((s, i) => {
                 const row = tbody.insertRow();
-                row.className = i === 0 ? 'leader-row' : '';
                 row.addEventListener('click', () => showTeamDetails(s.team));
+                
+                let rankBgColor;
+                if (i < 8) rankBgColor = '#DCFCE7'; // 1-8: açık yeşil
+                else if (i < 16) rankBgColor = '#DBEAFE'; // 9-16: açık mavi
+                else if (i < 24) rankBgColor = '#BFDBFE'; // 17-24: koyu mavi
+                else rankBgColor = '#FEE2E2'; // 25+: açık kırmızı
+                
                 row.innerHTML = `
-                    <td class="rank">${i === 0 ? '🥇' : i + 1}</td>
+                    <td class="rank" style="background: ${rankBgColor}; color: #1F2937; font-weight: 700;">${i + 1}</td>
                     <td>
                         <div class="team-info">
                             <div>
