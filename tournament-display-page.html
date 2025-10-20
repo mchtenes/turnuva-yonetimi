@@ -8,12 +8,12 @@
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
-            background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 50%, #1e3a8a 100%);
+            background: linear-gradient(135deg, #3B82F6 0%, #2563EB 50%, #3B82F6 100%);
             min-height: 100vh;
         }
         .header {
-            background: #0c1e4a;
-            border-bottom: 4px solid #fbbf24;
+            background: #1F2937;
+            border-bottom: 4px solid #0686D4;
             padding: 2rem;
             box-shadow: 0 4px 15px rgba(0,0,0,0.5);
         }
@@ -27,12 +27,12 @@
             gap: 1.5rem;
         }
         .title-section h1 { color: white; font-size: 2.5rem; margin-bottom: 0.25rem; }
-        .title-section p { color: #fbbf24; font-size: 1.1rem; }
+        .title-section p { color: #0686D4; font-size: 1.1rem; }
         .stats { display: flex; gap: 2rem; color: white; }
         .stat-item { text-align: center; }
-        .stat-value { font-size: 2rem; font-weight: bold; color: #fbbf24; }
+        .stat-value { font-size: 2rem; font-weight: bold; color: #0686D4; }
         .stat-label { font-size: 0.875rem; margin-top: 0.25rem; }
-        .nav { background: #1e40af; border-bottom: 2px solid #1e3a8a; box-shadow: 0 2px 10px rgba(0,0,0,0.3); }
+        .nav { background: #2563EB; border-bottom: 2px solid #1E40AF; box-shadow: 0 2px 10px rgba(0,0,0,0.3); }
         .nav-content { max-width: 1400px; margin: 0 auto; display: flex; gap: 0.25rem; }
         .nav-btn {
             padding: 1.25rem 2rem;
@@ -44,8 +44,8 @@
             transition: all 0.3s;
             font-size: 1rem;
         }
-        .nav-btn:hover { background: rgba(30, 64, 175, 0.5); }
-        .nav-btn.active { background: #1e3a8a; color: #fbbf24; border-bottom: 4px solid #fbbf24; }
+        .nav-btn:hover { background: rgba(37, 99, 235, 0.5); }
+        .nav-btn.active { background: #1E40AF; color: #0686D4; border-bottom: 4px solid #0686D4; }
         .container { max-width: 1400px; margin: 0 auto; padding: 2rem 1rem; }
         .card {
             background: white;
@@ -57,31 +57,31 @@
         .card-title {
             font-size: 1.8rem;
             font-weight: bold;
-            color: #1e3a8a;
+            color: #1F2937;
             margin-bottom: 1.5rem;
             padding-bottom: 1rem;
-            border-bottom: 3px solid #fbbf24;
+            border-bottom: 3px solid #0686D4;
         }
         .match-card {
             background: white;
-            border: 2px solid #e5e7eb;
+            border: 2px solid #E5E7EB;
             border-radius: 0.75rem;
             padding: 1.25rem;
             margin-bottom: 1rem;
             transition: all 0.3s;
         }
         .match-card:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
-        .match-card.played { background: linear-gradient(135deg, #ecfdf5, #d1fae5); border-color: #10b981; }
+        .match-card.played { background: linear-gradient(135deg, #ECFDF5, #D1FAE5); border-color: #22C55E; }
         .match-row { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
         .match-info { display: flex; align-items: center; gap: 1rem; }
         .match-date { font-weight: 600; color: #374151; min-width: 100px; }
-        .match-time { color: #6b7280; min-width: 60px; }
+        .match-time { color: #6B7280; min-width: 60px; }
         .match-teams { display: flex; align-items: center; gap: 1rem; font-size: 1.1rem; }
-        .team-name { font-weight: 600; color: #1e3a8a; min-width: 150px; }
+        .team-name { font-weight: 600; color: #1F2937; min-width: 150px; }
         .team-home { text-align: right; }
         .score-display {
-            background: #1e3a8a;
-            color: #fbbf24;
+            background: #2563EB;
+            color: #0686D4;
             padding: 0.75rem 1.5rem;
             border-radius: 0.5rem;
             font-weight: bold;
@@ -90,25 +90,25 @@
             text-align: center;
         }
         .score-pending {
-            background: #f3f4f6;
-            color: #9ca3af;
+            background: #F3F4F6;
+            color: #9CA3AF;
             padding: 0.75rem 1.5rem;
             border-radius: 0.5rem;
             font-size: 0.95rem;
             font-style: italic;
         }
         table { width: 100%; border-collapse: collapse; }
-        thead { background: linear-gradient(135deg, #1e3a8a, #1e40af); color: white; }
+        thead { background: linear-gradient(135deg, #2563EB, #1E40AF); color: white; }
         th, td { padding: 1rem; text-align: left; }
         th { font-weight: 600; font-size: 0.95rem; }
-        tbody tr { border-bottom: 1px solid #e5e7eb; transition: all 0.2s; cursor: pointer; }
-        tbody tr:hover { background: #f9fafb; }
-        .leader-row { background: linear-gradient(135deg, #fef3c7, #fde68a) !important; }
-        .leader-row:hover { background: linear-gradient(135deg, #fde68a, #fcd34d) !important; }
-        .rank { font-weight: bold; font-size: 1.2rem; color: #6b7280; text-align: center; width: 60px; }
-        .leader-row .rank { color: #d97706; }
+        tbody tr { border-bottom: 1px solid #E5E7EB; transition: all 0.2s; cursor: pointer; }
+        tbody tr:hover { background: #F9FAFB; }
+        .leader-row { background: linear-gradient(135deg, #FEF3C7, #FDE68A) !important; }
+        .leader-row:hover { background: linear-gradient(135deg, #FDE68A, #FCD34D) !important; }
+        .rank { font-weight: bold; font-size: 1.2rem; color: #6B7280; text-align: center; width: 60px; }
+        .leader-row .rank { color: #D97706; }
         .team-info { display: flex; align-items: center; gap: 0.75rem; }
-        .points { font-weight: bold; font-size: 1.3rem; color: #1e3a8a; text-align: center; }
+        .points { font-weight: bold; font-size: 1.3rem; color: #2563EB; text-align: center; }
         .hidden { display: none !important; }
         .badge {
             display: inline-block;
@@ -117,10 +117,10 @@
             font-size: 0.875rem;
             font-weight: 600;
         }
-        .badge-success { background: #d1fae5; color: #065f46; }
-        .badge-info { background: #dbeafe; color: #1e40af; }
+        .badge-success { background: #D1FAE5; color: #065F46; }
+        .badge-info { background: #DBEAFE; color: #1E40AF; }
         .filter-section {
-            background: #f9fafb;
+            background: #F9FAFB;
             padding: 1rem;
             border-radius: 0.5rem;
             margin-bottom: 1.5rem;
@@ -132,13 +132,13 @@
         .filter-label { font-weight: 600; color: #374151; }
         select {
             padding: 0.5rem 1rem;
-            border: 2px solid #d1d5db;
+            border: 2px solid #D1D5DB;
             border-radius: 0.5rem;
             font-size: 0.95rem;
             background: white;
             cursor: pointer;
         }
-        select:focus { outline: none; border-color: #2563eb; }
+        select:focus { outline: none; border-color: #2563EB; }
         
         /* Modal Styles */
         .modal-overlay {
@@ -164,7 +164,7 @@
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
         }
         .modal-header {
-            background: linear-gradient(135deg, #1e3a8a, #1e40af);
+            background: linear-gradient(135deg, #2563EB, #1E40AF);
             color: white;
             padding: 2rem;
             border-radius: 1rem 1rem 0 0;
@@ -174,7 +174,7 @@
         }
         .modal-title { display: flex; align-items: center; gap: 1rem; }
         .modal-title h2 { font-size: 1.8rem; margin-bottom: 0.25rem; }
-        .modal-title p { color: #fbbf24; font-size: 1rem; }
+        .modal-title p { color: #0686D4; font-size: 1rem; }
         .modal-close {
             background: rgba(255, 255, 255, 0.2);
             border: none;
@@ -198,34 +198,34 @@
             margin-bottom: 2rem;
         }
         .stat-box {
-            background: #f9fafb;
+            background: #F9FAFB;
             padding: 1rem;
             border-radius: 0.5rem;
             text-align: center;
-            border: 2px solid #e5e7eb;
+            border: 2px solid #E5E7EB;
         }
-        .stat-box-label { color: #6b7280; font-size: 0.875rem; margin-bottom: 0.5rem; }
-        .stat-box-value { font-size: 1.8rem; font-weight: bold; color: #1e3a8a; }
-        .stat-box.primary { background: linear-gradient(135deg, #dbeafe, #bfdbfe); border-color: #2563eb; }
-        .stat-box.primary .stat-box-value { color: #1e40af; }
+        .stat-box-label { color: #6B7280; font-size: 0.875rem; margin-bottom: 0.5rem; }
+        .stat-box-value { font-size: 1.8rem; font-weight: bold; color: #1F2937; }
+        .stat-box.primary { background: linear-gradient(135deg, #DBEAFE, #BFDBFE); border-color: #2563EB; }
+        .stat-box.primary .stat-box-value { color: #1E40AF; }
         .match-list-title {
             font-size: 1.3rem;
             font-weight: bold;
-            color: #1e3a8a;
+            color: #1F2937;
             margin-bottom: 1rem;
             padding-bottom: 0.5rem;
-            border-bottom: 2px solid #fbbf24;
+            border-bottom: 2px solid #0686D4;
         }
         .team-match-card {
             background: white;
-            border: 2px solid #e5e7eb;
+            border: 2px solid #E5E7EB;
             border-radius: 0.75rem;
             padding: 1.25rem;
             margin-bottom: 1rem;
         }
-        .team-match-card.won { background: linear-gradient(135deg, #ecfdf5, #d1fae5); border-color: #10b981; }
-        .team-match-card.drawn { background: linear-gradient(135deg, #fef3c7, #fde68a); border-color: #f59e0b; }
-        .team-match-card.lost { background: linear-gradient(135deg, #fef2f2, #fee2e2); border-color: #ef4444; }
+        .team-match-card.won { background: linear-gradient(135deg, #ECFDF5, #D1FAE5); border-color: #22C55E; }
+        .team-match-card.drawn { background: linear-gradient(135deg, #FEF3C7, #FDE68A); border-color: #FACC15; }
+        .team-match-card.lost { background: linear-gradient(135deg, #FEF2F2, #FEE2E2); border-color: #EF4444; }
         .match-result-badge {
             display: inline-block;
             padding: 0.25rem 0.75rem;
@@ -233,9 +233,9 @@
             font-size: 0.875rem;
             font-weight: 600;
         }
-        .match-result-badge.won { background: #10b981; color: white; }
-        .match-result-badge.drawn { background: #f59e0b; color: white; }
-        .match-result-badge.lost { background: #ef4444; color: white; }
+        .match-result-badge.won { background: #22C55E; color: white; }
+        .match-result-badge.drawn { background: #FACC15; color: #1F2937; }
+        .match-result-badge.lost { background: #EF4444; color: white; }
         
         /* Loading */
         .loading-overlay {
@@ -244,7 +244,7 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: rgba(30, 58, 138, 0.95);
+            background: rgba(31, 41, 55, 0.95);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -253,7 +253,7 @@
         .loading-content { text-align: center; color: white; }
         .spinner {
             border: 5px solid rgba(255, 255, 255, 0.3);
-            border-top: 5px solid #fbbf24;
+            border-top: 5px solid #0686D4;
             border-radius: 50%;
             width: 80px;
             height: 80px;
@@ -261,17 +261,17 @@
             margin: 0 auto 1.5rem;
         }
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-        .empty-state { text-align: center; padding: 4rem 2rem; color: #6b7280; }
+        .empty-state { text-align: center; padding: 4rem 2rem; color: #6B7280; }
         .empty-state-icon { font-size: 4rem; margin-bottom: 1rem; }
         .error-box {
-            background: #fef2f2;
-            border: 3px solid #dc2626;
+            background: #FEF2F2;
+            border: 3px solid #EF4444;
             border-radius: 1rem;
             padding: 2rem;
             margin: 2rem;
             text-align: center;
         }
-        .error-box h2 { color: #dc2626; margin-bottom: 1rem; }
+        .error-box h2 { color: #EF4444; margin-bottom: 1rem; }
         .error-box p { color: #374151; margin-bottom: 0.5rem; }
     </style>
 </head>
@@ -281,7 +281,7 @@
         <div class="loading-content">
             <div class="spinner"></div>
             <h2 style="font-size: 1.8rem; margin-bottom: 0.5rem;">Turnuva Verileri Yükleniyor...</h2>
-            <p style="color: #fbbf24;">tournament_data.json dosyası okunuyor</p>
+            <p style="color: #0686D4;">tournament_data.json dosyası okunuyor</p>
         </div>
     </div>
 
@@ -343,9 +343,9 @@
             <!-- Standings Tab -->
             <div id="tab-standings" class="hidden">
                 <div class="card">
-                    <div style="background: linear-gradient(135deg, #1e3a8a, #1e40af); color: white; padding: 1.5rem; border-radius: 0.75rem; margin: -2rem -2rem 2rem -2rem;">
+                    <div style="background: linear-gradient(135deg, #2563EB, #1E40AF); color: white; padding: 1.5rem; border-radius: 0.75rem; margin: -2rem -2rem 2rem -2rem;">
                         <h2 style="font-size: 2rem; margin-bottom: 0.5rem;">Puan Durumu</h2>
-                        <p style="color: #fbbf24; font-size: 1rem;">Güncel sıralama ve istatistikler - Detaylar için takıma tıklayın</p>
+                        <p style="color: #0686D4; font-size: 1rem;">Güncel sıralama ve istatistikler - Detaylar için takıma tıklayın</p>
                     </div>
                     <div style="overflow-x: auto;">
                         <table>
@@ -376,7 +376,7 @@
             <div class="error-box">
                 <h2>Veri Yükleme Hatası</h2>
                 <p><strong>tournament_data.json</strong> dosyası bulunamadı veya okunamadı.</p>
-                <button onclick="location.reload()" style="margin-top: 1.5rem; padding: 0.75rem 2rem; background: #2563eb; color: white; border: none; border-radius: 0.5rem; font-weight: 600; cursor: pointer;">Sayfayı Yenile</button>
+                <button onclick="location.reload()" style="margin-top: 1.5rem; padding: 0.75rem 2rem; background: #2563EB; color: white; border: none; border-radius: 0.5rem; font-weight: 600; cursor: pointer;">Sayfayı Yenile</button>
             </div>
         </div>
     </div>
@@ -431,7 +431,6 @@
             const byName = new Map();
             let nextId = 1;
         
-            // Var olan teams'i topla
             if (Array.isArray(raw.teams)) {
                 raw.teams.forEach(t => {
                     if (!t) return;
@@ -450,7 +449,6 @@
                 });
             }
         
-            // Bir değerden takım nesnesi üret
             function ensureTeam(val) {
                 if (val && typeof val === 'object') {
                     const name = toStr(val.name || '');
@@ -504,7 +502,6 @@
                 return t;
             }
         
-            // Fikstürleri normalize et
             const fixtures = (raw.fixtures || []).map((f, i) => {
                 const home = ensureTeam(f.homeTeam ?? f.home ?? f.homeTeamName);
                 const away = ensureTeam(f.awayTeam ?? f.away ?? f.awayTeamName);
@@ -630,7 +627,7 @@
             filteredFixtures.forEach(f => {
                 if (f.round && f.round !== currentRound) {
                     currentRound = f.round;
-                    html += `<div style="background: linear-gradient(135deg, #1e3a8a, #1e40af); color: white; padding: 1rem 1.5rem; border-radius: 0.75rem; margin: 1.5rem 0 1rem 0; font-weight: bold; font-size: 1.2rem;">🏆 ${currentRound}. TUR</div>`;
+                    html += `<div style="background: linear-gradient(135deg, #2563EB, #1E40AF); color: white; padding: 1rem 1.5rem; border-radius: 0.75rem; margin: 1.5rem 0 1rem 0; font-weight: bold; font-size: 1.2rem;">🏆 ${currentRound}. TUR</div>`;
                 }
                 
                 html += `
@@ -638,7 +635,7 @@
                         <div class="match-row">
                             <div class="match-info">
                                 ${f.played ? '<span class="badge badge-success">✓ Oynanmış</span>' : '<span class="badge badge-info">Oynanacak</span>'}
-                                ${f.round ? `<span class="badge" style="background: #dbeafe; color: #1e40af;">Tur ${f.round}</span>` : ''}
+                                ${f.round ? `<span class="badge" style="background: #DBEAFE; color: #1E40AF;">Tur ${f.round}</span>` : ''}
                                 <span class="match-date">${f.date}</span>
                                 <span class="match-time">${f.time}</span>
                             </div>
@@ -709,18 +706,18 @@
                     <td>
                         <div class="team-info">
                             <div>
-                                <strong style="color: #1e3a8a; font-size: 1.05rem;">${s.team.name}</strong>
+                                <strong style="color: #1F2937; font-size: 1.05rem;">${s.team.name}</strong>
                             </div>
                         </div>
                     </td>
-                    <td style="text-align: center; font-weight: 600; color: #d97706;">#${s.team.seed || '-'}</td>
+                    <td style="text-align: center; font-weight: 600; color: #0686D4;">#${s.team.seed || '-'}</td>
                     <td style="text-align: center;">${s.played}</td>
-                    <td style="text-align: center; color: #059669; font-weight: 600;">${s.won}</td>
-                    <td style="text-align: center; color: #d97706; font-weight: 600;">${s.drawn}</td>
-                    <td style="text-align: center; color: #dc2626; font-weight: 600;">${s.lost}</td>
+                    <td style="text-align: center; color: #22C55E; font-weight: 600;">${s.won}</td>
+                    <td style="text-align: center; color: #FACC15; font-weight: 600;">${s.drawn}</td>
+                    <td style="text-align: center; color: #EF4444; font-weight: 600;">${s.lost}</td>
                     <td style="text-align: center; font-weight: 600;">${s.goalsFor}</td>
                     <td style="text-align: center; font-weight: 600;">${s.goalsAgainst}</td>
-                    <td style="text-align: center; font-weight: bold; color: ${s.goalDifference >= 0 ? '#059669' : '#dc2626'};">
+                    <td style="text-align: center; font-weight: bold; color: ${s.goalDifference >= 0 ? '#22C55E' : '#EF4444'};">
                         ${s.goalDifference > 0 ? '+' : ''}${s.goalDifference}
                     </td>
                     <td class="points">${s.points}</td>
@@ -756,12 +753,12 @@
             document.getElementById('teamStatsGrid').innerHTML = `
                 <div class="stat-box primary"><div class="stat-box-label">Puan</div><div class="stat-box-value">${points}</div></div>
                 <div class="stat-box"><div class="stat-box-label">Oynanan</div><div class="stat-box-value">${playedMatches.length}</div></div>
-                <div class="stat-box"><div class="stat-box-label">Galibiyet</div><div class="stat-box-value" style="color: #10b981;">${wins}</div></div>
-                <div class="stat-box"><div class="stat-box-label">Beraberlik</div><div class="stat-box-value" style="color: #f59e0b;">${draws}</div></div>
-                <div class="stat-box"><div class="stat-box-label">Mağlubiyet</div><div class="stat-box-value" style="color: #ef4444;">${losses}</div></div>
+                <div class="stat-box"><div class="stat-box-label">Galibiyet</div><div class="stat-box-value" style="color: #22C55E;">${wins}</div></div>
+                <div class="stat-box"><div class="stat-box-label">Beraberlik</div><div class="stat-box-value" style="color: #FACC15;">${draws}</div></div>
+                <div class="stat-box"><div class="stat-box-label">Mağlubiyet</div><div class="stat-box-value" style="color: #EF4444;">${losses}</div></div>
                 <div class="stat-box"><div class="stat-box-label">Atılan Gol</div><div class="stat-box-value">${goalsFor}</div></div>
                 <div class="stat-box"><div class="stat-box-label">Yenilen Gol</div><div class="stat-box-value">${goalsAgainst}</div></div>
-                <div class="stat-box"><div class="stat-box-label">Averaj</div><div class="stat-box-value" style="color: ${goalDiff >= 0 ? '#10b981' : '#ef4444'};">${goalDiff > 0 ? '+' : ''}${goalDiff}</div></div>
+                <div class="stat-box"><div class="stat-box-label">Averaj</div><div class="stat-box-value" style="color: ${goalDiff >= 0 ? '#22C55E' : '#EF4444'};">${goalDiff > 0 ? '+' : ''}${goalDiff}</div></div>
                 <div class="stat-box"><div class="stat-box-label">Galibyet Oranı</div><div class="stat-box-value">${winRate}%</div></div>
             `;
 
@@ -771,7 +768,7 @@
             teamMatches.forEach(match => {
                 if (match.round && match.round !== currentRound) {
                     currentRound = match.round;
-                    html += `<div style="background: linear-gradient(135deg, #1e3a8a, #1e40af); color: white; padding: 0.75rem 1rem; border-radius: 0.5rem; margin: 1rem 0 0.75rem 0; font-weight: bold; text-align: center;">🏆 ${currentRound}. TUR</div>`;
+                    html += `<div style="background: linear-gradient(135deg, #2563EB, #1E40AF); color: white; padding: 0.75rem 1rem; border-radius: 0.5rem; margin: 1rem 0 0.75rem 0; font-weight: bold; text-align: center;">🏆 ${currentRound}. TUR</div>`;
                 }
                 
                 const isHome = match.homeTeam.id === team.id;
@@ -796,16 +793,16 @@
                         <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
                             <div style="display: flex; align-items: center; gap: 1rem;">
                                 ${match.played ? `<span class="match-result-badge ${resultBadge}">${resultText}</span>` : '<span class="badge badge-info">Oynanacak</span>'}
-                                ${match.round ? `<span class="badge" style="background: #dbeafe; color: #1e40af;">Tur ${match.round}</span>` : ''}
+                                ${match.round ? `<span class="badge" style="background: #DBEAFE; color: #1E40AF;">Tur ${match.round}</span>` : ''}
                                 <span style="font-weight: 600; color: #374151;">${match.date}</span>
-                                <span style="color: #6b7280;">${match.time}</span>
+                                <span style="color: #6B7280;">${match.time}</span>
                             </div>
                             <div style="display: flex; align-items: center; gap: 1rem; font-size: 1.1rem;">
-                                <span style="font-weight: 600; color: #1e3a8a;">${isHome ? '🏠' : '✈️'} ${isHome ? 'vs' : '@'} ${opponent.name}</span>
-                                <span style="color: #d97706; font-weight: 600;">(Torba #${opponent.seed || '-'})</span>
+                                <span style="font-weight: 600; color: #1F2937;">${isHome ? '🏠' : '✈️'} ${isHome ? 'vs' : '@'} ${opponent.name}</span>
+                                <span style="color: #0686D4; font-weight: 600;">(Torba #${opponent.seed || '-'})</span>
                                 ${match.played ? 
-                                    `<div style="background: #1e3a8a; color: #fbbf24; padding: 0.5rem 1rem; border-radius: 0.5rem; font-weight: bold; font-size: 1.2rem;">${isHome ? teamScore : oppScore} - ${isHome ? oppScore : teamScore}</div>` :
-                                    '<div style="background: #f3f4f6; color: #9ca3af; padding: 0.5rem 1rem; border-radius: 0.5rem;">vs</div>'
+                                    `<div style="background: #2563EB; color: #0686D4; padding: 0.5rem 1rem; border-radius: 0.5rem; font-weight: bold; font-size: 1.2rem;">${isHome ? teamScore : oppScore} - ${isHome ? oppScore : teamScore}</div>` :
+                                    '<div style="background: #F3F4F6; color: #9CA3AF; padding: 0.5rem 1rem; border-radius: 0.5rem;">vs</div>'
                                 }
                             </div>
                         </div>
