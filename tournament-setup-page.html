@@ -6,21 +6,14 @@
     <title>Turnuva Kurulumu - Takım ve Kura Yönetimi</title>
     <script src="https://cdn.sheetjs.com/xlsx-0.20.1/package/dist/xlsx.full.min.js"></script>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
             background: linear-gradient(135deg, #3B82F6 0%, #2563EB 50%, #3B82F6 100%);
             min-height: 100vh;
             padding: 2rem;
         }
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-        }
+        .container { max-width: 1400px; margin: 0 auto; }
         .header {
             background: #1F2937;
             border: 4px solid #0686D4;
@@ -30,283 +23,53 @@
             text-align: center;
             box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
-        .header h1 {
-            color: white;
-            font-size: 2.5rem;
-            margin-bottom: 0.5rem;
-        }
-        .header p {
-            color: #0686D4;
-            font-size: 1.1rem;
-        }
-        .card {
-            background: white;
-            border-radius: 1rem;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-            padding: 2rem;
-            margin-bottom: 2rem;
-        }
-        .card-title {
-            font-size: 1.8rem;
-            font-weight: bold;
-            color: #1F2937;
-            margin-bottom: 1.5rem;
-            padding-bottom: 1rem;
-            border-bottom: 3px solid #0686D4;
-        }
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-        .form-label {
-            display: block;
-            font-size: 0.95rem;
-            font-weight: 600;
-            color: #374151;
-            margin-bottom: 0.5rem;
-        }
-        .form-input {
-            width: 100%;
-            padding: 0.75rem 1rem;
-            border: 2px solid #E5E7EB;
-            border-radius: 0.5rem;
-            font-size: 1rem;
-            transition: all 0.3s;
-        }
-        .form-input:focus {
-            outline: none;
-            border-color: #2563EB;
-            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
-        }
-        input[type="file"] {
-            padding: 0.5rem;
-        }
-        input[type="file"]::file-selector-button {
-            padding: 0.5rem 1rem;
-            background: #2563EB;
-            color: white;
-            border: none;
-            border-radius: 0.375rem;
-            font-weight: 600;
-            cursor: pointer;
-            margin-right: 1rem;
-        }
-        input[type="file"]::file-selector-button:hover {
-            background: #1D4ED8;
-        }
-        .grid-2 {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 1.5rem;
-        }
-        .grid-3 {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1rem;
-        }
-        .btn {
-            padding: 0.75rem 2rem;
-            border: none;
-            border-radius: 0.5rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s;
-            font-size: 1rem;
-        }
-        .btn-primary {
-            background: #2563EB;
-            color: white;
-        }
-        .btn-primary:hover {
-            background: #1D4ED8;
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(37, 99, 235, 0.4);
-        }
-        .btn-success {
-            background: #22C55E;
-            color: white;
-        }
-        .btn-success:hover {
-            background: #16A34A;
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(34, 197, 94, 0.4);
-        }
-        .btn-danger {
-            background: #EF4444;
-            color: white;
-            padding: 0.5rem 1rem;
-        }
-        .btn-danger:hover {
-            background: #DC2626;
-        }
-        .btn-secondary {
-            background: #6B7280;
-            color: white;
-        }
-        .btn-secondary:hover {
-            background: #4B5563;
-        }
-        .btn-large {
-            padding: 1.25rem 3rem;
-            font-size: 1.3rem;
-        }
-        .btn-export {
-            background: linear-gradient(135deg, #22C55E, #16A34A);
-            color: white;
-            padding: 1rem 2.5rem;
-            font-size: 1.2rem;
-            border-radius: 0.75rem;
-            box-shadow: 0 8px 20px rgba(34, 197, 94, 0.3);
-        }
-        .btn-export:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 12px 25px rgba(34, 197, 94, 0.4);
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 1rem;
-        }
-        thead {
-            background: #F3F4F6;
-        }
-        th, td {
-            padding: 1rem;
-            text-align: left;
-            border-bottom: 1px solid #E5E7EB;
-        }
-        th {
-            font-weight: 600;
-            color: #374151;
-            font-size: 0.95rem;
-        }
-        tr:hover {
-            background: #F9FAFB;
-        }
-        .spinner {
-            border: 5px solid #F3F4F6;
-            border-top: 5px solid #0686D4;
-            border-radius: 50%;
-            width: 100px;
-            height: 100px;
-            animation: spin 1s linear infinite;
-            margin: 3rem auto;
-        }
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-        .success-box {
-            background: linear-gradient(135deg, #ECFDF5, #D1FAE5);
-            border: 3px solid #22C55E;
-            border-radius: 1rem;
-            padding: 2rem;
-            margin: 2rem 0;
-            text-align: center;
-        }
-        .match-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 1rem;
-            max-height: 500px;
-            overflow-y: auto;
-            padding: 1rem;
-            background: #F9FAFB;
-            border-radius: 0.5rem;
-        }
-        .match-card {
-            background: white;
-            border: 2px solid #E5E7EB;
-            border-radius: 0.75rem;
-            padding: 1rem;
-            transition: all 0.3s;
-        }
-        .match-card:hover {
-            border-color: #2563EB;
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-        }
-        .badge {
-            display: inline-block;
-            padding: 0.25rem 0.75rem;
-            border-radius: 0.25rem;
-            font-size: 0.875rem;
-            font-weight: 600;
-        }
-        .badge-info {
-            background: #DBEAFE;
-            color: #1E40AF;
-        }
-        .small-text {
-            font-size: 0.875rem;
-            color: #6B7280;
-            margin-top: 0.5rem;
-        }
-        .alert {
-            padding: 1rem 1.5rem;
-            border-radius: 0.5rem;
-            margin: 1rem 0;
-        }
-        .alert-info {
-            background: #DBEAFE;
-            border-left: 4px solid #2563EB;
-            color: #1E40AF;
-        }
-        .export-section {
-            background: linear-gradient(135deg, #F0FDF4, #DCFCE7);
-            border: 3px solid #22C55E;
-            border-radius: 1rem;
-            padding: 2rem;
-            text-align: center;
-            margin-top: 2rem;
-        }
-        .step-indicator {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 2rem;
-            padding: 1rem;
-            background: #F9FAFB;
-            border-radius: 0.5rem;
-        }
-        .step {
-            flex: 1;
-            text-align: center;
-            padding: 1rem;
-            position: relative;
-        }
-        .step::after {
-            content: '→';
-            position: absolute;
-            right: -1rem;
-            top: 50%;
-            transform: translateY(-50%);
-            color: #9CA3AF;
-            font-size: 1.5rem;
-        }
-        .step:last-child::after {
-            display: none;
-        }
-        .step.active {
-            background: #DBEAFE;
-            border-radius: 0.5rem;
-        }
-        .step-number {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background: #D1D5DB;
-            color: white;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            margin: 0 auto 0.5rem;
-        }
-        .step.active .step-number {
-            background: #2563EB;
-        }
-        .step.completed .step-number {
-            background: #22C55E;
-        }
+        .header h1 { color: white; font-size: 2.5rem; margin-bottom: 0.5rem; }
+        .header p { color: #0686D4; font-size: 1.1rem; }
+        .card { background: white; border-radius: 1rem; box-shadow: 0 10px 30px rgba(0,0,0,0.3); padding: 2rem; margin-bottom: 2rem; }
+        .card-title { font-size: 1.8rem; font-weight: bold; color: #1F2937; margin-bottom: 1.5rem; padding-bottom: 1rem; border-bottom: 3px solid #0686D4; }
+        .form-group { margin-bottom: 1.5rem; }
+        .form-label { display: block; font-size: 0.95rem; font-weight: 600; color: #374151; margin-bottom: 0.5rem; }
+        .form-input { width: 100%; padding: 0.75rem 1rem; border: 2px solid #E5E7EB; border-radius: 0.5rem; font-size: 1rem; transition: all 0.3s; }
+        .form-input:focus { outline: none; border-color: #2563EB; box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1); }
+        .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; }
+        .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; }
+        .btn { padding: 0.75rem 2rem; border: none; border-radius: 0.5rem; font-weight: 600; cursor: pointer; transition: all 0.3s; font-size: 1rem; }
+        .btn-primary { background: #2563EB; color: white; }
+        .btn-primary:hover { background: #1D4ED8; transform: translateY(-2px); box-shadow: 0 5px 15px rgba(37, 99, 235, 0.4); }
+        .btn-success { background: #22C55E; color: white; }
+        .btn-success:hover { background: #16A34A; transform: translateY(-2px); box-shadow: 0 5px 15px rgba(34, 197, 94, 0.4); }
+        .btn-danger { background: #EF4444; color: white; padding: 0.5rem 1rem; }
+        .btn-danger:hover { background: #DC2626; }
+        .btn-secondary { background: #6B7280; color: white; }
+        .btn-secondary:hover { background: #4B5563; }
+        .btn-large { padding: 1.25rem 3rem; font-size: 1.3rem; }
+        .btn-export { background: linear-gradient(135deg, #22C55E, #16A34A); color: white; padding: 1rem 2.5rem; font-size: 1.2rem; border-radius: 0.75rem; box-shadow: 0 8px 20px rgba(34, 197, 94, 0.3); }
+        .btn-export:hover { transform: translateY(-3px); box-shadow: 0 12px 25px rgba(34, 197, 94, 0.4); }
+        table { width: 100%; border-collapse: collapse; margin-top: 1rem; }
+        thead { background: #F3F4F6; }
+        th, td { padding: 1rem; text-align: left; border-bottom: 1px solid #E5E7EB; }
+        th { font-weight: 600; color: #374151; font-size: 0.95rem; }
+        tr:hover { background: #F9FAFB; }
+        .small-text { font-size: 0.875rem; color: #6B7280; margin-top: 0.5rem; }
+        .alert { padding: 1rem 1.5rem; border-radius: 0.5rem; margin: 1rem 0; }
+        .alert-info { background: #DBEAFE; border-left: 4px solid #2563EB; color: #1E40AF; }
+        .success-box { background: linear-gradient(135deg, #ECFDF5, #D1FAE5); border: 3px solid #22C55E; border-radius: 1rem; padding: 2rem; margin: 2rem 0; text-align: center; }
+        .match-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1rem; max-height: 500px; overflow-y: auto; padding: 1rem; background: #F9FAFB; border-radius: 0.5rem; }
+        .match-card { background: white; border: 2px solid #E5E7EB; border-radius: 0.75rem; padding: 1rem; transition: all 0.3s; }
+        .match-card:hover { border-color: #2563EB; transform: translateY(-2px); box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+        .badge { display: inline-block; padding: 0.25rem 0.75rem; border-radius: 0.25rem; font-size: 0.875rem; font-weight: 600; }
+        .badge-info { background: #DBEAFE; color: #1E40AF; }
+        .spinner { border: 5px solid #F3F4F6; border-top: 5px solid #0686D4; border-radius: 50%; width: 100px; height: 100px; animation: spin 1s linear infinite; margin: 3rem auto; }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        .export-section { background: linear-gradient(135deg, #F0FDF4, #DCFCE7); border: 3px solid #22C55E; border-radius: 1rem; padding: 2rem; text-align: center; margin-top: 2rem; }
+        .step-indicator { display: flex; justify-content: space-between; margin-bottom: 2rem; padding: 1rem; background: #F9FAFB; border-radius: 0.5rem; }
+        .step { flex: 1; text-align: center; padding: 1rem; position: relative; }
+        .step::after { content: '→'; position: absolute; right: -1rem; top: 50%; transform: translateY(-50%); color: #9CA3AF; font-size: 1.5rem; }
+        .step:last-child::after { display: none; }
+        .step.active { background: #DBEAFE; border-radius: 0.5rem; }
+        .step-number { width: 40px; height: 40px; border-radius: 50%; background: #D1D5DB; color: white; display: flex; align-items: center; justify-content: center; font-weight: bold; margin: 0 auto 0.5rem; }
+        .step.active .step-number { background: #2563EB; }
+        .step.completed .step-number { background: #22C55E; }
     </style>
 </head>
 <body>
@@ -317,31 +80,18 @@
         </div>
 
         <div class="step-indicator">
-            <div class="step active" id="step1">
-                <div class="step-number">1</div>
-                <strong>Takımlar</strong>
-            </div>
-            <div class="step" id="step2">
-                <div class="step-number">2</div>
-                <strong>Kura Çekimi</strong>
-            </div>
-            <div class="step" id="step3">
-                <div class="step-number">3</div>
-                <strong>Fikstür</strong>
-            </div>
-            <div class="step" id="step4">
-                <div class="step-number">4</div>
-                <strong>Export</strong>
-            </div>
+            <div class="step active" id="step1"><div class="step-number">1</div><strong>Takımlar</strong></div>
+            <div class="step" id="step2"><div class="step-number">2</div><strong>Kura Çekimi</strong></div>
+            <div class="step" id="step3"><div class="step-number">3</div><strong>Fikstür</strong></div>
+            <div class="step" id="step4"><div class="step-number">4</div><strong>Export</strong></div>
         </div>
 
-        <!-- Turnuva Bilgileri -->
         <div class="card">
             <h2 class="card-title">Turnuva Bilgileri</h2>
             <div class="grid-2">
                 <div class="form-group">
                     <label class="form-label">Turnuva Adı</label>
-                    <input type="text" class="form-input" id="inputTournamentName" placeholder="Örn: UEFA Champions League" value="Avrupa Ligi">
+                    <input type="text" class="form-input" id="inputTournamentName" value="Avrupa Ligi">
                 </div>
                 <div class="form-group">
                     <label class="form-label">Sezon</label>
@@ -350,10 +100,18 @@
             </div>
         </div>
 
-        <!-- Takım Ekleme -->
+        <div class="card">
+            <h2 class="card-title">Kaydedilmiş Maçları Yükle</h2>
+            <div class="form-group">
+                <label class="form-label">Maç Dosyası</label>
+                <input type="file" id="matchesFile" accept=".json" onchange="handleMatchesUpload(event)" class="form-input">
+                <p class="small-text">Daha önce kaydedilmiş maçları yükleyerek, takımları ve kura çekimini geri yükleyebilirsiniz.</p>
+            </div>
+        </div>
+
         <div class="card">
             <h2 class="card-title">Takım Yönetimi</h2>
-            
+
             <div class="form-group">
                 <label class="form-label">Manuel Takım Ekle</label>
                 <div class="grid-3">
@@ -366,15 +124,21 @@
             <div class="form-group">
                 <label class="form-label">Excel/CSV ile Toplu İçe Aktar</label>
                 <input type="file" id="excelFile" accept=".xlsx,.xls,.csv" onchange="handleFileUpload(event)" class="form-input">
-                <p class="small-text">
-                    Excel sütunları: <strong>"Takım Adı"</strong>, <strong>"Torba"</strong><br>
-                    <a href="#" onclick="event.preventDefault(); downloadSampleExcel();" style="color: #2563EB; font-weight: 600; text-decoration: underline;">Örnek Excel dosyasını indir</a>
-                </p>
+                <p class="small-text">Excel sütunları: <strong>"Takım Adı"</strong>, <strong>"Torba"</strong><br><a href="#" onclick="event.preventDefault(); downloadSampleExcel();" style="color: #2563EB; font-weight: 600; text-decoration: underline;">Örnek Excel dosyasını indir</a></p>
             </div>
 
             <div class="form-group">
-                <label class="form-label">Her Takım Kaç Maç Oynayacak?</label>
-                <input type="number" class="form-input" id="inputMatchCount" value="8" min="2" max="20" style="width: 150px;">
+                <label class="form-label">Maç Ayarları</label>
+                <div class="grid-2">
+                    <div>
+                        <label class="form-label">Her Takım Kaç Maç Oynayacak?</label>
+                        <input type="number" class="form-input" id="inputMatchCount" value="8" min="2" max="20">
+                    </div>
+                    <div>
+                        <label class="form-label">Her Torbadan Kaç Rakip?</label>
+                        <input type="number" class="form-input" id="inputOpponentsPerSeed" value="2" min="1" max="10">
+                    </div>
+                </div>
             </div>
 
             <h3 style="color: #1F2937; margin: 1.5rem 0 1rem;">Kayıtlı Takımlar (<span id="teamCount">0</span>)</h3>
@@ -390,49 +154,35 @@
             </table>
         </div>
 
-        <!-- Kura Çekimi -->
         <div class="card">
             <h2 class="card-title">Kura Çekimi</h2>
-            <div id="drawContent">
-                <div class="alert alert-info">
-                    En az 2 takım eklemelisiniz.
-                </div>
-            </div>
+            <div id="drawContent"><div class="alert alert-info">En az 2 takım eklemelisiniz.</div></div>
         </div>
 
-        <!-- Fikstür -->
         <div class="card" id="fixtureCard" style="display: none;">
             <h2 class="card-title">Fikstür Oluşturma</h2>
             <div class="form-group">
                 <label class="form-label">Başlangıç Tarihi</label>
-                <input type="date" class="form-input" id="inputStartDate" onchange="generateFixtures()" style="width: 200px;">
+                <input type="date" class="form-input" id="inputStartDate" style="width: 200px;">
                 <p class="small-text">Kurallar: Pazartesi 2 maç, Salı-Cuma 1 maç, Cumartesi-Pazar boş</p>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Maç Olmayacak Tarihler</label>
+                <textarea class="form-input" id="inputHolidays" placeholder="2024-12-25,2024-12-26,2024-01-01" style="height: 80px; font-family: monospace;"></textarea>
+                <p class="small-text">YYYY-MM-DD formatında, virgülle ayrılmış.</p>
             </div>
             <div id="fixturePreview"></div>
         </div>
 
-        <!-- Export Bölümü -->
         <div class="export-section" id="exportSection" style="display: none;">
             <h2 style="color: #16A34A; font-size: 2rem; margin-bottom: 1rem;">Kurulum Tamamlandı!</h2>
-            <p style="color: #15803D; font-size: 1.1rem; margin-bottom: 2rem;">
-                Turnuva fikstürü hazır. Aşağıdaki butona tıklayarak maç programını dışa aktarın.
-            </p>
-            <button class="btn btn-export" onclick="exportTournament()">
-                Turnuva Verilerini İndir (tournament_data.json)
-            </button>
-            <p class="small-text" style="margin-top: 1rem; color: #15803D;">
-                İndirilen <strong>tournament_data.json</strong> dosyasını GitHub repo'nuzun ana dizinine yükleyin.
-            </p>
+            <p style="color: #15803D; font-size: 1.1rem; margin-bottom: 2rem;">Turnuva fikstürü hazır.</p>
+            <button class="btn btn-export" onclick="exportTournament()">Turnuva Verilerini İndir</button>
         </div>
     </div>
 
     <script>
-        let teams = [];
-        let matches = [];
-        let fixtures = [];
-        let matchCount = 8;
-        let tournamentName = 'Avrupa Ligi';
-        let season = '2024-25';
+        let teams = [], matches = [], fixtures = [], matchCount = 8;
 
         function updateSteps() {
             document.getElementById('step1').className = 'step completed';
@@ -444,17 +194,10 @@
         function addTeam() {
             const name = document.getElementById('inputTeamName').value.trim();
             const seed = parseInt(document.getElementById('inputTeamSeed').value);
-            
-            if (!name) {
-                alert('Takım adı zorunludur!');
+            if (!name || !Number.isFinite(seed) || seed < 1 || seed > 32) {
+                alert('Geçersiz giriş!');
                 return;
             }
-            
-            if (!Number.isFinite(seed) || seed < 1 || seed > 32) {
-                alert('Torba değeri 1-32 arasında olmalıdır!');
-                return;
-            }
-            
             teams.push({ id: Date.now(), name, seed });
             document.getElementById('inputTeamName').value = '';
             document.getElementById('inputTeamSeed').value = '';
@@ -463,7 +206,7 @@
         }
 
         function removeTeam(id) {
-            if (!confirm('Bu takımı silmek istediğinizden emin misiniz?')) return;
+            if (!confirm('Silmek istediğinizden emin misiniz?')) return;
             teams = teams.filter(t => t.id !== id);
             renderTeams();
             updateDrawButton();
@@ -471,290 +214,126 @@
 
         function renderTeams() {
             const tbody = document.getElementById('teamsBody');
-            tbody.innerHTML = '';
-            
-            if (teams.length === 0) {
-                tbody.innerHTML = '<tr><td colspan="3" style="text-align: center; color: #9CA3AF; padding: 2rem;">Henüz takım eklenmedi</td></tr>';
-            } else {
-                teams.sort((a, b) => a.seed - b.seed).forEach(team => {
-                    const row = tbody.insertRow();
-                    const nameCell = row.insertCell();
-                    const seedCell = row.insertCell();
-                    const actionCell = row.insertCell();
-                    
-                    nameCell.innerHTML = `<strong style="color: #1F2937;">${team.name}</strong>`;
-                    
-                    seedCell.style.textAlign = 'center';
-                    seedCell.style.cursor = 'pointer';
-                    seedCell.style.padding = '0.5rem';
-                    seedCell.innerHTML = `<span id="seed-${team.id}" style="font-weight: 600; color: #0686D4; display: inline-block; padding: 0.5rem 1rem; border-radius: 0.5rem; background: #DBEAFE; user-select: none;">#${team.seed}</span>`;
-                    
-                    seedCell.addEventListener('click', () => editSeed(team.id, team.seed));
-                    
-                    actionCell.style.textAlign = 'center';
-                    
-                    const deleteBtn = document.createElement('button');
-                    deleteBtn.className = 'btn btn-danger';
-                    deleteBtn.textContent = 'Sil';
-                    deleteBtn.onclick = () => removeTeam(team.id);
-                    actionCell.appendChild(deleteBtn);
-                });
-            }
-            
+            tbody.innerHTML = teams.length === 0 ? '<tr><td colspan="3" style="text-align: center; color: #9CA3AF; padding: 2rem;">Henüz takım eklenmedi</td></tr>' : '';
+            teams.sort((a, b) => a.seed - b.seed).forEach(team => {
+                const row = tbody.insertRow();
+                row.innerHTML = `
+                    <td><strong style="color: #1F2937;">${team.name}</strong></td>
+                    <td style="text-align: center;"><span style="font-weight: 600; color: #0686D4;">#${team.seed}</span></td>
+                    <td style="text-align: center;"><button class="btn btn-danger" onclick="removeTeam(${team.id})">Sil</button></td>
+                `;
+            });
             document.getElementById('teamCount').textContent = teams.length;
             updateSteps();
         }
 
-        function editSeed(teamId, currentSeed) {
-            const team = teams.find(t => t.id === teamId);
-            if (!team) return;
-
-            const seedCell = document.getElementById(`seed-${teamId}`).parentElement;
-            const input = document.createElement('input');
-            input.type = 'number';
-            input.min = '1';
-            input.max = '32';
-            input.value = currentSeed;
-            input.style.width = '80px';
-            input.style.padding = '0.5rem';
-            input.style.borderRadius = '0.5rem';
-            input.style.border = '2px solid #2563EB';
-            input.style.fontSize = '1rem';
-            input.style.fontWeight = '600';
-            input.style.textAlign = 'center';
-
-            seedCell.innerHTML = '';
-            seedCell.appendChild(input);
-            input.focus();
-            input.select();
-
-            function saveSeed() {
-                const newSeed = parseInt(input.value);
-                if (Number.isFinite(newSeed) && newSeed >= 1 && newSeed <= 32) {
-                    team.seed = newSeed;
-                    renderTeams();
-                } else {
-                    alert('Torba değeri 1-32 arasında olmalıdır!');
-                    renderTeams();
-                }
-            }
-
-            input.addEventListener('blur', saveSeed);
-            input.addEventListener('keydown', (e) => {
-                if (e.key === 'Enter') saveSeed();
-                if (e.key === 'Escape') renderTeams();
-            });
-        }
-
         function downloadSampleExcel() {
-            if (typeof XLSX === 'undefined') {
-                alert('Excel kütüphanesi yüklenemedi. Lütfen sayfayı yenileyin.');
-                return;
-            }
-
-            const sampleData = [
-                // Torba 1 (8 takım)
-                { "Takım Adı": "Real Madrid", "Torba": 1 },
-                { "Takım Adı": "Barcelona", "Torba": 1 },
-                { "Takım Adı": "Manchester City", "Torba": 1 },
-                { "Takım Adı": "Bayern Münih", "Torba": 1 },
-                { "Takım Adı": "Paris Saint-Germain", "Torba": 1 },
-                { "Takım Adı": "Liverpool", "Torba": 1 },
-                { "Takım Adı": "Inter Milano", "Torba": 1 },
-                { "Takım Adı": "AC Milan", "Torba": 1 },
-                // Torba 2 (8 takım)
-                { "Takım Adı": "Juventus", "Torba": 2 },
-                { "Takım Adı": "Atlético Madrid", "Torba": 2 },
-                { "Takım Adı": "Chelsea", "Torba": 2 },
-                { "Takım Adı": "Borussia Dortmund", "Torba": 2 },
-                { "Takım Adı": "Manchester United", "Torba": 2 },
-                { "Takım Adı": "Arsenal", "Torba": 2 },
-                { "Takım Adı": "Napoli", "Torba": 2 },
-                { "Takım Adı": "Roma", "Torba": 2 },
-                // Torba 3 (7 takım)
-                { "Takım Adı": "Sevilla", "Torba": 3 },
-                { "Takım Adı": "Galatasaray", "Torba": 3 },
-                { "Takım Adı": "Fenerbahçe", "Torba": 3 },
-                { "Takım Adı": "Beşiktaş", "Torba": 3 },
-                { "Takım Adı": "Başakşehir FK", "Torba": 3 },
-                { "Takım Adı": "Leverkusen", "Torba": 3 },
-                { "Takım Adı": "Fiorentina", "Torba": 3 },
-                { "Takım Adı": "Real Sociedad", "Torba": 3 },
-                // Torba 4 (7 takım)
-                { "Takım Adı": "Trabzonspor", "Torba": 4 },
-                { "Takım Adı": "Bursaspor", "Torba": 4 },
-                { "Takım Adı": "Sporting Lizbon", "Torba": 4 },
-                { "Takım Adı": "Benfica", "Torba": 4 },
-                { "Takım Adı": "Porto", "Torba": 4 },
-                { "Takım Adı": "Lyon", "Torba": 4 },
-                { "Takım Adı": "Lazio", "Torba": 4 },
-                { "Takım Adı": "Brighton", "Torba": 4 }
+            if (typeof XLSX === 'undefined') { alert('Kütüphane yüklenmedi'); return; }
+            const data = [
+                { "Takım Adı": "Real Madrid", "Torba": 1 }, { "Takım Adı": "Barcelona", "Torba": 1 },
+                { "Takım Adı": "Manchester City", "Torba": 1 }, { "Takım Adı": "Bayern Münih", "Torba": 1 },
+                { "Takım Adı": "PSG", "Torba": 1 }, { "Takım Adı": "Liverpool", "Torba": 1 },
+                { "Takım Adı": "Inter Milano", "Torba": 1 }, { "Takım Adı": "AC Milan", "Torba": 1 },
+                { "Takım Adı": "Juventus", "Torba": 2 }, { "Takım Adı": "Atlético Madrid", "Torba": 2 },
+                { "Takım Adı": "Chelsea", "Torba": 2 }, { "Takım Adı": "Dortmund", "Torba": 2 },
+                { "Takım Adı": "Manchester United", "Torba": 2 }, { "Takım Adı": "Arsenal", "Torba": 2 },
+                { "Takım Adı": "Napoli", "Torba": 2 }, { "Takım Adı": "Roma", "Torba": 2 },
+                { "Takım Adı": "Sevilla", "Torba": 3 }, { "Takım Adı": "Galatasaray", "Torba": 3 },
+                { "Takım Adı": "Fenerbahçe", "Torba": 3 }, { "Takım Adı": "Beşiktaş", "Torba": 3 },
+                { "Takım Adı": "Leverkusen", "Torba": 3 }, { "Takım Adı": "Fiorentina", "Torba": 3 },
+                { "Takım Adı": "Real Sociedad", "Torba": 3 }, { "Takım Adı": "Trabzonspor", "Torba": 4 },
+                { "Takım Adı": "Sporting", "Torba": 4 }, { "Takım Adı": "Benfica", "Torba": 4 },
+                { "Takım Adı": "Porto", "Torba": 4 }, { "Takım Adı": "Lyon", "Torba": 4 },
+                { "Takım Adı": "Lazio", "Torba": 4 }, { "Takım Adı": "Brighton", "Torba": 4 }
             ];
-
-            try {
-                const ws = XLSX.utils.json_to_sheet(sampleData);
-                const wb = XLSX.utils.book_new();
-                XLSX.utils.book_append_sheet(wb, ws, "Takımlar");
-                ws['!cols'] = [{ wch: 25 }, { wch: 10 }];
-                XLSX.writeFile(wb, "ornek_takimlar.xlsx");
-                alert("Örnek Excel dosyası indirildi!");
-            } catch (err) {
-                alert('Excel oluşturma hatası: ' + err.message);
-                console.error(err);
-            }
+            const ws = XLSX.utils.json_to_sheet(data);
+            const wb = XLSX.utils.book_new();
+            XLSX.utils.book_append_sheet(wb, ws, "Takımlar");
+            XLSX.writeFile(wb, "ornek_takimlar.xlsx");
         }
 
         function handleFileUpload(event) {
             const file = event.target.files[0];
-            if (!file) return;
-
-            if (typeof XLSX === 'undefined') {
-                alert('Excel kütüphanesi yüklenemedi. Lütfen sayfayı yenileyin.');
-                event.target.value = '';
-                return;
-            }
-
+            if (!file || typeof XLSX === 'undefined') return;
             const reader = new FileReader();
             reader.onload = (e) => {
                 try {
                     const data = new Uint8Array(e.target.result);
                     const workbook = XLSX.read(data, { type: 'array' });
-                    const sheet = workbook.Sheets[workbook.SheetNames[0]];
-                    const json = XLSX.utils.sheet_to_json(sheet);
-                    
+                    const json = XLSX.utils.sheet_to_json(workbook.Sheets[workbook.SheetNames[0]]);
                     let imported = 0;
-                    json.forEach((row) => {
-                        const name = row['Takım Adı'] || row['Team Name'] || row['Name'] || '';
-                        const seed = parseInt(row['Torba'] || row['torba'] || row['Seed'] || row['seed'] || 0);
-                        
-                        if (name && Number.isFinite(seed) && seed > 0 && seed <= 32) {
-                            teams.push({ 
-                                id: Date.now() + imported + Math.random(), 
-                                name: name.toString().trim(), 
-                                seed 
-                            });
+                    json.forEach(row => {
+                        const name = row['Takım Adı'] || '';
+                        const seed = parseInt(row['Torba'] || 0);
+                        if (name && seed > 0 && seed <= 32) {
+                            teams.push({ id: Date.now() + imported + Math.random(), name: name.toString().trim(), seed });
                             imported++;
                         }
                     });
-                    
                     renderTeams();
                     updateDrawButton();
-                    alert(`${imported} takım başarıyla içe aktarıldı!`);
+                    alert(`${imported} takım başarıyla yüklendi!`);
                     event.target.value = '';
-                } catch (err) {
-                    alert('Dosya okuma hatası: ' + err.message);
-                    event.target.value = '';
-                }
+                } catch (err) { alert('Hata: ' + err.message); }
             };
             reader.readAsArrayBuffer(file);
         }
 
         function updateDrawButton() {
             const content = document.getElementById('drawContent');
-            if (teams.length < 2) {
-                content.innerHTML = '<div class="alert alert-info">En az 2 takım eklemelisiniz.</div>';
-            } else if (matches.length === 0) {
+            if (teams.length < 2) content.innerHTML = '<div class="alert alert-info">En az 2 takım eklemelisiniz.</div>';
+            else if (matches.length === 0) {
                 matchCount = parseInt(document.getElementById('inputMatchCount').value);
-                content.innerHTML = `
-                    <p style="font-size: 1.1rem; margin-bottom: 1.5rem; color: #374151;">
-                        <strong>${teams.length}</strong> takım kayıtlı. Her takım <strong>${matchCount}</strong> farklı rakiple karşılaşacak.
-                    </p>
-                    <button class="btn btn-primary btn-large" onclick="performDraw()">Kura Çekimini Başlat</button>
-                `;
+                content.innerHTML = `<p style="margin-bottom: 1.5rem; color: #374151;"><strong>${teams.length}</strong> takım kayıtlı. Her takım <strong>${matchCount}</strong> farklı rakiple karşılaşacak.</p><button class="btn btn-primary btn-large" onclick="performDraw()">Kura Çekimini Başlat</button>`;
             }
         }
 
         function performDraw() {
             matchCount = parseInt(document.getElementById('inputMatchCount').value) || 5;
-            tournamentName = document.getElementById('inputTournamentName').value;
-            season = document.getElementById('inputSeason').value;
-        
-            // Torba değerlerini kontrol et
-            const torbas = teams.map(t => t.seed).filter(s => s !== null);
-            const validTorbas = new Set();
-            for (let i = 1; i <= matchCount; i++) {
-                validTorbas.add(i);
-            }
-            
-            const invalidTorbas = torbas.filter(t => !validTorbas.has(t));
-            if (invalidTorbas.length > 0) {
-                alert(`Hata: ${matchCount} maç oynanacaksa, torba değerleri 1-${matchCount} arası olmalıdır.\nGeçersiz torba değerleri: ${[...new Set(invalidTorbas)].join(', ')}`);
+            const opponentsPerSeed = parseInt(document.getElementById('inputOpponentsPerSeed').value) || 1;
+            if (matchCount % opponentsPerSeed !== 0) {
+                alert(`Hata: ${matchCount} maçı ${opponentsPerSeed} rakiple bölmek mümkün değil!`);
                 return;
             }
-        
-            document.getElementById('drawContent').innerHTML =
-                '<div class="spinner"></div><p style="text-align:center;font-size:1.2rem;color:#374151;">Kura çekimi yapılıyor... (10000 deneme)</p>';
-        
+            const expectedSeeds = matchCount / opponentsPerSeed;
+            const currentSeeds = new Set(teams.map(t => t.seed));
+            if (currentSeeds.size !== expectedSeeds) {
+                alert(`Hata: ${expectedSeeds} torba gereklidir. Mevcut: ${currentSeeds.size}`);
+                return;
+            }
+            document.getElementById('drawContent').innerHTML = '<div class="spinner"></div><p style="text-align:center; color:#374151;">Kura çekimi yapılıyor...</p>';
             setTimeout(() => {
                 matches = [];
-                let drawSuccess = false;
-                let attempt = 0;
-                const maxAttempts = 10000;
-
-                while (!drawSuccess && attempt < maxAttempts) {
-                    attempt++;
+                for (let attempt = 0; attempt < 10000; attempt++) {
                     matches = [];
                     const usedPairs = new Set();
                     const opponentsByTorba = {};
-                    
-                    // Her takımın torba koşullarını izle
                     teams.forEach(team => {
                         opponentsByTorba[team.id] = {};
-                        for (let i = 1; i <= matchCount; i++) {
-                            opponentsByTorba[team.id][i] = [];
-                        }
+                        for (let i = 1; i <= expectedSeeds; i++) opponentsByTorba[team.id][i] = [];
                     });
-
                     let allRoundsSuccess = true;
-
                     for (let round = 1; round <= matchCount; round++) {
                         const roundMatches = [];
-                        let teamIds = teams.map(t => t.id);
-        
                         let roundSuccess = false;
                         for (let roundAttempt = 0; roundAttempt < 100; roundAttempt++) {
                             roundMatches.length = 0;
-                            let available = [...teamIds];
+                            let available = teams.map(t => t.id);
                             let pairingSuccess = true;
-        
                             while (available.length >= 2) {
                                 const t1Id = available.shift();
                                 const t1 = teams.find(t => t.id === t1Id);
-                                
-                                // t1'in oynayabileceği rakipleri bul
                                 const possibleOpponents = available.filter(t2Id => {
                                     const t2 = teams.find(t => t.id === t2Id);
-                                    const pairKey1 = `${t1Id}-${t2Id}`;
-                                    const pairKey2 = `${t2Id}-${t1Id}`;
-                                    
-                                    if (usedPairs.has(pairKey1) || usedPairs.has(pairKey2)) {
-                                        return false;
-                                    }
-                                    
-                                    // t1 bu torba değerinden daha maç yapmış mı?
-                                    if (opponentsByTorba[t1Id][t2.seed] && 
-                                        opponentsByTorba[t1Id][t2.seed].length > 0) {
-                                        return false;
-                                    }
-                                    
-                                    // t2 bu torba değerinden daha maç yapmış mı?
-                                    if (opponentsByTorba[t2Id][t1.seed] && 
-                                        opponentsByTorba[t2Id][t1.seed].length > 0) {
-                                        return false;
-                                    }
-                                    
+                                    if (usedPairs.has(`${t1Id}-${t2Id}`) || usedPairs.has(`${t2Id}-${t1Id}`)) return false;
+                                    if (opponentsByTorba[t1Id][t2.seed].length >= opponentsPerSeed) return false;
+                                    if (opponentsByTorba[t2Id][t1.seed].length >= opponentsPerSeed) return false;
                                     return true;
                                 });
-        
-                                if (possibleOpponents.length === 0) {
-                                    pairingSuccess = false;
-                                    break;
-                                }
-        
+                                if (possibleOpponents.length === 0) { pairingSuccess = false; break; }
                                 const t2Id = possibleOpponents[Math.floor(Math.random() * possibleOpponents.length)];
                                 const t2 = teams.find(t => t.id === t2Id);
                                 const isHome = Math.random() > 0.5;
-        
                                 roundMatches.push({
                                     id: Date.now() + matches.length + Math.random(),
                                     homeTeam: isHome ? t1 : t2,
@@ -764,80 +343,88 @@
                                     homeScore: null,
                                     awayScore: null
                                 });
-        
                                 usedPairs.add(`${t1Id}-${t2Id}`);
                                 usedPairs.add(`${t2Id}-${t1Id}`);
                                 opponentsByTorba[t1Id][t2.seed].push(t2Id);
                                 opponentsByTorba[t2Id][t1.seed].push(t1Id);
-                                
                                 available = available.filter(id => id !== t2Id);
                             }
-        
                             if (pairingSuccess && roundMatches.length === teams.length / 2) {
                                 roundSuccess = true;
                                 break;
                             }
                         }
-
-                        if (!roundSuccess) {
-                            allRoundsSuccess = false;
-                            break;
-                        }
-
+                        if (!roundSuccess) { allRoundsSuccess = false; break; }
                         matches.push(...roundMatches);
                     }
-
-                    if (allRoundsSuccess && matches.length === matchCount * (teams.length / 2)) {
-                        drawSuccess = true;
-                    }
+                    if (allRoundsSuccess && matches.length === matchCount * (teams.length / 2)) break;
                 }
-
-                if (!drawSuccess) {
-                    alert('Uyarı: Kura çekimi 10000 deneme sonunda başarısız oldu. Takım ve torba ayarlamalarını kontrol edin.');
-                    matches = [];
-                    renderDrawResult();
-                } else {
-                    renderDrawResult();
-                }
-                
+                renderDrawResult();
                 updateSteps();
             }, 100);
         }
 
         function renderDrawResult() {
-            let html = `
-                <div class="success-box">
-                    <h3 style="color: #16A34A; font-size: 1.8rem; margin-bottom: 0.5rem;">Kura Çekimi Tamamlandı!</h3>
-                    <p style="color: #15803D; font-size: 1.1rem;"><strong>${matches.length}</strong> maç başarıyla oluşturuldu</p>
-                </div>
-                <div class="match-grid">
-            `;
-            
+            let html = `<div class="success-box"><h3 style="color: #16A34A;">Kura Çekimi Tamamlandı!</h3><p style="color: #15803D;"><strong>${matches.length}</strong> maç oluşturuldu</p></div><div class="match-grid">`;
             matches.forEach((m, i) => {
-                html += `
-                    <div class="match-card">
-                        <span class="badge badge-info">Maç #${i + 1}</span>
-                        <div style="margin-top: 0.75rem; font-size: 0.95rem;">
-                            <div style="font-weight: 600; color: #1F2937;">${m.homeTeam.name}</div>
-                            <div style="text-align: center; color: #9CA3AF; margin: 0.25rem 0;">vs</div>
-                            <div style="font-weight: 600; color: #1F2937;">${m.awayTeam.name}</div>
-                        </div>
-                    </div>
-                `;
+                html += `<div class="match-card"><span class="badge badge-info">Maç #${i+1}</span><div style="margin-top: 0.75rem;"><div style="font-weight: 600; color: #1F2937;">${m.homeTeam.name}</div><div style="text-align: center; color: #9CA3AF; margin: 0.25rem 0;">vs</div><div style="font-weight: 600; color: #1F2937;">${m.awayTeam.name}</div></div></div>`;
             });
-            
-            html += `</div>
-                <div style="text-align: center; margin-top: 2rem;">
-                    <button class="btn btn-secondary" onclick="resetDraw()">Yeniden Kura Çek</button>
-                </div>
-            `;
-            
+            html += `</div><div style="text-align: center; margin-top: 2rem; display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;"><button class="btn btn-success" onclick="saveMatches()">💾 Maçları Kaydet</button><button class="btn btn-secondary" onclick="resetDraw()">🔄 Yeniden Kura Çek</button></div>`;
             document.getElementById('drawContent').innerHTML = html;
             document.getElementById('fixtureCard').style.display = 'block';
         }
 
+        function saveMatches() {
+            if (matches.length === 0) { alert('Kaydetmek için maçlar olmalıdır!'); return; }
+            const exportData = {
+                teams: teams.map(t => ({ id: t.id, name: t.name, seed: t.seed })),
+                matches: matches.map(m => ({
+                    id: m.id,
+                    homeTeam: { id: m.homeTeam.id, name: m.homeTeam.name, seed: m.homeTeam.seed },
+                    awayTeam: { id: m.awayTeam.id, name: m.awayTeam.name, seed: m.awayTeam.seed },
+                    round: m.round,
+                    played: m.played,
+                    homeScore: m.homeScore,
+                    awayScore: m.awayScore
+                })),
+                matchCount: matchCount,
+                exportDate: new Date().toISOString(),
+                version: '1.0'
+            };
+            const blob = new Blob([JSON.stringify(exportData, null, 2)], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = `matches_${new Date().getTime()}.json`;
+            link.click();
+            URL.revokeObjectURL(url);
+            alert(`${matches.length} maç kaydedildi!`);
+        }
+
+        function handleMatchesUpload(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                try {
+                    const data = JSON.parse(e.target.result);
+                    teams = data.teams.map(t => ({...t}));
+                    matches = data.matches.map(m => ({...m}));
+                    matchCount = data.matchCount;
+                    renderTeams();
+                    updateDrawButton();
+                    document.getElementById('fixtureCard').style.display = 'block';
+                    renderDrawResult();
+                    updateSteps();
+                    alert(`${teams.length} takım ve ${matches.length} maç yüklendi!`);
+                    event.target.value = '';
+                } catch (err) { alert('Hata: ' + err.message); }
+            };
+            reader.readAsText(file);
+        }
+
         function resetDraw() {
-            if (!confirm('Kura çekimini sıfırlamak istediğinizden emin misiniz?')) return;
+            if (!confirm('Sıfırlamak istediğinizden emin misiniz?')) return;
             matches = [];
             fixtures = [];
             updateDrawButton();
@@ -849,88 +436,65 @@
         function generateFixtures() {
             const startDate = document.getElementById('inputStartDate').value;
             if (!startDate) return;
-        
+            const holidaysInput = document.getElementById('inputHolidays').value.trim();
+            const holidaySet = new Set();
+            if (holidaysInput) {
+                const dates = holidaysInput.split(',').map(d => d.trim());
+                for (const date of dates) {
+                    if (!/^\d{4}-\d{2}-\d{2}$/.test(date)) {
+                        alert(`Geçersiz tarih: "${date}"`);
+                        return;
+                    }
+                    holidaySet.add(date);
+                }
+            }
             fixtures = [];
             let baseDate = new Date(startDate);
-        
             for (let round = 1; round <= matchCount; round++) {
                 const roundMatches = matches.filter(m => m.round === round);
                 let roundDate = new Date(baseDate);
                 let matchIndex = 0;
-        
                 while (matchIndex < roundMatches.length) {
                     const currentDate = new Date(roundDate);
                     const day = currentDate.getDay();
-        
-                    if (day === 0 || day === 6) {
+                    const dateStr = currentDate.toISOString().split('T')[0];
+                    if (day === 0 || day === 6 || holidaySet.has(dateStr)) {
                         roundDate.setDate(roundDate.getDate() + 1);
                         continue;
                     }
-        
-                    const matchPerDay = (day === 1 ? 2 : 1);
+                    const matchPerDay = day === 1 ? 2 : 1;
                     for (let i = 0; i < matchPerDay && matchIndex < roundMatches.length; i++) {
                         const match = roundMatches[matchIndex];
-                        fixtures.push({
-                            ...match,
-                            date: currentDate.toISOString().split('T')[0],
-                            time: i === 0 ? '19:00' : '21:45'
-                        });
+                        fixtures.push({ ...match, date: dateStr, time: i === 0 ? '19:00' : '21:45' });
                         matchIndex++;
                     }
-        
                     roundDate.setDate(roundDate.getDate() + 1);
                 }
-        
                 baseDate.setDate(baseDate.getDate() + 7);
             }
-        
             renderFixturePreview();
             document.getElementById('exportSection').style.display = 'block';
             updateSteps();
         }
 
         function renderFixturePreview() {
-            let html = '<h3 style="color: #1F2937; margin-bottom: 1rem;">Oluşturulan Fikstür</h3>';
-            html += '<div style="max-height: 400px; overflow-y: auto; background: #F9FAFB; padding: 1rem; border-radius: 0.5rem;">';
-            
+            let html = '<h3 style="color: #1F2937; margin-bottom: 1rem;">Oluşturulan Fikstür</h3><div style="max-height: 400px; overflow-y: auto; background: #F9FAFB; padding: 1rem; border-radius: 0.5rem;">';
             fixtures.forEach((f, i) => {
-                html += `
-                    <div style="background: white; border: 2px solid #E5E7EB; border-radius: 0.5rem; padding: 1rem; margin-bottom: 0.75rem;">
-                        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
-                            <div>
-                                <span class="badge badge-info">Maç #${i + 1}</span>
-                                <strong style="margin-left: 1rem; color: #374151;">${f.date}</strong>
-                                <span style="margin-left: 0.5rem; color: #6B7280;">${f.time}</span>
-                            </div>
-                            <div style="font-weight: 600; color: #1F2937;">
-                                ${f.homeTeam.name} <span style="color: #9CA3AF;">vs</span> ${f.awayTeam.name}
-                            </div>
-                        </div>
-                    </div>
-                `;
+                html += `<div style="background: white; border: 2px solid #E5E7EB; border-radius: 0.5rem; padding: 1rem; margin-bottom: 0.75rem;"><div style="display: flex; justify-content: space-between; flex-wrap: wrap; gap: 1rem;"><div><span class="badge badge-info">Maç #${i+1}</span><strong style="margin-left: 1rem; color: #374151;">${f.date}</strong><span style="margin-left: 0.5rem; color: #6B7280;">${f.time}</span></div><div style="font-weight: 600; color: #1F2937;">${f.homeTeam.name} <span style="color: #9CA3AF;">vs</span> ${f.awayTeam.name}</div></div></div>`;
             });
-            
             html += '</div>';
             document.getElementById('fixturePreview').innerHTML = html;
         }
 
         function exportTournament() {
-            if (fixtures.length === 0) {
-                alert('Önce fikstür oluşturmalısınız!');
-                return;
-            }
-        
+            if (fixtures.length === 0) { alert('Önce fikstür oluşturmalısınız!'); return; }
             const exportData = {
-                tournamentName,
-                season,
+                tournamentName: document.getElementById('inputTournamentName').value,
+                season: document.getElementById('inputSeason').value,
                 totalTeams: teams.length,
                 matchesPerTeam: matchCount,
                 totalMatches: fixtures.length,
-                teams: teams.map(t => ({
-                    id: t.id,
-                    name: t.name,
-                    seed: t.seed
-                })),
+                teams: teams.map(t => ({ id: t.id, name: t.name, seed: t.seed })),
                 fixtures: fixtures.map(f => ({
                     homeTeam: { id: f.homeTeam.id, name: f.homeTeam.name, seed: f.homeTeam.seed },
                     awayTeam: { id: f.awayTeam.id, name: f.awayTeam.name, seed: f.awayTeam.seed },
@@ -944,19 +508,18 @@
                 exportDate: new Date().toISOString(),
                 version: '4.0'
             };
-        
-            const dataStr = JSON.stringify(exportData, null, 2);
-            const blob = new Blob([dataStr], { type: 'application/json' });
+            const blob = new Blob([JSON.stringify(exportData, null, 2)], { type: 'application/json' });
             const url = URL.createObjectURL(blob);
             const link = document.createElement('a');
             link.href = url;
             link.download = 'tournament_data.json';
             link.click();
             URL.revokeObjectURL(url);
-        
-            alert(`${exportData.totalMatches} maçlık fikstür başarıyla dışa aktarıldı!`);
+            alert(`${exportData.totalMatches} maçlık fikstür dışa aktarıldı!`);
         }
 
+        document.getElementById('inputStartDate').addEventListener('change', generateFixtures);
+        document.getElementById('inputHolidays').addEventListener('change', generateFixtures);
         renderTeams();
         updateDrawButton();
     </script>
