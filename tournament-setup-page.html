@@ -98,7 +98,7 @@
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 1.5rem;
         }
-        .grid-4 {
+        .grid-3 {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 1rem;
@@ -312,7 +312,7 @@
 <body>
     <div class="container">
         <div class="header">
-            <h1>🏆 Turnuva Kurulum Paneli</h1>
+            <h1>Turnuva Kurulum Paneli</h1>
             <p>Takım Yönetimi • Kura Çekimi • Fikstür Oluşturma</p>
         </div>
 
@@ -337,7 +337,7 @@
 
         <!-- Turnuva Bilgileri -->
         <div class="card">
-            <h2 class="card-title">📋 Turnuva Bilgileri</h2>
+            <h2 class="card-title">Turnuva Bilgileri</h2>
             <div class="grid-2">
                 <div class="form-group">
                     <label class="form-label">Turnuva Adı</label>
@@ -352,14 +352,13 @@
 
         <!-- Takım Ekleme -->
         <div class="card">
-            <h2 class="card-title">👥 Takım Yönetimi</h2>
+            <h2 class="card-title">Takım Yönetimi</h2>
             
             <div class="form-group">
                 <label class="form-label">Manuel Takım Ekle</label>
-                <div class="grid-4">
+                <div class="grid-3">
                     <input type="text" class="form-input" id="inputTeamName" placeholder="Takım Adı">
-                    <input type="text" class="form-input" id="inputTeamCountry" placeholder="Ülke">
-                    <input type="text" class="form-input" id="inputTeamLogo" placeholder="Logo URL (opsiyonel)">
+                    <input type="number" class="form-input" id="inputTeamSeed" placeholder="Torba (1-32)" min="1" max="32">
                     <button class="btn btn-primary" onclick="addTeam()">➕ Takım Ekle</button>
                 </div>
             </div>
@@ -368,8 +367,8 @@
                 <label class="form-label">Excel/CSV ile Toplu İçe Aktar</label>
                 <input type="file" id="excelFile" accept=".xlsx,.xls,.csv" onchange="handleFileUpload(event)" class="form-input">
                 <p class="small-text">
-                    📊 Excel sütunları: <strong>"Takım Adı"</strong>, <strong>"Ülke"</strong>, <strong>"Logo"</strong> (opsiyonel)<br>
-                    💡 <a href="#" onclick="event.preventDefault(); downloadSampleExcel();" style="color: #2563eb; font-weight: 600; text-decoration: underline;">Örnek Excel dosyasını indir</a>
+                    Excel sütunları: <strong>"Takım Adı"</strong>, <strong>"Torba"</strong><br>
+                    <a href="#" onclick="event.preventDefault(); downloadSampleExcel();" style="color: #2563eb; font-weight: 600; text-decoration: underline;">Örnek Excel dosyasını indir</a>
                 </p>
             </div>
 
@@ -383,7 +382,7 @@
                 <thead>
                     <tr>
                         <th>Takım Adı</th>
-                        <th>Ülke</th>
+                        <th style="text-align: center; width: 100px;">Torba</th>
                         <th style="width: 100px; text-align: center;">İşlem</th>
                     </tr>
                 </thead>
@@ -393,37 +392,36 @@
 
         <!-- Kura Çekimi -->
         <div class="card">
-            <h2 class="card-title">🎲 Kura Çekimi</h2>
+            <h2 class="card-title">Kura Çekimi</h2>
             <div id="drawContent">
                 <div class="alert alert-info">
-                    ℹ️ Kura çekimi yapmak için en az 2 takım eklemelisiniz.
+                    En az 2 takım eklemelisiniz.
                 </div>
             </div>
         </div>
 
         <!-- Fikstür -->
         <div class="card" id="fixtureCard" style="display: none;">
-            <h2 class="card-title">📅 Fikstür Oluşturma</h2>
+            <h2 class="card-title">Fikstür Oluşturma</h2>
             <div class="form-group">
                 <label class="form-label">Başlangıç Tarihi</label>
                 <input type="date" class="form-input" id="inputStartDate" onchange="generateFixtures()" style="width: 200px;">
-                <p class="small-text">📌 Kurallar: Pazartesi 2 maç, Salı-Cuma 1 maç, Cumartesi-Pazar boş</p>
+                <p class="small-text">Kurallar: Pazartesi 2 maç, Salı-Cuma 1 maç, Cumartesi-Pazar boş</p>
             </div>
             <div id="fixturePreview"></div>
         </div>
 
         <!-- Export Bölümü -->
         <div class="export-section" id="exportSection" style="display: none;">
-            <h2 style="color: #059669; font-size: 2rem; margin-bottom: 1rem;">✅ Kurulum Tamamlandı!</h2>
+            <h2 style="color: #059669; font-size: 2rem; margin-bottom: 1rem;">Kurulum Tamamlandı!</h2>
             <p style="color: #047857; font-size: 1.1rem; margin-bottom: 2rem;">
                 Turnuva fikstürü hazır. Aşağıdaki butona tıklayarak maç programını dışa aktarın.
             </p>
             <button class="btn btn-export" onclick="exportTournament()">
-                📥 Turnuva Verilerini İndir (tournament_data.json)
+                Turnuva Verilerini İndir (tournament_data.json)
             </button>
             <p class="small-text" style="margin-top: 1rem; color: #047857;">
-                İndirilen <strong>tournament_data.json</strong> dosyasını GitHub repo'nuzun ana dizinine yükleyin.<br>
-                Görüntüleme sayfası bu dosyayı otomatik okuyacak.
+                İndirilen <strong>tournament_data.json</strong> dosyasını GitHub repo'nuzun ana dizinine yükleyin.
             </p>
         </div>
     </div>
@@ -445,18 +443,21 @@
 
         function addTeam() {
             const name = document.getElementById('inputTeamName').value.trim();
-            const country = document.getElementById('inputTeamCountry').value.trim();
-            const logo = document.getElementById('inputTeamLogo').value.trim();
+            const seed = parseInt(document.getElementById('inputTeamSeed').value);
             
-            if (!name || !country) {
-                alert('Takım adı ve ülke zorunludur!');
+            if (!name) {
+                alert('Takım adı zorunludur!');
                 return;
             }
             
-            teams.push({ id: Date.now(), name, country, logo });
+            if (!Number.isFinite(seed) || seed < 1 || seed > 32) {
+                alert('Torba değeri 1-32 arasında olmalıdır!');
+                return;
+            }
+            
+            teams.push({ id: Date.now(), name, seed });
             document.getElementById('inputTeamName').value = '';
-            document.getElementById('inputTeamCountry').value = '';
-            document.getElementById('inputTeamLogo').value = '';
+            document.getElementById('inputTeamSeed').value = '';
             renderTeams();
             updateDrawButton();
         }
@@ -475,19 +476,19 @@
             if (teams.length === 0) {
                 tbody.innerHTML = '<tr><td colspan="3" style="text-align: center; color: #9ca3af; padding: 2rem;">Henüz takım eklenmedi</td></tr>';
             } else {
-                teams.forEach(team => {
+                teams.sort((a, b) => a.seed - b.seed).forEach(team => {
                     const row = tbody.insertRow();
                     const nameCell = row.insertCell();
-                    const countryCell = row.insertCell();
+                    const seedCell = row.insertCell();
                     const actionCell = row.insertCell();
                     
                     nameCell.innerHTML = `<strong style="color: #1e3a8a;">${team.name}</strong>`;
-                    countryCell.innerHTML = team.country;
+                    seedCell.innerHTML = `<span style="text-align: center; display: block; font-weight: 600; color: #d97706;">#${team.seed}</span>`;
                     actionCell.style.textAlign = 'center';
                     
                     const deleteBtn = document.createElement('button');
                     deleteBtn.className = 'btn btn-danger';
-                    deleteBtn.textContent = '🗑️ Sil';
+                    deleteBtn.textContent = 'Sil';
                     deleteBtn.onclick = () => removeTeam(team.id);
                     actionCell.appendChild(deleteBtn);
                 });
@@ -498,44 +499,36 @@
         }
 
         function downloadSampleExcel() {
-            // XLSX kontrolü
             if (typeof XLSX === 'undefined') {
-                alert('⚠️ Excel kütüphanesi yüklenemedi. Lütfen sayfayı yenileyin.');
-                console.error('XLSX library not loaded');
+                alert('Excel kütüphanesi yüklenemedi. Lütfen sayfayı yenileyin.');
                 return;
             }
 
             const sampleData = [
-                { "Takım Adı": "Real Madrid", "Ülke": "İspanya", "Logo": "" },
-                { "Takım Adı": "Barcelona", "Ülke": "İspanya", "Logo": "" },
-                { "Takım Adı": "Manchester United", "Ülke": "İngiltere", "Logo": "" },
-                { "Takım Adı": "Bayern München", "Ülke": "Almanya", "Logo": "" },
-                { "Takım Adı": "Paris Saint-Germain", "Ülke": "Fransa", "Logo": "" },
-                { "Takım Adı": "Juventus", "Ülke": "İtalya", "Logo": "" },
-                { "Takım Adı": "Liverpool", "Ülke": "İngiltere", "Logo": "" },
-                { "Takım Adı": "AC Milan", "Ülke": "İtalya", "Logo": "" },
-                { "Takım Adı": "Galatasaray", "Ülke": "Türkiye", "Logo": "" },
-                { "Takım Adı": "Fenerbahçe", "Ülke": "Türkiye", "Logo": "" },
-                { "Takım Adı": "Beşiktaş", "Ülke": "Türkiye", "Logo": "" },
-                { "Takım Adı": "Trabzonspor", "Ülke": "Türkiye", "Logo": "" }
+                { "Takım Adı": "Real Madrid", "Torba": 1 },
+                { "Takım Adı": "Barcelona", "Torba": 2 },
+                { "Takım Adı": "Manchester United", "Torba": 3 },
+                { "Takım Adı": "Bayern Münih", "Torba": 4 },
+                { "Takım Adı": "Paris Saint-Germain", "Torba": 5 },
+                { "Takım Adı": "Juventus", "Torba": 6 },
+                { "Takım Adı": "Liverpool", "Torba": 7 },
+                { "Takım Adı": "AC Milan", "Torba": 8 },
+                { "Takım Adı": "Galatasaray", "Torba": 9 },
+                { "Takım Adı": "Fenerbahçe", "Torba": 10 },
+                { "Takım Adı": "Beşiktaş", "Torba": 11 },
+                { "Takım Adı": "Trabzonspor", "Torba": 12 }
             ];
 
             try {
                 const ws = XLSX.utils.json_to_sheet(sampleData);
                 const wb = XLSX.utils.book_new();
                 XLSX.utils.book_append_sheet(wb, ws, "Takımlar");
-
-                ws['!cols'] = [
-                    { wch: 25 },
-                    { wch: 15 },
-                    { wch: 30 }
-                ];
-
+                ws['!cols'] = [{ wch: 25 }, { wch: 10 }];
                 XLSX.writeFile(wb, "ornek_takimlar.xlsx");
-                alert("✅ Örnek Excel dosyası indirildi!\n\nBu dosyayı düzenleyip kendi takımlarınızı ekleyebilirsiniz.");
+                alert("Örnek Excel dosyası indirildi!");
             } catch (err) {
-                alert('❌ Excel oluşturma hatası: ' + err.message);
-                console.error('Excel generation error:', err);
+                alert('Excel oluşturma hatası: ' + err.message);
+                console.error(err);
             }
         }
 
@@ -543,10 +536,8 @@
             const file = event.target.files[0];
             if (!file) return;
 
-            // XLSX kontrolü
             if (typeof XLSX === 'undefined') {
-                alert('⚠️ Excel kütüphanesi yüklenemedi. Lütfen sayfayı yenileyin veya farklı bir tarayıcı deneyin.');
-                console.error('XLSX library not loaded');
+                alert('Excel kütüphanesi yüklenemedi. Lütfen sayfayı yenileyin.');
                 event.target.value = '';
                 return;
             }
@@ -560,30 +551,28 @@
                     const json = XLSX.utils.sheet_to_json(sheet);
                     
                     let imported = 0;
-                    json.forEach((row, index) => {
-                        const name = row['Takım Adı'] || row['Team Name'] || row['Name'] || row['Takım'] || '';
-                        const country = row['Ülke'] || row['Country'] || row['Ulke'] || '';
-                        const logo = row['Logo'] || '';
-                        if (name && country) {
-                            teams.push({ 
-                                id: Date.now() + imported + Math.random(), 
-                                name: name.toString().trim(), 
-                                country: country.toString().trim(), 
-                                logo: logo.toString().trim() 
-                            });
-                            imported++;
+                    json.forEach((row) => {
+                        const name = row['Takım Adı'] || row['Team Name'] || row['Name'] || '';
+                        const seed = parseInt(row['Torba'] || row['torba'] || row['Seed'] || row['seed'] || 0);
+                        
+                        if (name && Number.isFinite(seed) && seed > 0 && seed <= 32) {
+                            if (!teams.some(t => t.seed === seed)) {
+                                teams.push({ 
+                                    id: Date.now() + imported + Math.random(), 
+                                    name: name.toString().trim(), 
+                                    seed 
+                                });
+                                imported++;
+                            }
                         }
                     });
                     
                     renderTeams();
                     updateDrawButton();
-                    alert(`✅ ${imported} takım başarıyla içe aktarıldı!`);
-                    
-                    // Reset file input
+                    alert(`${imported} takım başarıyla içe aktarıldı!`);
                     event.target.value = '';
                 } catch (err) {
-                    alert('❌ Dosya okuma hatası: ' + err.message);
-                    console.error('Excel okuma hatası:', err);
+                    alert('Dosya okuma hatası: ' + err.message);
                     event.target.value = '';
                 }
             };
@@ -593,14 +582,14 @@
         function updateDrawButton() {
             const content = document.getElementById('drawContent');
             if (teams.length < 2) {
-                content.innerHTML = '<div class="alert alert-info">ℹ️ Kura çekimi yapmak için en az 2 takım eklemelisiniz.</div>';
+                content.innerHTML = '<div class="alert alert-info">En az 2 takım eklemelisiniz.</div>';
             } else if (matches.length === 0) {
                 matchCount = parseInt(document.getElementById('inputMatchCount').value);
                 content.innerHTML = `
                     <p style="font-size: 1.1rem; margin-bottom: 1.5rem; color: #374151;">
                         <strong>${teams.length}</strong> takım kayıtlı. Her takım <strong>${matchCount}</strong> farklı rakiple karşılaşacak.
                     </p>
-                    <button class="btn btn-primary btn-large" onclick="performDraw()">🎲 Kura Çekimini Başlat</button>
+                    <button class="btn btn-primary btn-large" onclick="performDraw()">Kura Çekimini Başlat</button>
                 `;
             }
         }
@@ -611,7 +600,7 @@
             season = document.getElementById('inputSeason').value;
         
             document.getElementById('drawContent').innerHTML =
-                '<div class="spinner"></div><p style="text-align:center;font-size:1.2rem;color:#374151;">⏳ Kura çekimi yapılıyor...</p>';
+                '<div class="spinner"></div><p style="text-align:center;font-size:1.2rem;color:#374151;">Kura çekimi yapılıyor...</p>';
         
             setTimeout(() => {
                 matches = [];
@@ -634,7 +623,6 @@
                         );
         
                         if (possible.length === 0) {
-                            // Çıkmaz durum — round yeniden oluşturulsun
                             available = [...teamIds];
                             roundMatches.length = 0;
                             continue;
@@ -676,7 +664,7 @@
         function renderDrawResult() {
             let html = `
                 <div class="success-box">
-                    <h3 style="color: #059669; font-size: 1.8rem; margin-bottom: 0.5rem;">✅ Kura Çekimi Tamamlandı!</h3>
+                    <h3 style="color: #059669; font-size: 1.8rem; margin-bottom: 0.5rem;">Kura Çekimi Tamamlandı!</h3>
                     <p style="color: #047857; font-size: 1.1rem;"><strong>${matches.length}</strong> maç başarıyla oluşturuldu</p>
                 </div>
                 <div class="match-grid">
@@ -697,7 +685,7 @@
             
             html += `</div>
                 <div style="text-align: center; margin-top: 2rem;">
-                    <button class="btn btn-secondary" onclick="resetDraw()">🔄 Yeniden Kura Çek</button>
+                    <button class="btn btn-secondary" onclick="resetDraw()">Yeniden Kura Çek</button>
                 </div>
             `;
             
@@ -722,7 +710,6 @@
             fixtures = [];
             let baseDate = new Date(startDate);
         
-            // Her tur (round) için ayrı hafta
             for (let round = 1; round <= matchCount; round++) {
                 const roundMatches = matches.filter(m => m.round === round);
                 let roundDate = new Date(baseDate);
@@ -730,7 +717,7 @@
         
                 while (matchIndex < roundMatches.length) {
                     const currentDate = new Date(roundDate);
-                    const day = currentDate.getDay(); // 0= Pazar, 1= Pazartesi ...
+                    const day = currentDate.getDay();
         
                     if (day === 0 || day === 6) {
                         roundDate.setDate(roundDate.getDate() + 1);
@@ -751,7 +738,6 @@
                     roundDate.setDate(roundDate.getDate() + 1);
                 }
         
-                // Sonraki tur için haftayı atla (7 gün)
                 baseDate.setDate(baseDate.getDate() + 7);
             }
         
@@ -761,7 +747,7 @@
         }
 
         function renderFixturePreview() {
-            let html = '<h3 style="color: #1e3a8a; margin-bottom: 1rem;">📋 Oluşturulan Fikstür</h3>';
+            let html = '<h3 style="color: #1e3a8a; margin-bottom: 1rem;">Oluşturulan Fikstür</h3>';
             html += '<div style="max-height: 400px; overflow-y: auto; background: #f9fafb; padding: 1rem; border-radius: 0.5rem;">';
             
             fixtures.forEach((f, i) => {
@@ -787,7 +773,7 @@
 
         function exportTournament() {
             if (fixtures.length === 0) {
-                alert('❌ Önce fikstür oluşturmalısınız!');
+                alert('Önce fikstür oluşturmalısınız!');
                 return;
             }
         
@@ -797,9 +783,14 @@
                 totalTeams: teams.length,
                 matchesPerTeam: matchCount,
                 totalMatches: fixtures.length,
+                teams: teams.map(t => ({
+                    id: t.id,
+                    name: t.name,
+                    seed: t.seed
+                })),
                 fixtures: fixtures.map(f => ({
-                    homeTeam: f.homeTeam.name,
-                    awayTeam: f.awayTeam.name,
+                    homeTeam: { id: f.homeTeam.id, name: f.homeTeam.name, seed: f.homeTeam.seed },
+                    awayTeam: { id: f.awayTeam.id, name: f.awayTeam.name, seed: f.awayTeam.seed },
                     round: f.round,
                     date: f.date,
                     time: f.time,
@@ -808,7 +799,7 @@
                     awayScore: f.awayScore
                 })),
                 exportDate: new Date().toISOString(),
-                version: '3.0'
+                version: '4.0'
             };
         
             const dataStr = JSON.stringify(exportData, null, 2);
@@ -820,10 +811,9 @@
             link.click();
             URL.revokeObjectURL(url);
         
-            alert(`✅ ${exportData.totalMatches} maçlık fikstür başarıyla dışa aktarıldı!`);
+            alert(`${exportData.totalMatches} maçlık fikstür başarıyla dışa aktarıldı!`);
         }
 
-        // Başlangıç
         renderTeams();
         updateDrawButton();
     </script>
