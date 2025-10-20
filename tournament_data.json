@@ -2,166 +2,166 @@
   "tournamentName": "Avrupa Ligi",
   "season": "2024-25",
   "totalTeams": 32,
-  "matchesPerTeam": 4,
-  "totalMatches": 64,
+  "matchesPerTeam": 8,
+  "totalMatches": 128,
   "teams": [
     {
-      "id": 1760965270768.4526,
+      "id": 1760966802468.3167,
       "name": "Real Madrid",
       "seed": 1
     },
     {
-      "id": 1760965270769.6707,
+      "id": 1760966802469.3403,
       "name": "Barcelona",
       "seed": 1
     },
     {
-      "id": 1760965270770.072,
+      "id": 1760966802470.5918,
       "name": "Manchester City",
       "seed": 1
     },
     {
-      "id": 1760965270771.2434,
+      "id": 1760966802471.2786,
       "name": "Bayern Münih",
       "seed": 1
     },
     {
-      "id": 1760965270772.126,
+      "id": 1760966802472.6033,
       "name": "Paris Saint-Germain",
       "seed": 1
     },
     {
-      "id": 1760965270773.916,
+      "id": 1760966802473.814,
       "name": "Liverpool",
       "seed": 1
     },
     {
-      "id": 1760965270774.8118,
+      "id": 1760966802474.8782,
       "name": "Inter Milano",
       "seed": 1
     },
     {
-      "id": 1760965270775.85,
+      "id": 1760966802475.2559,
       "name": "AC Milan",
       "seed": 1
     },
     {
-      "id": 1760965270776.2153,
+      "id": 1760966802476.1482,
       "name": "Juventus",
       "seed": 2
     },
     {
-      "id": 1760965270777.5066,
+      "id": 1760966802477.4497,
       "name": "Atlético Madrid",
       "seed": 2
     },
     {
-      "id": 1760965270778.18,
+      "id": 1760966802478.4397,
       "name": "Chelsea",
       "seed": 2
     },
     {
-      "id": 1760965270779.9602,
+      "id": 1760966802479.3538,
       "name": "Borussia Dortmund",
       "seed": 2
     },
     {
-      "id": 1760965270780.2512,
+      "id": 1760966802480.5898,
       "name": "Manchester United",
       "seed": 2
     },
     {
-      "id": 1760965270781.6719,
+      "id": 1760966802481.0864,
       "name": "Arsenal",
       "seed": 2
     },
     {
-      "id": 1760965270782.2473,
+      "id": 1760966802482.4006,
       "name": "Napoli",
       "seed": 2
     },
     {
-      "id": 1760965270783.3735,
+      "id": 1760966802483.7986,
       "name": "Roma",
       "seed": 2
     },
     {
-      "id": 1760965270784.283,
+      "id": 1760966802484.7087,
       "name": "Sevilla",
       "seed": 3
     },
     {
-      "id": 1760965270785.8982,
+      "id": 1760966802485.9102,
       "name": "Galatasaray",
       "seed": 3
     },
     {
-      "id": 1760965270786.5447,
+      "id": 1760966802486.818,
       "name": "Fenerbahçe",
       "seed": 3
     },
     {
-      "id": 1760965270787.0803,
+      "id": 1760966802487.9336,
       "name": "Beşiktaş",
       "seed": 3
     },
     {
-      "id": 1760965270788.564,
+      "id": 1760966802488.5957,
       "name": "Başakşehir FK",
       "seed": 3
     },
     {
-      "id": 1760965270789.679,
+      "id": 1760966802489.483,
       "name": "Leverkusen",
       "seed": 3
     },
     {
-      "id": 1760965270790.0305,
+      "id": 1760966802490.4434,
       "name": "Fiorentina",
       "seed": 3
     },
     {
-      "id": 1760965270791.2231,
+      "id": 1760966802491.2456,
       "name": "Real Sociedad",
       "seed": 3
     },
     {
-      "id": 1760965270792.8838,
+      "id": 1760966802492.5955,
       "name": "Trabzonspor",
       "seed": 4
     },
     {
-      "id": 1760965270793.1887,
+      "id": 1760966802493.7595,
       "name": "Bursaspor",
       "seed": 4
     },
     {
-      "id": 1760965270794.5469,
+      "id": 1760966802494.0781,
       "name": "Sporting Lizbon",
       "seed": 4
     },
     {
-      "id": 1760965270795.0935,
+      "id": 1760966802495.7988,
       "name": "Benfica",
       "seed": 4
     },
     {
-      "id": 1760965270796.6812,
+      "id": 1760966802496.0208,
       "name": "Porto",
       "seed": 4
     },
     {
-      "id": 1760965270797.031,
+      "id": 1760966802497.5164,
       "name": "Lyon",
       "seed": 4
     },
     {
-      "id": 1760965270798.5208,
+      "id": 1760966802498.9941,
       "name": "Lazio",
       "seed": 4
     },
     {
-      "id": 1760965270799.2727,
+      "id": 1760966802499.4243,
       "name": "Brighton",
       "seed": 4
     }
@@ -169,14 +169,14 @@
   "fixtures": [
     {
       "homeTeam": {
-        "id": 1760965270768.4526,
-        "name": "Real Madrid",
-        "seed": 1
+        "id": 1760966802483.7986,
+        "name": "Roma",
+        "seed": 2
       },
       "awayTeam": {
-        "id": 1760965270779.9602,
-        "name": "Borussia Dortmund",
-        "seed": 2
+        "id": 1760966802468.3167,
+        "name": "Real Madrid",
+        "seed": 1
       },
       "round": 1,
       "date": "2025-10-20",
@@ -187,14 +187,14 @@
     },
     {
       "homeTeam": {
-        "id": 1760965270787.0803,
-        "name": "Beşiktaş",
-        "seed": 3
-      },
-      "awayTeam": {
-        "id": 1760965270769.6707,
+        "id": 1760966802469.3403,
         "name": "Barcelona",
         "seed": 1
+      },
+      "awayTeam": {
+        "id": 1760966802477.4497,
+        "name": "Atlético Madrid",
+        "seed": 2
       },
       "round": 1,
       "date": "2025-10-20",
@@ -205,13 +205,13 @@
     },
     {
       "homeTeam": {
-        "id": 1760965270784.283,
-        "name": "Sevilla",
-        "seed": 3
+        "id": 1760966802470.5918,
+        "name": "Manchester City",
+        "seed": 1
       },
       "awayTeam": {
-        "id": 1760965270770.072,
-        "name": "Manchester City",
+        "id": 1760966802471.2786,
+        "name": "Bayern Münih",
         "seed": 1
       },
       "round": 1,
@@ -223,13 +223,13 @@
     },
     {
       "homeTeam": {
-        "id": 1760965270793.1887,
-        "name": "Bursaspor",
+        "id": 1760966802499.4243,
+        "name": "Brighton",
         "seed": 4
       },
       "awayTeam": {
-        "id": 1760965270771.2434,
-        "name": "Bayern Münih",
+        "id": 1760966802472.6033,
+        "name": "Paris Saint-Germain",
         "seed": 1
       },
       "round": 1,
@@ -241,13 +241,13 @@
     },
     {
       "homeTeam": {
-        "id": 1760965270785.8982,
-        "name": "Galatasaray",
+        "id": 1760966802490.4434,
+        "name": "Fiorentina",
         "seed": 3
       },
       "awayTeam": {
-        "id": 1760965270772.126,
-        "name": "Paris Saint-Germain",
+        "id": 1760966802473.814,
+        "name": "Liverpool",
         "seed": 1
       },
       "round": 1,
@@ -259,14 +259,14 @@
     },
     {
       "homeTeam": {
-        "id": 1760965270773.916,
-        "name": "Liverpool",
-        "seed": 1
+        "id": 1760966802487.9336,
+        "name": "Beşiktaş",
+        "seed": 3
       },
       "awayTeam": {
-        "id": 1760965270799.2727,
-        "name": "Brighton",
-        "seed": 4
+        "id": 1760966802474.8782,
+        "name": "Inter Milano",
+        "seed": 1
       },
       "round": 1,
       "date": "2025-10-24",
@@ -277,14 +277,14 @@
     },
     {
       "homeTeam": {
-        "id": 1760965270774.8118,
-        "name": "Inter Milano",
-        "seed": 1
+        "id": 1760966802498.9941,
+        "name": "Lazio",
+        "seed": 4
       },
       "awayTeam": {
-        "id": 1760965270786.5447,
-        "name": "Fenerbahçe",
-        "seed": 3
+        "id": 1760966802475.2559,
+        "name": "AC Milan",
+        "seed": 1
       },
       "round": 1,
       "date": "2025-10-27",
@@ -295,14 +295,14 @@
     },
     {
       "homeTeam": {
-        "id": 1760965270788.564,
-        "name": "Başakşehir FK",
-        "seed": 3
+        "id": 1760966802492.5955,
+        "name": "Trabzonspor",
+        "seed": 4
       },
       "awayTeam": {
-        "id": 1760965270775.85,
-        "name": "AC Milan",
-        "seed": 1
+        "id": 1760966802476.1482,
+        "name": "Juventus",
+        "seed": 2
       },
       "round": 1,
       "date": "2025-10-27",
@@ -313,14 +313,14 @@
     },
     {
       "homeTeam": {
-        "id": 1760965270776.2153,
-        "name": "Juventus",
+        "id": 1760966802478.4397,
+        "name": "Chelsea",
         "seed": 2
       },
       "awayTeam": {
-        "id": 1760965270791.2231,
-        "name": "Real Sociedad",
-        "seed": 3
+        "id": 1760966802482.4006,
+        "name": "Napoli",
+        "seed": 2
       },
       "round": 1,
       "date": "2025-10-28",
@@ -331,14 +331,14 @@
     },
     {
       "homeTeam": {
-        "id": 1760965270777.5066,
-        "name": "Atlético Madrid",
+        "id": 1760966802479.3538,
+        "name": "Borussia Dortmund",
         "seed": 2
       },
       "awayTeam": {
-        "id": 1760965270797.031,
-        "name": "Lyon",
-        "seed": 4
+        "id": 1760966802484.7087,
+        "name": "Sevilla",
+        "seed": 3
       },
       "round": 1,
       "date": "2025-10-29",
@@ -349,14 +349,14 @@
     },
     {
       "homeTeam": {
-        "id": 1760965270798.5208,
-        "name": "Lazio",
-        "seed": 4
+        "id": 1760966802480.5898,
+        "name": "Manchester United",
+        "seed": 2
       },
       "awayTeam": {
-        "id": 1760965270778.18,
-        "name": "Chelsea",
-        "seed": 2
+        "id": 1760966802488.5957,
+        "name": "Başakşehir FK",
+        "seed": 3
       },
       "round": 1,
       "date": "2025-10-30",
@@ -367,14 +367,14 @@
     },
     {
       "homeTeam": {
-        "id": 1760965270796.6812,
-        "name": "Porto",
-        "seed": 4
+        "id": 1760966802481.0864,
+        "name": "Arsenal",
+        "seed": 2
       },
       "awayTeam": {
-        "id": 1760965270780.2512,
-        "name": "Manchester United",
-        "seed": 2
+        "id": 1760966802489.483,
+        "name": "Leverkusen",
+        "seed": 3
       },
       "round": 1,
       "date": "2025-10-31",
@@ -385,14 +385,14 @@
     },
     {
       "homeTeam": {
-        "id": 1760965270782.2473,
-        "name": "Napoli",
-        "seed": 2
+        "id": 1760966802486.818,
+        "name": "Fenerbahçe",
+        "seed": 3
       },
       "awayTeam": {
-        "id": 1760965270781.6719,
-        "name": "Arsenal",
-        "seed": 2
+        "id": 1760966802485.9102,
+        "name": "Galatasaray",
+        "seed": 3
       },
       "round": 1,
       "date": "2025-11-03",
@@ -403,13 +403,13 @@
     },
     {
       "homeTeam": {
-        "id": 1760965270783.3735,
-        "name": "Roma",
-        "seed": 2
+        "id": 1760966802497.5164,
+        "name": "Lyon",
+        "seed": 4
       },
       "awayTeam": {
-        "id": 1760965270789.679,
-        "name": "Leverkusen",
+        "id": 1760966802491.2456,
+        "name": "Real Sociedad",
         "seed": 3
       },
       "round": 1,
@@ -421,13 +421,13 @@
     },
     {
       "homeTeam": {
-        "id": 1760965270790.0305,
-        "name": "Fiorentina",
-        "seed": 3
+        "id": 1760966802494.0781,
+        "name": "Sporting Lizbon",
+        "seed": 4
       },
       "awayTeam": {
-        "id": 1760965270795.0935,
-        "name": "Benfica",
+        "id": 1760966802493.7595,
+        "name": "Bursaspor",
         "seed": 4
       },
       "round": 1,
@@ -439,13 +439,13 @@
     },
     {
       "homeTeam": {
-        "id": 1760965270794.5469,
-        "name": "Sporting Lizbon",
+        "id": 1760966802495.7988,
+        "name": "Benfica",
         "seed": 4
       },
       "awayTeam": {
-        "id": 1760965270792.8838,
-        "name": "Trabzonspor",
+        "id": 1760966802496.0208,
+        "name": "Porto",
         "seed": 4
       },
       "round": 1,
@@ -457,14 +457,14 @@
     },
     {
       "homeTeam": {
-        "id": 1760965270798.5208,
-        "name": "Lazio",
-        "seed": 4
-      },
-      "awayTeam": {
-        "id": 1760965270768.4526,
+        "id": 1760966802468.3167,
         "name": "Real Madrid",
         "seed": 1
+      },
+      "awayTeam": {
+        "id": 1760966802497.5164,
+        "name": "Lyon",
+        "seed": 4
       },
       "round": 2,
       "date": "2025-10-27",
@@ -475,14 +475,14 @@
     },
     {
       "homeTeam": {
-        "id": 1760965270769.6707,
-        "name": "Barcelona",
-        "seed": 1
+        "id": 1760966802482.4006,
+        "name": "Napoli",
+        "seed": 2
       },
       "awayTeam": {
-        "id": 1760965270781.6719,
-        "name": "Arsenal",
-        "seed": 2
+        "id": 1760966802469.3403,
+        "name": "Barcelona",
+        "seed": 1
       },
       "round": 2,
       "date": "2025-10-27",
@@ -493,14 +493,14 @@
     },
     {
       "homeTeam": {
-        "id": 1760965270770.072,
+        "id": 1760966802470.5918,
         "name": "Manchester City",
         "seed": 1
       },
       "awayTeam": {
-        "id": 1760965270783.3735,
-        "name": "Roma",
-        "seed": 2
+        "id": 1760966802496.0208,
+        "name": "Porto",
+        "seed": 4
       },
       "round": 2,
       "date": "2025-10-28",
@@ -511,124 +511,124 @@
     },
     {
       "homeTeam": {
-        "id": 1760965270771.2434,
+        "id": 1760966802471.2786,
         "name": "Bayern Münih",
         "seed": 1
       },
       "awayTeam": {
-        "id": 1760965270789.679,
-        "name": "Leverkusen",
-        "seed": 3
-      },
-      "round": 2,
-      "date": "2025-10-29",
-      "time": "19:00",
-      "played": false,
-      "homeScore": null,
-      "awayScore": null
-    },
-    {
-      "homeTeam": {
-        "id": 1760965270772.126,
-        "name": "Paris Saint-Germain",
-        "seed": 1
-      },
-      "awayTeam": {
-        "id": 1760965270797.031,
-        "name": "Lyon",
-        "seed": 4
-      },
-      "round": 2,
-      "date": "2025-10-30",
-      "time": "19:00",
-      "played": false,
-      "homeScore": null,
-      "awayScore": null
-    },
-    {
-      "homeTeam": {
-        "id": 1760965270774.8118,
-        "name": "Inter Milano",
-        "seed": 1
-      },
-      "awayTeam": {
-        "id": 1760965270773.916,
-        "name": "Liverpool",
-        "seed": 1
-      },
-      "round": 2,
-      "date": "2025-10-31",
-      "time": "19:00",
-      "played": false,
-      "homeScore": null,
-      "awayScore": null
-    },
-    {
-      "homeTeam": {
-        "id": 1760965270775.85,
-        "name": "AC Milan",
-        "seed": 1
-      },
-      "awayTeam": {
-        "id": 1760965270794.5469,
-        "name": "Sporting Lizbon",
-        "seed": 4
-      },
-      "round": 2,
-      "date": "2025-11-03",
-      "time": "19:00",
-      "played": false,
-      "homeScore": null,
-      "awayScore": null
-    },
-    {
-      "homeTeam": {
-        "id": 1760965270778.18,
-        "name": "Chelsea",
-        "seed": 2
-      },
-      "awayTeam": {
-        "id": 1760965270776.2153,
-        "name": "Juventus",
-        "seed": 2
-      },
-      "round": 2,
-      "date": "2025-11-03",
-      "time": "21:45",
-      "played": false,
-      "homeScore": null,
-      "awayScore": null
-    },
-    {
-      "homeTeam": {
-        "id": 1760965270777.5066,
-        "name": "Atlético Madrid",
-        "seed": 2
-      },
-      "awayTeam": {
-        "id": 1760965270788.564,
-        "name": "Başakşehir FK",
-        "seed": 3
-      },
-      "round": 2,
-      "date": "2025-11-04",
-      "time": "19:00",
-      "played": false,
-      "homeScore": null,
-      "awayScore": null
-    },
-    {
-      "homeTeam": {
-        "id": 1760965270779.9602,
-        "name": "Borussia Dortmund",
-        "seed": 2
-      },
-      "awayTeam": {
-        "id": 1760965270785.8982,
+        "id": 1760966802485.9102,
         "name": "Galatasaray",
         "seed": 3
       },
       "round": 2,
+      "date": "2025-10-29",
+      "time": "19:00",
+      "played": false,
+      "homeScore": null,
+      "awayScore": null
+    },
+    {
+      "homeTeam": {
+        "id": 1760966802472.6033,
+        "name": "Paris Saint-Germain",
+        "seed": 1
+      },
+      "awayTeam": {
+        "id": 1760966802489.483,
+        "name": "Leverkusen",
+        "seed": 3
+      },
+      "round": 2,
+      "date": "2025-10-30",
+      "time": "19:00",
+      "played": false,
+      "homeScore": null,
+      "awayScore": null
+    },
+    {
+      "homeTeam": {
+        "id": 1760966802473.814,
+        "name": "Liverpool",
+        "seed": 1
+      },
+      "awayTeam": {
+        "id": 1760966802492.5955,
+        "name": "Trabzonspor",
+        "seed": 4
+      },
+      "round": 2,
+      "date": "2025-10-31",
+      "time": "19:00",
+      "played": false,
+      "homeScore": null,
+      "awayScore": null
+    },
+    {
+      "homeTeam": {
+        "id": 1760966802499.4243,
+        "name": "Brighton",
+        "seed": 4
+      },
+      "awayTeam": {
+        "id": 1760966802474.8782,
+        "name": "Inter Milano",
+        "seed": 1
+      },
+      "round": 2,
+      "date": "2025-11-03",
+      "time": "19:00",
+      "played": false,
+      "homeScore": null,
+      "awayScore": null
+    },
+    {
+      "homeTeam": {
+        "id": 1760966802494.0781,
+        "name": "Sporting Lizbon",
+        "seed": 4
+      },
+      "awayTeam": {
+        "id": 1760966802475.2559,
+        "name": "AC Milan",
+        "seed": 1
+      },
+      "round": 2,
+      "date": "2025-11-03",
+      "time": "21:45",
+      "played": false,
+      "homeScore": null,
+      "awayScore": null
+    },
+    {
+      "homeTeam": {
+        "id": 1760966802477.4497,
+        "name": "Atlético Madrid",
+        "seed": 2
+      },
+      "awayTeam": {
+        "id": 1760966802476.1482,
+        "name": "Juventus",
+        "seed": 2
+      },
+      "round": 2,
+      "date": "2025-11-04",
+      "time": "19:00",
+      "played": false,
+      "homeScore": null,
+      "awayScore": null
+    },
+    {
+      "homeTeam": {
+        "id": 1760966802479.3538,
+        "name": "Borussia Dortmund",
+        "seed": 2
+      },
+      "awayTeam": {
+        "id": 1760966802478.4397,
+        "name": "Chelsea",
+        "seed": 2
+      },
+      "round": 2,
       "date": "2025-11-05",
       "time": "19:00",
       "played": false,
@@ -637,14 +637,14 @@
     },
     {
       "homeTeam": {
-        "id": 1760965270784.283,
-        "name": "Sevilla",
-        "seed": 3
-      },
-      "awayTeam": {
-        "id": 1760965270780.2512,
+        "id": 1760966802480.5898,
         "name": "Manchester United",
         "seed": 2
+      },
+      "awayTeam": {
+        "id": 1760966802498.9941,
+        "name": "Lazio",
+        "seed": 4
       },
       "round": 2,
       "date": "2025-11-06",
@@ -655,14 +655,14 @@
     },
     {
       "homeTeam": {
-        "id": 1760965270782.2473,
-        "name": "Napoli",
-        "seed": 2
+        "id": 1760966802493.7595,
+        "name": "Bursaspor",
+        "seed": 4
       },
       "awayTeam": {
-        "id": 1760965270790.0305,
-        "name": "Fiorentina",
-        "seed": 3
+        "id": 1760966802481.0864,
+        "name": "Arsenal",
+        "seed": 2
       },
       "round": 2,
       "date": "2025-11-07",
@@ -673,13 +673,13 @@
     },
     {
       "homeTeam": {
-        "id": 1760965270792.8838,
-        "name": "Trabzonspor",
-        "seed": 4
+        "id": 1760966802483.7986,
+        "name": "Roma",
+        "seed": 2
       },
       "awayTeam": {
-        "id": 1760965270786.5447,
-        "name": "Fenerbahçe",
+        "id": 1760966802488.5957,
+        "name": "Başakşehir FK",
         "seed": 3
       },
       "round": 2,
@@ -691,13 +691,13 @@
     },
     {
       "homeTeam": {
-        "id": 1760965270793.1887,
-        "name": "Bursaspor",
-        "seed": 4
+        "id": 1760966802486.818,
+        "name": "Fenerbahçe",
+        "seed": 3
       },
       "awayTeam": {
-        "id": 1760965270787.0803,
-        "name": "Beşiktaş",
+        "id": 1760966802484.7087,
+        "name": "Sevilla",
         "seed": 3
       },
       "round": 2,
@@ -709,13 +709,13 @@
     },
     {
       "homeTeam": {
-        "id": 1760965270796.6812,
-        "name": "Porto",
-        "seed": 4
+        "id": 1760966802491.2456,
+        "name": "Real Sociedad",
+        "seed": 3
       },
       "awayTeam": {
-        "id": 1760965270791.2231,
-        "name": "Real Sociedad",
+        "id": 1760966802487.9336,
+        "name": "Beşiktaş",
         "seed": 3
       },
       "round": 2,
@@ -727,12 +727,12 @@
     },
     {
       "homeTeam": {
-        "id": 1760965270799.2727,
-        "name": "Brighton",
-        "seed": 4
+        "id": 1760966802490.4434,
+        "name": "Fiorentina",
+        "seed": 3
       },
       "awayTeam": {
-        "id": 1760965270795.0935,
+        "id": 1760966802495.7988,
         "name": "Benfica",
         "seed": 4
       },
@@ -745,12 +745,12 @@
     },
     {
       "homeTeam": {
-        "id": 1760965270771.2434,
-        "name": "Bayern Münih",
+        "id": 1760966802475.2559,
+        "name": "AC Milan",
         "seed": 1
       },
       "awayTeam": {
-        "id": 1760965270768.4526,
+        "id": 1760966802468.3167,
         "name": "Real Madrid",
         "seed": 1
       },
@@ -763,14 +763,14 @@
     },
     {
       "homeTeam": {
-        "id": 1760965270795.0935,
-        "name": "Benfica",
-        "seed": 4
-      },
-      "awayTeam": {
-        "id": 1760965270769.6707,
+        "id": 1760966802469.3403,
         "name": "Barcelona",
         "seed": 1
+      },
+      "awayTeam": {
+        "id": 1760966802495.7988,
+        "name": "Benfica",
+        "seed": 4
       },
       "round": 3,
       "date": "2025-11-03",
@@ -781,12 +781,12 @@
     },
     {
       "homeTeam": {
-        "id": 1760965270796.6812,
-        "name": "Porto",
-        "seed": 4
+        "id": 1760966802477.4497,
+        "name": "Atlético Madrid",
+        "seed": 2
       },
       "awayTeam": {
-        "id": 1760965270770.072,
+        "id": 1760966802470.5918,
         "name": "Manchester City",
         "seed": 1
       },
@@ -799,14 +799,14 @@
     },
     {
       "homeTeam": {
-        "id": 1760965270772.126,
-        "name": "Paris Saint-Germain",
-        "seed": 1
+        "id": 1760966802490.4434,
+        "name": "Fiorentina",
+        "seed": 3
       },
       "awayTeam": {
-        "id": 1760965270780.2512,
-        "name": "Manchester United",
-        "seed": 2
+        "id": 1760966802471.2786,
+        "name": "Bayern Münih",
+        "seed": 1
       },
       "round": 3,
       "date": "2025-11-05",
@@ -817,13 +817,13 @@
     },
     {
       "homeTeam": {
-        "id": 1760965270778.18,
-        "name": "Chelsea",
-        "seed": 2
+        "id": 1760966802496.0208,
+        "name": "Porto",
+        "seed": 4
       },
       "awayTeam": {
-        "id": 1760965270773.916,
-        "name": "Liverpool",
+        "id": 1760966802472.6033,
+        "name": "Paris Saint-Germain",
         "seed": 1
       },
       "round": 3,
@@ -835,13 +835,13 @@
     },
     {
       "homeTeam": {
-        "id": 1760965270782.2473,
-        "name": "Napoli",
-        "seed": 2
+        "id": 1760966802494.0781,
+        "name": "Sporting Lizbon",
+        "seed": 4
       },
       "awayTeam": {
-        "id": 1760965270774.8118,
-        "name": "Inter Milano",
+        "id": 1760966802473.814,
+        "name": "Liverpool",
         "seed": 1
       },
       "round": 3,
@@ -853,13 +853,13 @@
     },
     {
       "homeTeam": {
-        "id": 1760965270776.2153,
-        "name": "Juventus",
-        "seed": 2
+        "id": 1760966802491.2456,
+        "name": "Real Sociedad",
+        "seed": 3
       },
       "awayTeam": {
-        "id": 1760965270775.85,
-        "name": "AC Milan",
+        "id": 1760966802474.8782,
+        "name": "Inter Milano",
         "seed": 1
       },
       "round": 3,
@@ -871,13 +871,13 @@
     },
     {
       "homeTeam": {
-        "id": 1760965270777.5066,
-        "name": "Atlético Madrid",
-        "seed": 2
+        "id": 1760966802499.4243,
+        "name": "Brighton",
+        "seed": 4
       },
       "awayTeam": {
-        "id": 1760965270783.3735,
-        "name": "Roma",
+        "id": 1760966802476.1482,
+        "name": "Juventus",
         "seed": 2
       },
       "round": 3,
@@ -889,13 +889,13 @@
     },
     {
       "homeTeam": {
-        "id": 1760965270794.5469,
-        "name": "Sporting Lizbon",
-        "seed": 4
+        "id": 1760966802485.9102,
+        "name": "Galatasaray",
+        "seed": 3
       },
       "awayTeam": {
-        "id": 1760965270779.9602,
-        "name": "Borussia Dortmund",
+        "id": 1760966802478.4397,
+        "name": "Chelsea",
         "seed": 2
       },
       "round": 3,
@@ -907,13 +907,13 @@
     },
     {
       "homeTeam": {
-        "id": 1760965270792.8838,
-        "name": "Trabzonspor",
-        "seed": 4
+        "id": 1760966802486.818,
+        "name": "Fenerbahçe",
+        "seed": 3
       },
       "awayTeam": {
-        "id": 1760965270781.6719,
-        "name": "Arsenal",
+        "id": 1760966802479.3538,
+        "name": "Borussia Dortmund",
         "seed": 2
       },
       "round": 3,
@@ -925,14 +925,14 @@
     },
     {
       "homeTeam": {
-        "id": 1760965270784.283,
-        "name": "Sevilla",
-        "seed": 3
+        "id": 1760966802480.5898,
+        "name": "Manchester United",
+        "seed": 2
       },
       "awayTeam": {
-        "id": 1760965270797.031,
-        "name": "Lyon",
-        "seed": 4
+        "id": 1760966802483.7986,
+        "name": "Roma",
+        "seed": 2
       },
       "round": 3,
       "date": "2025-11-13",
@@ -943,14 +943,14 @@
     },
     {
       "homeTeam": {
-        "id": 1760965270785.8982,
-        "name": "Galatasaray",
-        "seed": 3
+        "id": 1760966802498.9941,
+        "name": "Lazio",
+        "seed": 4
       },
       "awayTeam": {
-        "id": 1760965270789.679,
-        "name": "Leverkusen",
-        "seed": 3
+        "id": 1760966802481.0864,
+        "name": "Arsenal",
+        "seed": 2
       },
       "round": 3,
       "date": "2025-11-14",
@@ -961,14 +961,14 @@
     },
     {
       "homeTeam": {
-        "id": 1760965270787.0803,
-        "name": "Beşiktaş",
-        "seed": 3
+        "id": 1760966802482.4006,
+        "name": "Napoli",
+        "seed": 2
       },
       "awayTeam": {
-        "id": 1760965270786.5447,
-        "name": "Fenerbahçe",
-        "seed": 3
+        "id": 1760966802492.5955,
+        "name": "Trabzonspor",
+        "seed": 4
       },
       "round": 3,
       "date": "2025-11-17",
@@ -979,14 +979,14 @@
     },
     {
       "homeTeam": {
-        "id": 1760965270788.564,
-        "name": "Başakşehir FK",
+        "id": 1760966802487.9336,
+        "name": "Beşiktaş",
         "seed": 3
       },
       "awayTeam": {
-        "id": 1760965270799.2727,
-        "name": "Brighton",
-        "seed": 4
+        "id": 1760966802484.7087,
+        "name": "Sevilla",
+        "seed": 3
       },
       "round": 3,
       "date": "2025-11-17",
@@ -997,13 +997,13 @@
     },
     {
       "homeTeam": {
-        "id": 1760965270790.0305,
-        "name": "Fiorentina",
-        "seed": 3
+        "id": 1760966802493.7595,
+        "name": "Bursaspor",
+        "seed": 4
       },
       "awayTeam": {
-        "id": 1760965270791.2231,
-        "name": "Real Sociedad",
+        "id": 1760966802488.5957,
+        "name": "Başakşehir FK",
         "seed": 3
       },
       "round": 3,
@@ -1015,14 +1015,14 @@
     },
     {
       "homeTeam": {
-        "id": 1760965270798.5208,
-        "name": "Lazio",
+        "id": 1760966802497.5164,
+        "name": "Lyon",
         "seed": 4
       },
       "awayTeam": {
-        "id": 1760965270793.1887,
-        "name": "Bursaspor",
-        "seed": 4
+        "id": 1760966802489.483,
+        "name": "Leverkusen",
+        "seed": 3
       },
       "round": 3,
       "date": "2025-11-19",
@@ -1033,14 +1033,14 @@
     },
     {
       "homeTeam": {
-        "id": 1760965270768.4526,
-        "name": "Real Madrid",
-        "seed": 1
+        "id": 1760966802484.7087,
+        "name": "Sevilla",
+        "seed": 3
       },
       "awayTeam": {
-        "id": 1760965270791.2231,
-        "name": "Real Sociedad",
-        "seed": 3
+        "id": 1760966802468.3167,
+        "name": "Real Madrid",
+        "seed": 1
       },
       "round": 4,
       "date": "2025-11-10",
@@ -1051,13 +1051,13 @@
     },
     {
       "homeTeam": {
-        "id": 1760965270769.6707,
-        "name": "Barcelona",
-        "seed": 1
+        "id": 1760966802485.9102,
+        "name": "Galatasaray",
+        "seed": 3
       },
       "awayTeam": {
-        "id": 1760965270772.126,
-        "name": "Paris Saint-Germain",
+        "id": 1760966802469.3403,
+        "name": "Barcelona",
         "seed": 1
       },
       "round": 4,
@@ -1069,13 +1069,13 @@
     },
     {
       "homeTeam": {
-        "id": 1760965270770.072,
-        "name": "Manchester City",
-        "seed": 1
+        "id": 1760966802497.5164,
+        "name": "Lyon",
+        "seed": 4
       },
       "awayTeam": {
-        "id": 1760965270775.85,
-        "name": "AC Milan",
+        "id": 1760966802470.5918,
+        "name": "Manchester City",
         "seed": 1
       },
       "round": 4,
@@ -1087,13 +1087,13 @@
     },
     {
       "homeTeam": {
-        "id": 1760965270777.5066,
-        "name": "Atlético Madrid",
-        "seed": 2
+        "id": 1760966802471.2786,
+        "name": "Bayern Münih",
+        "seed": 1
       },
       "awayTeam": {
-        "id": 1760965270771.2434,
-        "name": "Bayern Münih",
+        "id": 1760966802475.2559,
+        "name": "AC Milan",
         "seed": 1
       },
       "round": 4,
@@ -1105,13 +1105,13 @@
     },
     {
       "homeTeam": {
-        "id": 1760965270790.0305,
-        "name": "Fiorentina",
+        "id": 1760966802487.9336,
+        "name": "Beşiktaş",
         "seed": 3
       },
       "awayTeam": {
-        "id": 1760965270773.916,
-        "name": "Liverpool",
+        "id": 1760966802472.6033,
+        "name": "Paris Saint-Germain",
         "seed": 1
       },
       "round": 4,
@@ -1123,14 +1123,14 @@
     },
     {
       "homeTeam": {
-        "id": 1760965270774.8118,
+        "id": 1760966802474.8782,
         "name": "Inter Milano",
         "seed": 1
       },
       "awayTeam": {
-        "id": 1760965270792.8838,
-        "name": "Trabzonspor",
-        "seed": 4
+        "id": 1760966802473.814,
+        "name": "Liverpool",
+        "seed": 1
       },
       "round": 4,
       "date": "2025-11-14",
@@ -1141,14 +1141,14 @@
     },
     {
       "homeTeam": {
-        "id": 1760965270776.2153,
+        "id": 1760966802476.1482,
         "name": "Juventus",
         "seed": 2
       },
       "awayTeam": {
-        "id": 1760965270799.2727,
-        "name": "Brighton",
-        "seed": 4
+        "id": 1760966802480.5898,
+        "name": "Manchester United",
+        "seed": 2
       },
       "round": 4,
       "date": "2025-11-17",
@@ -1159,14 +1159,14 @@
     },
     {
       "homeTeam": {
-        "id": 1760965270778.18,
-        "name": "Chelsea",
+        "id": 1760966802477.4497,
+        "name": "Atlético Madrid",
         "seed": 2
       },
       "awayTeam": {
-        "id": 1760965270786.5447,
-        "name": "Fenerbahçe",
-        "seed": 3
+        "id": 1760966802496.0208,
+        "name": "Porto",
+        "seed": 4
       },
       "round": 4,
       "date": "2025-11-17",
@@ -1177,13 +1177,13 @@
     },
     {
       "homeTeam": {
-        "id": 1760965270779.9602,
-        "name": "Borussia Dortmund",
-        "seed": 2
+        "id": 1760966802490.4434,
+        "name": "Fiorentina",
+        "seed": 3
       },
       "awayTeam": {
-        "id": 1760965270780.2512,
-        "name": "Manchester United",
+        "id": 1760966802478.4397,
+        "name": "Chelsea",
         "seed": 2
       },
       "round": 4,
@@ -1195,14 +1195,14 @@
     },
     {
       "homeTeam": {
-        "id": 1760965270781.6719,
-        "name": "Arsenal",
+        "id": 1760966802479.3538,
+        "name": "Borussia Dortmund",
         "seed": 2
       },
       "awayTeam": {
-        "id": 1760965270787.0803,
-        "name": "Beşiktaş",
-        "seed": 3
+        "id": 1760966802493.7595,
+        "name": "Bursaspor",
+        "seed": 4
       },
       "round": 4,
       "date": "2025-11-19",
@@ -1213,13 +1213,13 @@
     },
     {
       "homeTeam": {
-        "id": 1760965270795.0935,
-        "name": "Benfica",
-        "seed": 4
+        "id": 1760966802482.4006,
+        "name": "Napoli",
+        "seed": 2
       },
       "awayTeam": {
-        "id": 1760965270782.2473,
-        "name": "Napoli",
+        "id": 1760966802481.0864,
+        "name": "Arsenal",
         "seed": 2
       },
       "round": 4,
@@ -1231,14 +1231,14 @@
     },
     {
       "homeTeam": {
-        "id": 1760965270783.3735,
-        "name": "Roma",
-        "seed": 2
+        "id": 1760966802486.818,
+        "name": "Fenerbahçe",
+        "seed": 3
       },
       "awayTeam": {
-        "id": 1760965270793.1887,
-        "name": "Bursaspor",
-        "seed": 4
+        "id": 1760966802483.7986,
+        "name": "Roma",
+        "seed": 2
       },
       "round": 4,
       "date": "2025-11-21",
@@ -1249,12 +1249,12 @@
     },
     {
       "homeTeam": {
-        "id": 1760965270784.283,
-        "name": "Sevilla",
-        "seed": 3
+        "id": 1760966802494.0781,
+        "name": "Sporting Lizbon",
+        "seed": 4
       },
       "awayTeam": {
-        "id": 1760965270788.564,
+        "id": 1760966802488.5957,
         "name": "Başakşehir FK",
         "seed": 3
       },
@@ -1267,13 +1267,13 @@
     },
     {
       "homeTeam": {
-        "id": 1760965270798.5208,
-        "name": "Lazio",
+        "id": 1760966802492.5955,
+        "name": "Trabzonspor",
         "seed": 4
       },
       "awayTeam": {
-        "id": 1760965270785.8982,
-        "name": "Galatasaray",
+        "id": 1760966802489.483,
+        "name": "Leverkusen",
         "seed": 3
       },
       "round": 4,
@@ -1285,14 +1285,14 @@
     },
     {
       "homeTeam": {
-        "id": 1760965270789.679,
-        "name": "Leverkusen",
-        "seed": 3
+        "id": 1760966802498.9941,
+        "name": "Lazio",
+        "seed": 4
       },
       "awayTeam": {
-        "id": 1760965270794.5469,
-        "name": "Sporting Lizbon",
-        "seed": 4
+        "id": 1760966802491.2456,
+        "name": "Real Sociedad",
+        "seed": 3
       },
       "round": 4,
       "date": "2025-11-25",
@@ -1303,13 +1303,13 @@
     },
     {
       "homeTeam": {
-        "id": 1760965270796.6812,
-        "name": "Porto",
+        "id": 1760966802495.7988,
+        "name": "Benfica",
         "seed": 4
       },
       "awayTeam": {
-        "id": 1760965270797.031,
-        "name": "Lyon",
+        "id": 1760966802499.4243,
+        "name": "Brighton",
         "seed": 4
       },
       "round": 4,
@@ -1318,8 +1318,1160 @@
       "played": false,
       "homeScore": null,
       "awayScore": null
+    },
+    {
+      "homeTeam": {
+        "id": 1760966802468.3167,
+        "name": "Real Madrid",
+        "seed": 1
+      },
+      "awayTeam": {
+        "id": 1760966802469.3403,
+        "name": "Barcelona",
+        "seed": 1
+      },
+      "round": 5,
+      "date": "2025-11-17",
+      "time": "19:00",
+      "played": false,
+      "homeScore": null,
+      "awayScore": null
+    },
+    {
+      "homeTeam": {
+        "id": 1760966802470.5918,
+        "name": "Manchester City",
+        "seed": 1
+      },
+      "awayTeam": {
+        "id": 1760966802484.7087,
+        "name": "Sevilla",
+        "seed": 3
+      },
+      "round": 5,
+      "date": "2025-11-17",
+      "time": "21:45",
+      "played": false,
+      "homeScore": null,
+      "awayScore": null
+    },
+    {
+      "homeTeam": {
+        "id": 1760966802483.7986,
+        "name": "Roma",
+        "seed": 2
+      },
+      "awayTeam": {
+        "id": 1760966802471.2786,
+        "name": "Bayern Münih",
+        "seed": 1
+      },
+      "round": 5,
+      "date": "2025-11-18",
+      "time": "19:00",
+      "played": false,
+      "homeScore": null,
+      "awayScore": null
+    },
+    {
+      "homeTeam": {
+        "id": 1760966802472.6033,
+        "name": "Paris Saint-Germain",
+        "seed": 1
+      },
+      "awayTeam": {
+        "id": 1760966802473.814,
+        "name": "Liverpool",
+        "seed": 1
+      },
+      "round": 5,
+      "date": "2025-11-19",
+      "time": "19:00",
+      "played": false,
+      "homeScore": null,
+      "awayScore": null
+    },
+    {
+      "homeTeam": {
+        "id": 1760966802480.5898,
+        "name": "Manchester United",
+        "seed": 2
+      },
+      "awayTeam": {
+        "id": 1760966802474.8782,
+        "name": "Inter Milano",
+        "seed": 1
+      },
+      "round": 5,
+      "date": "2025-11-20",
+      "time": "19:00",
+      "played": false,
+      "homeScore": null,
+      "awayScore": null
+    },
+    {
+      "homeTeam": {
+        "id": 1760966802475.2559,
+        "name": "AC Milan",
+        "seed": 1
+      },
+      "awayTeam": {
+        "id": 1760966802489.483,
+        "name": "Leverkusen",
+        "seed": 3
+      },
+      "round": 5,
+      "date": "2025-11-21",
+      "time": "19:00",
+      "played": false,
+      "homeScore": null,
+      "awayScore": null
+    },
+    {
+      "homeTeam": {
+        "id": 1760966802491.2456,
+        "name": "Real Sociedad",
+        "seed": 3
+      },
+      "awayTeam": {
+        "id": 1760966802476.1482,
+        "name": "Juventus",
+        "seed": 2
+      },
+      "round": 5,
+      "date": "2025-11-24",
+      "time": "19:00",
+      "played": false,
+      "homeScore": null,
+      "awayScore": null
+    },
+    {
+      "homeTeam": {
+        "id": 1760966802477.4497,
+        "name": "Atlético Madrid",
+        "seed": 2
+      },
+      "awayTeam": {
+        "id": 1760966802485.9102,
+        "name": "Galatasaray",
+        "seed": 3
+      },
+      "round": 5,
+      "date": "2025-11-24",
+      "time": "21:45",
+      "played": false,
+      "homeScore": null,
+      "awayScore": null
+    },
+    {
+      "homeTeam": {
+        "id": 1760966802495.7988,
+        "name": "Benfica",
+        "seed": 4
+      },
+      "awayTeam": {
+        "id": 1760966802478.4397,
+        "name": "Chelsea",
+        "seed": 2
+      },
+      "round": 5,
+      "date": "2025-11-25",
+      "time": "19:00",
+      "played": false,
+      "homeScore": null,
+      "awayScore": null
+    },
+    {
+      "homeTeam": {
+        "id": 1760966802479.3538,
+        "name": "Borussia Dortmund",
+        "seed": 2
+      },
+      "awayTeam": {
+        "id": 1760966802494.0781,
+        "name": "Sporting Lizbon",
+        "seed": 4
+      },
+      "round": 5,
+      "date": "2025-11-26",
+      "time": "19:00",
+      "played": false,
+      "homeScore": null,
+      "awayScore": null
+    },
+    {
+      "homeTeam": {
+        "id": 1760966802487.9336,
+        "name": "Beşiktaş",
+        "seed": 3
+      },
+      "awayTeam": {
+        "id": 1760966802481.0864,
+        "name": "Arsenal",
+        "seed": 2
+      },
+      "round": 5,
+      "date": "2025-11-27",
+      "time": "19:00",
+      "played": false,
+      "homeScore": null,
+      "awayScore": null
+    },
+    {
+      "homeTeam": {
+        "id": 1760966802482.4006,
+        "name": "Napoli",
+        "seed": 2
+      },
+      "awayTeam": {
+        "id": 1760966802499.4243,
+        "name": "Brighton",
+        "seed": 4
+      },
+      "round": 5,
+      "date": "2025-11-28",
+      "time": "19:00",
+      "played": false,
+      "homeScore": null,
+      "awayScore": null
+    },
+    {
+      "homeTeam": {
+        "id": 1760966802486.818,
+        "name": "Fenerbahçe",
+        "seed": 3
+      },
+      "awayTeam": {
+        "id": 1760966802498.9941,
+        "name": "Lazio",
+        "seed": 4
+      },
+      "round": 5,
+      "date": "2025-12-01",
+      "time": "19:00",
+      "played": false,
+      "homeScore": null,
+      "awayScore": null
+    },
+    {
+      "homeTeam": {
+        "id": 1760966802488.5957,
+        "name": "Başakşehir FK",
+        "seed": 3
+      },
+      "awayTeam": {
+        "id": 1760966802490.4434,
+        "name": "Fiorentina",
+        "seed": 3
+      },
+      "round": 5,
+      "date": "2025-12-01",
+      "time": "21:45",
+      "played": false,
+      "homeScore": null,
+      "awayScore": null
+    },
+    {
+      "homeTeam": {
+        "id": 1760966802493.7595,
+        "name": "Bursaspor",
+        "seed": 4
+      },
+      "awayTeam": {
+        "id": 1760966802492.5955,
+        "name": "Trabzonspor",
+        "seed": 4
+      },
+      "round": 5,
+      "date": "2025-12-02",
+      "time": "19:00",
+      "played": false,
+      "homeScore": null,
+      "awayScore": null
+    },
+    {
+      "homeTeam": {
+        "id": 1760966802497.5164,
+        "name": "Lyon",
+        "seed": 4
+      },
+      "awayTeam": {
+        "id": 1760966802496.0208,
+        "name": "Porto",
+        "seed": 4
+      },
+      "round": 5,
+      "date": "2025-12-03",
+      "time": "19:00",
+      "played": false,
+      "homeScore": null,
+      "awayScore": null
+    },
+    {
+      "homeTeam": {
+        "id": 1760966802468.3167,
+        "name": "Real Madrid",
+        "seed": 1
+      },
+      "awayTeam": {
+        "id": 1760966802493.7595,
+        "name": "Bursaspor",
+        "seed": 4
+      },
+      "round": 6,
+      "date": "2025-11-24",
+      "time": "19:00",
+      "played": false,
+      "homeScore": null,
+      "awayScore": null
+    },
+    {
+      "homeTeam": {
+        "id": 1760966802469.3403,
+        "name": "Barcelona",
+        "seed": 1
+      },
+      "awayTeam": {
+        "id": 1760966802498.9941,
+        "name": "Lazio",
+        "seed": 4
+      },
+      "round": 6,
+      "date": "2025-11-24",
+      "time": "21:45",
+      "played": false,
+      "homeScore": null,
+      "awayScore": null
+    },
+    {
+      "homeTeam": {
+        "id": 1760966802488.5957,
+        "name": "Başakşehir FK",
+        "seed": 3
+      },
+      "awayTeam": {
+        "id": 1760966802470.5918,
+        "name": "Manchester City",
+        "seed": 1
+      },
+      "round": 6,
+      "date": "2025-11-25",
+      "time": "19:00",
+      "played": false,
+      "homeScore": null,
+      "awayScore": null
+    },
+    {
+      "homeTeam": {
+        "id": 1760966802479.3538,
+        "name": "Borussia Dortmund",
+        "seed": 2
+      },
+      "awayTeam": {
+        "id": 1760966802471.2786,
+        "name": "Bayern Münih",
+        "seed": 1
+      },
+      "round": 6,
+      "date": "2025-11-26",
+      "time": "19:00",
+      "played": false,
+      "homeScore": null,
+      "awayScore": null
+    },
+    {
+      "homeTeam": {
+        "id": 1760966802474.8782,
+        "name": "Inter Milano",
+        "seed": 1
+      },
+      "awayTeam": {
+        "id": 1760966802472.6033,
+        "name": "Paris Saint-Germain",
+        "seed": 1
+      },
+      "round": 6,
+      "date": "2025-11-27",
+      "time": "19:00",
+      "played": false,
+      "homeScore": null,
+      "awayScore": null
+    },
+    {
+      "homeTeam": {
+        "id": 1760966802486.818,
+        "name": "Fenerbahçe",
+        "seed": 3
+      },
+      "awayTeam": {
+        "id": 1760966802473.814,
+        "name": "Liverpool",
+        "seed": 1
+      },
+      "round": 6,
+      "date": "2025-11-28",
+      "time": "19:00",
+      "played": false,
+      "homeScore": null,
+      "awayScore": null
+    },
+    {
+      "homeTeam": {
+        "id": 1760966802475.2559,
+        "name": "AC Milan",
+        "seed": 1
+      },
+      "awayTeam": {
+        "id": 1760966802481.0864,
+        "name": "Arsenal",
+        "seed": 2
+      },
+      "round": 6,
+      "date": "2025-12-01",
+      "time": "19:00",
+      "played": false,
+      "homeScore": null,
+      "awayScore": null
+    },
+    {
+      "homeTeam": {
+        "id": 1760966802476.1482,
+        "name": "Juventus",
+        "seed": 2
+      },
+      "awayTeam": {
+        "id": 1760966802490.4434,
+        "name": "Fiorentina",
+        "seed": 3
+      },
+      "round": 6,
+      "date": "2025-12-01",
+      "time": "21:45",
+      "played": false,
+      "homeScore": null,
+      "awayScore": null
+    },
+    {
+      "homeTeam": {
+        "id": 1760966802477.4497,
+        "name": "Atlético Madrid",
+        "seed": 2
+      },
+      "awayTeam": {
+        "id": 1760966802494.0781,
+        "name": "Sporting Lizbon",
+        "seed": 4
+      },
+      "round": 6,
+      "date": "2025-12-02",
+      "time": "19:00",
+      "played": false,
+      "homeScore": null,
+      "awayScore": null
+    },
+    {
+      "homeTeam": {
+        "id": 1760966802478.4397,
+        "name": "Chelsea",
+        "seed": 2
+      },
+      "awayTeam": {
+        "id": 1760966802497.5164,
+        "name": "Lyon",
+        "seed": 4
+      },
+      "round": 6,
+      "date": "2025-12-03",
+      "time": "19:00",
+      "played": false,
+      "homeScore": null,
+      "awayScore": null
+    },
+    {
+      "homeTeam": {
+        "id": 1760966802495.7988,
+        "name": "Benfica",
+        "seed": 4
+      },
+      "awayTeam": {
+        "id": 1760966802480.5898,
+        "name": "Manchester United",
+        "seed": 2
+      },
+      "round": 6,
+      "date": "2025-12-04",
+      "time": "19:00",
+      "played": false,
+      "homeScore": null,
+      "awayScore": null
+    },
+    {
+      "homeTeam": {
+        "id": 1760966802482.4006,
+        "name": "Napoli",
+        "seed": 2
+      },
+      "awayTeam": {
+        "id": 1760966802487.9336,
+        "name": "Beşiktaş",
+        "seed": 3
+      },
+      "round": 6,
+      "date": "2025-12-05",
+      "time": "19:00",
+      "played": false,
+      "homeScore": null,
+      "awayScore": null
+    },
+    {
+      "homeTeam": {
+        "id": 1760966802483.7986,
+        "name": "Roma",
+        "seed": 2
+      },
+      "awayTeam": {
+        "id": 1760966802496.0208,
+        "name": "Porto",
+        "seed": 4
+      },
+      "round": 6,
+      "date": "2025-12-08",
+      "time": "19:00",
+      "played": false,
+      "homeScore": null,
+      "awayScore": null
+    },
+    {
+      "homeTeam": {
+        "id": 1760966802499.4243,
+        "name": "Brighton",
+        "seed": 4
+      },
+      "awayTeam": {
+        "id": 1760966802484.7087,
+        "name": "Sevilla",
+        "seed": 3
+      },
+      "round": 6,
+      "date": "2025-12-08",
+      "time": "21:45",
+      "played": false,
+      "homeScore": null,
+      "awayScore": null
+    },
+    {
+      "homeTeam": {
+        "id": 1760966802485.9102,
+        "name": "Galatasaray",
+        "seed": 3
+      },
+      "awayTeam": {
+        "id": 1760966802492.5955,
+        "name": "Trabzonspor",
+        "seed": 4
+      },
+      "round": 6,
+      "date": "2025-12-09",
+      "time": "19:00",
+      "played": false,
+      "homeScore": null,
+      "awayScore": null
+    },
+    {
+      "homeTeam": {
+        "id": 1760966802491.2456,
+        "name": "Real Sociedad",
+        "seed": 3
+      },
+      "awayTeam": {
+        "id": 1760966802489.483,
+        "name": "Leverkusen",
+        "seed": 3
+      },
+      "round": 6,
+      "date": "2025-12-10",
+      "time": "19:00",
+      "played": false,
+      "homeScore": null,
+      "awayScore": null
+    },
+    {
+      "homeTeam": {
+        "id": 1760966802468.3167,
+        "name": "Real Madrid",
+        "seed": 1
+      },
+      "awayTeam": {
+        "id": 1760966802488.5957,
+        "name": "Başakşehir FK",
+        "seed": 3
+      },
+      "round": 7,
+      "date": "2025-12-01",
+      "time": "19:00",
+      "played": false,
+      "homeScore": null,
+      "awayScore": null
+    },
+    {
+      "homeTeam": {
+        "id": 1760966802469.3403,
+        "name": "Barcelona",
+        "seed": 1
+      },
+      "awayTeam": {
+        "id": 1760966802470.5918,
+        "name": "Manchester City",
+        "seed": 1
+      },
+      "round": 7,
+      "date": "2025-12-01",
+      "time": "21:45",
+      "played": false,
+      "homeScore": null,
+      "awayScore": null
+    },
+    {
+      "homeTeam": {
+        "id": 1760966802492.5955,
+        "name": "Trabzonspor",
+        "seed": 4
+      },
+      "awayTeam": {
+        "id": 1760966802471.2786,
+        "name": "Bayern Münih",
+        "seed": 1
+      },
+      "round": 7,
+      "date": "2025-12-02",
+      "time": "19:00",
+      "played": false,
+      "homeScore": null,
+      "awayScore": null
+    },
+    {
+      "homeTeam": {
+        "id": 1760966802472.6033,
+        "name": "Paris Saint-Germain",
+        "seed": 1
+      },
+      "awayTeam": {
+        "id": 1760966802480.5898,
+        "name": "Manchester United",
+        "seed": 2
+      },
+      "round": 7,
+      "date": "2025-12-03",
+      "time": "19:00",
+      "played": false,
+      "homeScore": null,
+      "awayScore": null
+    },
+    {
+      "homeTeam": {
+        "id": 1760966802473.814,
+        "name": "Liverpool",
+        "seed": 1
+      },
+      "awayTeam": {
+        "id": 1760966802478.4397,
+        "name": "Chelsea",
+        "seed": 2
+      },
+      "round": 7,
+      "date": "2025-12-04",
+      "time": "19:00",
+      "played": false,
+      "homeScore": null,
+      "awayScore": null
+    },
+    {
+      "homeTeam": {
+        "id": 1760966802474.8782,
+        "name": "Inter Milano",
+        "seed": 1
+      },
+      "awayTeam": {
+        "id": 1760966802493.7595,
+        "name": "Bursaspor",
+        "seed": 4
+      },
+      "round": 7,
+      "date": "2025-12-05",
+      "time": "19:00",
+      "played": false,
+      "homeScore": null,
+      "awayScore": null
+    },
+    {
+      "homeTeam": {
+        "id": 1760966802476.1482,
+        "name": "Juventus",
+        "seed": 2
+      },
+      "awayTeam": {
+        "id": 1760966802475.2559,
+        "name": "AC Milan",
+        "seed": 1
+      },
+      "round": 7,
+      "date": "2025-12-08",
+      "time": "19:00",
+      "played": false,
+      "homeScore": null,
+      "awayScore": null
+    },
+    {
+      "homeTeam": {
+        "id": 1760966802481.0864,
+        "name": "Arsenal",
+        "seed": 2
+      },
+      "awayTeam": {
+        "id": 1760966802477.4497,
+        "name": "Atlético Madrid",
+        "seed": 2
+      },
+      "round": 7,
+      "date": "2025-12-08",
+      "time": "21:45",
+      "played": false,
+      "homeScore": null,
+      "awayScore": null
+    },
+    {
+      "homeTeam": {
+        "id": 1760966802483.7986,
+        "name": "Roma",
+        "seed": 2
+      },
+      "awayTeam": {
+        "id": 1760966802479.3538,
+        "name": "Borussia Dortmund",
+        "seed": 2
+      },
+      "round": 7,
+      "date": "2025-12-09",
+      "time": "19:00",
+      "played": false,
+      "homeScore": null,
+      "awayScore": null
+    },
+    {
+      "homeTeam": {
+        "id": 1760966802482.4006,
+        "name": "Napoli",
+        "seed": 2
+      },
+      "awayTeam": {
+        "id": 1760966802491.2456,
+        "name": "Real Sociedad",
+        "seed": 3
+      },
+      "round": 7,
+      "date": "2025-12-10",
+      "time": "19:00",
+      "played": false,
+      "homeScore": null,
+      "awayScore": null
+    },
+    {
+      "homeTeam": {
+        "id": 1760966802484.7087,
+        "name": "Sevilla",
+        "seed": 3
+      },
+      "awayTeam": {
+        "id": 1760966802494.0781,
+        "name": "Sporting Lizbon",
+        "seed": 4
+      },
+      "round": 7,
+      "date": "2025-12-11",
+      "time": "19:00",
+      "played": false,
+      "homeScore": null,
+      "awayScore": null
+    },
+    {
+      "homeTeam": {
+        "id": 1760966802485.9102,
+        "name": "Galatasaray",
+        "seed": 3
+      },
+      "awayTeam": {
+        "id": 1760966802495.7988,
+        "name": "Benfica",
+        "seed": 4
+      },
+      "round": 7,
+      "date": "2025-12-12",
+      "time": "19:00",
+      "played": false,
+      "homeScore": null,
+      "awayScore": null
+    },
+    {
+      "homeTeam": {
+        "id": 1760966802496.0208,
+        "name": "Porto",
+        "seed": 4
+      },
+      "awayTeam": {
+        "id": 1760966802486.818,
+        "name": "Fenerbahçe",
+        "seed": 3
+      },
+      "round": 7,
+      "date": "2025-12-15",
+      "time": "19:00",
+      "played": false,
+      "homeScore": null,
+      "awayScore": null
+    },
+    {
+      "homeTeam": {
+        "id": 1760966802499.4243,
+        "name": "Brighton",
+        "seed": 4
+      },
+      "awayTeam": {
+        "id": 1760966802487.9336,
+        "name": "Beşiktaş",
+        "seed": 3
+      },
+      "round": 7,
+      "date": "2025-12-15",
+      "time": "21:45",
+      "played": false,
+      "homeScore": null,
+      "awayScore": null
+    },
+    {
+      "homeTeam": {
+        "id": 1760966802490.4434,
+        "name": "Fiorentina",
+        "seed": 3
+      },
+      "awayTeam": {
+        "id": 1760966802489.483,
+        "name": "Leverkusen",
+        "seed": 3
+      },
+      "round": 7,
+      "date": "2025-12-16",
+      "time": "19:00",
+      "played": false,
+      "homeScore": null,
+      "awayScore": null
+    },
+    {
+      "homeTeam": {
+        "id": 1760966802497.5164,
+        "name": "Lyon",
+        "seed": 4
+      },
+      "awayTeam": {
+        "id": 1760966802498.9941,
+        "name": "Lazio",
+        "seed": 4
+      },
+      "round": 7,
+      "date": "2025-12-17",
+      "time": "19:00",
+      "played": false,
+      "homeScore": null,
+      "awayScore": null
+    },
+    {
+      "homeTeam": {
+        "id": 1760966802476.1482,
+        "name": "Juventus",
+        "seed": 2
+      },
+      "awayTeam": {
+        "id": 1760966802468.3167,
+        "name": "Real Madrid",
+        "seed": 1
+      },
+      "round": 8,
+      "date": "2025-12-08",
+      "time": "19:00",
+      "played": false,
+      "homeScore": null,
+      "awayScore": null
+    },
+    {
+      "homeTeam": {
+        "id": 1760966802491.2456,
+        "name": "Real Sociedad",
+        "seed": 3
+      },
+      "awayTeam": {
+        "id": 1760966802469.3403,
+        "name": "Barcelona",
+        "seed": 1
+      },
+      "round": 8,
+      "date": "2025-12-08",
+      "time": "21:45",
+      "played": false,
+      "homeScore": null,
+      "awayScore": null
+    },
+    {
+      "homeTeam": {
+        "id": 1760966802482.4006,
+        "name": "Napoli",
+        "seed": 2
+      },
+      "awayTeam": {
+        "id": 1760966802470.5918,
+        "name": "Manchester City",
+        "seed": 1
+      },
+      "round": 8,
+      "date": "2025-12-09",
+      "time": "19:00",
+      "played": false,
+      "homeScore": null,
+      "awayScore": null
+    },
+    {
+      "homeTeam": {
+        "id": 1760966802471.2786,
+        "name": "Bayern Münih",
+        "seed": 1
+      },
+      "awayTeam": {
+        "id": 1760966802495.7988,
+        "name": "Benfica",
+        "seed": 4
+      },
+      "round": 8,
+      "date": "2025-12-10",
+      "time": "19:00",
+      "played": false,
+      "homeScore": null,
+      "awayScore": null
+    },
+    {
+      "homeTeam": {
+        "id": 1760966802479.3538,
+        "name": "Borussia Dortmund",
+        "seed": 2
+      },
+      "awayTeam": {
+        "id": 1760966802472.6033,
+        "name": "Paris Saint-Germain",
+        "seed": 1
+      },
+      "round": 8,
+      "date": "2025-12-11",
+      "time": "19:00",
+      "played": false,
+      "homeScore": null,
+      "awayScore": null
+    },
+    {
+      "homeTeam": {
+        "id": 1760966802481.0864,
+        "name": "Arsenal",
+        "seed": 2
+      },
+      "awayTeam": {
+        "id": 1760966802473.814,
+        "name": "Liverpool",
+        "seed": 1
+      },
+      "round": 8,
+      "date": "2025-12-12",
+      "time": "19:00",
+      "played": false,
+      "homeScore": null,
+      "awayScore": null
+    },
+    {
+      "homeTeam": {
+        "id": 1760966802478.4397,
+        "name": "Chelsea",
+        "seed": 2
+      },
+      "awayTeam": {
+        "id": 1760966802474.8782,
+        "name": "Inter Milano",
+        "seed": 1
+      },
+      "round": 8,
+      "date": "2025-12-15",
+      "time": "19:00",
+      "played": false,
+      "homeScore": null,
+      "awayScore": null
+    },
+    {
+      "homeTeam": {
+        "id": 1760966802475.2559,
+        "name": "AC Milan",
+        "seed": 1
+      },
+      "awayTeam": {
+        "id": 1760966802486.818,
+        "name": "Fenerbahçe",
+        "seed": 3
+      },
+      "round": 8,
+      "date": "2025-12-15",
+      "time": "21:45",
+      "played": false,
+      "homeScore": null,
+      "awayScore": null
+    },
+    {
+      "homeTeam": {
+        "id": 1760966802477.4497,
+        "name": "Atlético Madrid",
+        "seed": 2
+      },
+      "awayTeam": {
+        "id": 1760966802484.7087,
+        "name": "Sevilla",
+        "seed": 3
+      },
+      "round": 8,
+      "date": "2025-12-16",
+      "time": "19:00",
+      "played": false,
+      "homeScore": null,
+      "awayScore": null
+    },
+    {
+      "homeTeam": {
+        "id": 1760966802480.5898,
+        "name": "Manchester United",
+        "seed": 2
+      },
+      "awayTeam": {
+        "id": 1760966802489.483,
+        "name": "Leverkusen",
+        "seed": 3
+      },
+      "round": 8,
+      "date": "2025-12-17",
+      "time": "19:00",
+      "played": false,
+      "homeScore": null,
+      "awayScore": null
+    },
+    {
+      "homeTeam": {
+        "id": 1760966802483.7986,
+        "name": "Roma",
+        "seed": 2
+      },
+      "awayTeam": {
+        "id": 1760966802497.5164,
+        "name": "Lyon",
+        "seed": 4
+      },
+      "round": 8,
+      "date": "2025-12-18",
+      "time": "19:00",
+      "played": false,
+      "homeScore": null,
+      "awayScore": null
+    },
+    {
+      "homeTeam": {
+        "id": 1760966802488.5957,
+        "name": "Başakşehir FK",
+        "seed": 3
+      },
+      "awayTeam": {
+        "id": 1760966802485.9102,
+        "name": "Galatasaray",
+        "seed": 3
+      },
+      "round": 8,
+      "date": "2025-12-19",
+      "time": "19:00",
+      "played": false,
+      "homeScore": null,
+      "awayScore": null
+    },
+    {
+      "homeTeam": {
+        "id": 1760966802487.9336,
+        "name": "Beşiktaş",
+        "seed": 3
+      },
+      "awayTeam": {
+        "id": 1760966802496.0208,
+        "name": "Porto",
+        "seed": 4
+      },
+      "round": 8,
+      "date": "2025-12-22",
+      "time": "19:00",
+      "played": false,
+      "homeScore": null,
+      "awayScore": null
+    },
+    {
+      "homeTeam": {
+        "id": 1760966802490.4434,
+        "name": "Fiorentina",
+        "seed": 3
+      },
+      "awayTeam": {
+        "id": 1760966802493.7595,
+        "name": "Bursaspor",
+        "seed": 4
+      },
+      "round": 8,
+      "date": "2025-12-22",
+      "time": "21:45",
+      "played": false,
+      "homeScore": null,
+      "awayScore": null
+    },
+    {
+      "homeTeam": {
+        "id": 1760966802492.5955,
+        "name": "Trabzonspor",
+        "seed": 4
+      },
+      "awayTeam": {
+        "id": 1760966802494.0781,
+        "name": "Sporting Lizbon",
+        "seed": 4
+      },
+      "round": 8,
+      "date": "2025-12-23",
+      "time": "19:00",
+      "played": false,
+      "homeScore": null,
+      "awayScore": null
+    },
+    {
+      "homeTeam": {
+        "id": 1760966802498.9941,
+        "name": "Lazio",
+        "seed": 4
+      },
+      "awayTeam": {
+        "id": 1760966802499.4243,
+        "name": "Brighton",
+        "seed": 4
+      },
+      "round": 8,
+      "date": "2025-12-24",
+      "time": "19:00",
+      "played": false,
+      "homeScore": null,
+      "awayScore": null
     }
   ],
-  "exportDate": "2025-10-20T13:01:33.008Z",
+  "exportDate": "2025-10-20T13:27:55.128Z",
   "version": "4.0"
 }
