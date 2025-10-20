@@ -506,17 +506,17 @@
 
             const sampleData = [
                 { "Takım Adı": "Real Madrid", "Torba": 1 },
-                { "Takım Adı": "Barcelona", "Torba": 2 },
-                { "Takım Adı": "Manchester United", "Torba": 3 },
-                { "Takım Adı": "Bayern Münih", "Torba": 4 },
-                { "Takım Adı": "Paris Saint-Germain", "Torba": 5 },
-                { "Takım Adı": "Juventus", "Torba": 6 },
-                { "Takım Adı": "Liverpool", "Torba": 7 },
-                { "Takım Adı": "AC Milan", "Torba": 8 },
-                { "Takım Adı": "Galatasaray", "Torba": 9 },
-                { "Takım Adı": "Fenerbahçe", "Torba": 10 },
-                { "Takım Adı": "Beşiktaş", "Torba": 11 },
-                { "Takım Adı": "Trabzonspor", "Torba": 12 }
+                { "Takım Adı": "Barcelona", "Torba": 1 },
+                { "Takım Adı": "Manchester United", "Torba": 1 },
+                { "Takım Adı": "Bayern Münih", "Torba": 2 },
+                { "Takım Adı": "Paris Saint-Germain", "Torba": 2 },
+                { "Takım Adı": "Juventus", "Torba": 2 },
+                { "Takım Adı": "Liverpool", "Torba": 3 },
+                { "Takım Adı": "AC Milan", "Torba": 3 },
+                { "Takım Adı": "Galatasaray", "Torba": 3 },
+                { "Takım Adı": "Fenerbahçe", "Torba": 4 },
+                { "Takım Adı": "Beşiktaş", "Torba": 4 },
+                { "Takım Adı": "Trabzonspor", "Torba": 4 }
             ];
 
             try {
@@ -556,14 +556,12 @@
                         const seed = parseInt(row['Torba'] || row['torba'] || row['Seed'] || row['seed'] || 0);
                         
                         if (name && Number.isFinite(seed) && seed > 0 && seed <= 32) {
-                            if (!teams.some(t => t.seed === seed)) {
-                                teams.push({ 
-                                    id: Date.now() + imported + Math.random(), 
-                                    name: name.toString().trim(), 
-                                    seed 
-                                });
-                                imported++;
-                            }
+                            teams.push({ 
+                                id: Date.now() + imported + Math.random(), 
+                                name: name.toString().trim(), 
+                                seed 
+                            });
+                            imported++;
                         }
                     });
                     
