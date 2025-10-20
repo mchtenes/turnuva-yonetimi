@@ -108,7 +108,6 @@
         .rank { font-weight: bold; font-size: 1.2rem; color: #6b7280; text-align: center; width: 60px; }
         .leader-row .rank { color: #d97706; }
         .team-info { display: flex; align-items: center; gap: 0.75rem; }
-        .team-logo { width: 32px; height: 32px; object-fit: contain; }
         .points { font-weight: bold; font-size: 1.3rem; color: #1e3a8a; text-align: center; }
         .hidden { display: none !important; }
         .badge {
@@ -315,8 +314,8 @@
 
     <div class="nav">
         <div class="nav-content">
-            <button class="nav-btn active" id="btnFixtures">📅 Fikstür</button>
-            <button class="nav-btn" id="btnStandings">🏆 Puan Durumu</button>
+            <button class="nav-btn active" id="btnFixtures">Fikstür</button>
+            <button class="nav-btn" id="btnStandings">Puan Durumu</button>
         </div>
     </div>
 
@@ -325,7 +324,7 @@
             <!-- Fixtures Tab -->
             <div id="tab-fixtures">
                 <div class="card">
-                    <h2 class="card-title">📅 Maç Fikstürü</h2>
+                    <h2 class="card-title">Maç Fikstürü</h2>
                     <div class="filter-section">
                         <span class="filter-label">Filtrele:</span>
                         <select id="filterStatus">
@@ -345,7 +344,7 @@
             <div id="tab-standings" class="hidden">
                 <div class="card">
                     <div style="background: linear-gradient(135deg, #1e3a8a, #1e40af); color: white; padding: 1.5rem; border-radius: 0.75rem; margin: -2rem -2rem 2rem -2rem;">
-                        <h2 style="font-size: 2rem; margin-bottom: 0.5rem;">🏆 Puan Durumu</h2>
+                        <h2 style="font-size: 2rem; margin-bottom: 0.5rem;">Puan Durumu</h2>
                         <p style="color: #fbbf24; font-size: 1rem;">Güncel sıralama ve istatistikler - Detaylar için takıma tıklayın</p>
                     </div>
                     <div style="overflow-x: auto;">
@@ -354,6 +353,7 @@
                                 <tr>
                                     <th style="text-align: center;">Sıra</th>
                                     <th>Takım</th>
+                                    <th style="text-align: center;">Torba</th>
                                     <th style="text-align: center;">O</th>
                                     <th style="text-align: center;">G</th>
                                     <th style="text-align: center;">B</th>
@@ -374,9 +374,9 @@
         <!-- Error Section -->
         <div id="errorSection" class="hidden">
             <div class="error-box">
-                <h2>❌ Veri Yükleme Hatası</h2>
+                <h2>Veri Yükleme Hatası</h2>
                 <p><strong>tournament_data.json</strong> dosyası bulunamadı veya okunamadı.</p>
-                <button onclick="location.reload()" style="margin-top: 1.5rem; padding: 0.75rem 2rem; background: #2563eb; color: white; border: none; border-radius: 0.5rem; font-weight: 600; cursor: pointer;">🔄 Sayfayı Yenile</button>
+                <button onclick="location.reload()" style="margin-top: 1.5rem; padding: 0.75rem 2rem; background: #2563eb; color: white; border: none; border-radius: 0.5rem; font-weight: 600; cursor: pointer;">Sayfayı Yenile</button>
             </div>
         </div>
     </div>
@@ -386,17 +386,16 @@
         <div class="modal-content">
             <div class="modal-header">
                 <div class="modal-title">
-                    <img id="modalTeamLogo" src="" alt="" class="team-logo" style="display: none;">
                     <div>
                         <h2 id="modalTeamName">Takım Detayları</h2>
-                        <p id="modalTeamCountry"></p>
+                        <p id="modalTeamSeed"></p>
                     </div>
                 </div>
                 <button class="modal-close" id="modalCloseBtn">×</button>
             </div>
             <div class="modal-body">
                 <div class="team-stats-grid" id="teamStatsGrid"></div>
-                <h3 class="match-list-title">📅 Maç Programı</h3>
+                <h3 class="match-list-title">Maç Programı</h3>
                 <div id="teamMatchesList"></div>
             </div>
         </div>
@@ -407,22 +406,16 @@
         let allFixtures = [];
         let filteredFixtures = [];
 
-        // Sayfa yüklendiğinde
         document.addEventListener('DOMContentLoaded', function() {
             loadTournamentData();
             initEventListeners();
         });
 
         function initEventListeners() {
-            // Navigation
             document.getElementById('btnFixtures').addEventListener('click', () => showTab('fixtures'));
             document.getElementById('btnStandings').addEventListener('click', () => showTab('standings'));
-            
-            // Filters
             document.getElementById('filterStatus').addEventListener('change', filterFixtures);
             document.getElementById('filterTeam').addEventListener('change', filterFixtures);
-            
-            // Modal close
             document.getElementById('modalCloseBtn').addEventListener('click', closeModal);
             document.getElementById('teamModal').addEventListener('click', function(e) {
                 if (e.target.id === 'teamModal') closeModal();
@@ -433,122 +426,112 @@
         }
 
         function normalizeTournamentData(raw) {
-          const toStr = (v) => (typeof v === 'string' ? v.trim() : v);
-          const byId = new Map();
-          const byName = new Map();
-          let nextId = 1;
+            const toStr = (v) => (typeof v === 'string' ? v.trim() : v);
+            const byId = new Map();
+            const byName = new Map();
+            let nextId = 1;
         
-          // 1) Var olan teams'i topla
-          if (Array.isArray(raw.teams)) {
-            raw.teams.forEach(t => {
-              if (!t) return;
-              const id = typeof t.id === 'number' ? t.id : (typeof t.id === 'string' ? parseInt(t.id,10) : undefined);
-              const name = toStr(t.name || '');
-              if (!name) return;
-              const teamObj = {
-                id: Number.isFinite(id) ? id : undefined,
-                name,
-                logo: t.logo || '',
-                country: t.country || ''
-              };
-              if (!Number.isFinite(teamObj.id)) teamObj.id = nextId++;
-              byId.set(teamObj.id, teamObj);
-              byName.set(name.toLowerCase(), teamObj);
-              if (teamObj.id >= nextId) nextId = teamObj.id + 1;
-            });
-          }
-        
-          // 2) Bir değerden takım nesnesi üret
-          function ensureTeam(val) {
-            // a) Nesne ise
-            if (val && typeof val === 'object') {
-              const name = toStr(val.name || '');
-              let id = val.id;
-              if (!Number.isFinite(id)) {
-                // id yoksa mevcut ada göre bul / oluştur
-                if (name && byName.has(name.toLowerCase())) {
-                  id = byName.get(name.toLowerCase()).id;
-                } else {
-                  id = nextId++;
-                }
-              }
-              // kayıt altına al / güncelle
-              let existing = byId.get(id);
-              if (!existing) {
-                existing = { id, name, logo: val.logo || '', country: val.country || '' };
-                byId.set(id, existing);
-                if (name) byName.set(name.toLowerCase(), existing);
-              } else {
-                // eksik alanları tamamla
-                existing.name = existing.name || name;
-                existing.logo = existing.logo || val.logo || '';
-                existing.country = existing.country || val.country || '';
-                if (existing.name && !byName.has(existing.name.toLowerCase())) {
-                  byName.set(existing.name.toLowerCase(), existing);
-                }
-              }
-              return existing;
+            // Var olan teams'i topla
+            if (Array.isArray(raw.teams)) {
+                raw.teams.forEach(t => {
+                    if (!t) return;
+                    const id = typeof t.id === 'number' ? t.id : (typeof t.id === 'string' ? parseInt(t.id, 10) : undefined);
+                    const name = toStr(t.name || '');
+                    if (!name) return;
+                    const teamObj = {
+                        id: Number.isFinite(id) ? id : undefined,
+                        name,
+                        seed: t.seed || null
+                    };
+                    if (!Number.isFinite(teamObj.id)) teamObj.id = nextId++;
+                    byId.set(teamObj.id, teamObj);
+                    byName.set(name.toLowerCase(), teamObj);
+                    if (teamObj.id >= nextId) nextId = teamObj.id + 1;
+                });
             }
         
-            // b) String ise: isimden bul / oluştur
-            if (typeof val === 'string') {
-              const name = val.trim();
-              if (name) {
-                const key = name.toLowerCase();
-                if (byName.has(key)) return byName.get(key);
-                const t = { id: nextId++, name, logo: '', country: '' };
+            // Bir değerden takım nesnesi üret
+            function ensureTeam(val) {
+                if (val && typeof val === 'object') {
+                    const name = toStr(val.name || '');
+                    let id = val.id;
+                    if (!Number.isFinite(id)) {
+                        if (name && byName.has(name.toLowerCase())) {
+                            id = byName.get(name.toLowerCase()).id;
+                        } else {
+                            id = nextId++;
+                        }
+                    }
+                    let existing = byId.get(id);
+                    if (!existing) {
+                        existing = { id, name, seed: val.seed || null };
+                        byId.set(id, existing);
+                        if (name) byName.set(name.toLowerCase(), existing);
+                    } else {
+                        existing.name = existing.name || name;
+                        existing.seed = existing.seed !== null ? existing.seed : (val.seed || null);
+                        if (existing.name && !byName.has(existing.name.toLowerCase())) {
+                            byName.set(existing.name.toLowerCase(), existing);
+                        }
+                    }
+                    return existing;
+                }
+        
+                if (typeof val === 'string') {
+                    const name = val.trim();
+                    if (name) {
+                        const key = name.toLowerCase();
+                        if (byName.has(key)) return byName.get(key);
+                        const t = { id: nextId++, name, seed: null };
+                        byId.set(t.id, t);
+                        byName.set(key, t);
+                        return t;
+                    }
+                }
+        
+                if (Number.isFinite(val)) {
+                    if (byId.has(val)) return byId.get(val);
+                    const t = { id: val, name: `Team ${val}`, seed: null };
+                    byId.set(val, t);
+                    byName.set(t.name.toLowerCase(), t);
+                    if (val >= nextId) nextId = val + 1;
+                    return t;
+                }
+        
+                const t = { id: nextId++, name: `Team ${nextId - 1}`, seed: null };
                 byId.set(t.id, t);
-                byName.set(key, t);
+                byName.set(t.name.toLowerCase(), t);
                 return t;
-              }
             }
         
-            // c) Sayı/id ise
-            if (Number.isFinite(val)) {
-              if (byId.has(val)) return byId.get(val);
-              const t = { id: val, name: `Team ${val}`, logo: '', country: '' };
-              byId.set(val, t);
-              byName.set(t.name.toLowerCase(), t);
-              if (val >= nextId) nextId = val + 1;
-              return t;
-            }
+            // Fikstürleri normalize et
+            const fixtures = (raw.fixtures || []).map((f, i) => {
+                const home = ensureTeam(f.homeTeam ?? f.home ?? f.homeTeamName);
+                const away = ensureTeam(f.awayTeam ?? f.away ?? f.awayTeamName);
+                return {
+                    id: f.id ?? (Date.now() + i),
+                    round: f.round ?? null,
+                    date: f.date ?? '',
+                    time: f.time ?? '',
+                    homeTeam: home,
+                    awayTeam: away,
+                    played: !!f.played,
+                    homeScore: f.homeScore ?? null,
+                    awayScore: f.awayScore ?? null
+                };
+            });
         
-            // d) Tanımsız/bozuk ise dummy takım
-            const t = { id: nextId++, name: `Team ${nextId - 1}`, logo: '', country: '' };
-            byId.set(t.id, t);
-            byName.set(t.name.toLowerCase(), t);
-            return t;
-          }
+            const teams = Array.from(byId.values()).sort((a, b) => a.id - b.id);
         
-          // 3) Fikstürleri normalize et (homeTeam / awayTeam mutlaka NESNE olsun)
-          const fixtures = (raw.fixtures || []).map((f, i) => {
-            const home = ensureTeam(f.homeTeam ?? f.home ?? f.homeTeamName);
-            const away = ensureTeam(f.awayTeam ?? f.away ?? f.awayTeamName);
             return {
-              id: f.id ?? (Date.now() + i),
-              round: f.round ?? null,
-              date: f.date ?? '',
-              time: f.time ?? '',
-              homeTeam: home,
-              awayTeam: away,
-              played: !!f.played,
-              homeScore: f.homeScore ?? null,
-              awayScore: f.awayScore ?? null
+                tournamentName: raw.tournamentName || 'Turnuva',
+                season: raw.season || '2024-25',
+                matchesPerTeam: raw.matchesPerTeam ?? null,
+                teams,
+                fixtures,
+                exportDate: raw.exportDate || null,
+                totalMatches: fixtures.length
             };
-          });
-        
-          // 4) Takım listesini yeniden üret (byId -> dizi)
-          const teams = Array.from(byId.values()).sort((a,b)=>a.id-b.id);
-        
-          return {
-            tournamentName: raw.tournamentName || 'Turnuva',
-            season: raw.season || '2024-25',
-            matchesPerTeam: raw.matchesPerTeam ?? null,
-            teams,
-            fixtures,
-            exportDate: raw.exportDate || null,
-            totalMatches: fixtures.length
-          };
         }
         
         async function loadTournamentData() {
@@ -561,31 +544,25 @@
                 if (!res.ok) throw new Error("tournament_data.json bulunamadı veya okunamadı.");
                 const raw = await res.json();
         
-                // 🔧 burada normalize ediyoruz
                 const normalized = normalizeTournamentData(raw);
         
-                // global state
                 tournamentData = normalized;
                 allFixtures = normalized.fixtures.slice();
                 filteredFixtures = allFixtures.slice();
         
-                // başlık ve sezon
                 document.getElementById("tournamentTitle").textContent = normalized.tournamentName || "Turnuva Görüntüleme";
                 document.getElementById("seasonText").textContent = (normalized.season || "2025") + " Sezonu";
         
-                // takım filtresi
                 const teamSelect = document.getElementById("filterTeam");
                 teamSelect.innerHTML = '<option value="all">Tüm Takımlar</option>';
                 normalized.teams.forEach(t => {
                     teamSelect.innerHTML += `<option value="${t.id}">${t.name}</option>`;
                 });
         
-                // mevcut akışı kullan
                 updateStats();
-                filterFixtures();     // renderFixtures çağırır
+                filterFixtures();
                 renderStandings();
         
-                // görünürlük
                 loadingElement.style.display = "none";
                 contentElement.style.display = "block";
                 errorElement.classList.add("hidden");
@@ -594,22 +571,8 @@
                 console.error("Yükleme hatası:", err);
                 if (loadingElement) loadingElement.style.display = "none";
                 if (errorElement) errorElement.classList.remove("hidden");
-                alert("❌ Turnuva verileri yüklenemedi:\n" + err.message);
+                alert("Turnuva verileri yüklenemedi:\n" + err.message);
             }
-        }
-        function initializeDisplay() {
-            document.getElementById('tournamentTitle').textContent = tournamentData.tournamentName || 'Turnuva';
-            document.getElementById('seasonText').textContent = (tournamentData.season || '2024-25') + ' Sezonu';
-
-            const teamFilter = document.getElementById('filterTeam');
-            teamFilter.innerHTML = '<option value="all">Tüm Takımlar</option>';
-            tournamentData.teams.forEach(team => {
-                teamFilter.innerHTML += `<option value="${team.id}">${team.name}</option>`;
-            });
-
-            updateStats();
-            filterFixtures();
-            renderStandings();
         }
 
         function showTab(tab) {
@@ -657,7 +620,7 @@
             const content = document.getElementById('fixturesContent');
             
             if (filteredFixtures.length === 0) {
-                content.innerHTML = '<div class="empty-state"><div class="empty-state-icon">🔍</div><h3>Maç Bulunamadı</h3></div>';
+                content.innerHTML = '<div class="empty-state"><div class="empty-state-icon">📋</div><h3>Maç Bulunamadı</h3></div>';
                 return;
             }
 
@@ -745,13 +708,12 @@
                     <td class="rank">${i === 0 ? '🥇' : i + 1}</td>
                     <td>
                         <div class="team-info">
-                            ${s.team.logo ? `<img src="${s.team.logo}" class="team-logo" alt="${s.team.name}">` : ''}
                             <div>
                                 <strong style="color: #1e3a8a; font-size: 1.05rem;">${s.team.name}</strong>
-                                <div style="color: #6b7280; font-size: 0.875rem;">${s.team.country}</div>
                             </div>
                         </div>
                     </td>
+                    <td style="text-align: center; font-weight: 600; color: #d97706;">#${s.team.seed || '-'}</td>
                     <td style="text-align: center;">${s.played}</td>
                     <td style="text-align: center; color: #059669; font-weight: 600;">${s.won}</td>
                     <td style="text-align: center; color: #d97706; font-weight: 600;">${s.drawn}</td>
@@ -768,16 +730,8 @@
 
         function showTeamDetails(team) {
             document.getElementById('modalTeamName').textContent = team.name;
-            document.getElementById('modalTeamCountry').textContent = team.country;
+            document.getElementById('modalTeamSeed').textContent = team.seed ? `Torba #${team.seed}` : 'Torba: -';
             
-            const logoImg = document.getElementById('modalTeamLogo');
-            if (team.logo) {
-                logoImg.src = team.logo;
-                logoImg.style.display = 'block';
-            } else {
-                logoImg.style.display = 'none';
-            }
-
             const teamMatches = allFixtures.filter(f => f.homeTeam.id === team.id || f.awayTeam.id === team.id);
             const playedMatches = teamMatches.filter(f => f.played);
             let wins = 0, draws = 0, losses = 0, goalsFor = 0, goalsAgainst = 0;
@@ -848,6 +802,7 @@
                             </div>
                             <div style="display: flex; align-items: center; gap: 1rem; font-size: 1.1rem;">
                                 <span style="font-weight: 600; color: #1e3a8a;">${isHome ? '🏠' : '✈️'} ${isHome ? 'vs' : '@'} ${opponent.name}</span>
+                                <span style="color: #d97706; font-weight: 600;">(Torba #${opponent.seed || '-'})</span>
                                 ${match.played ? 
                                     `<div style="background: #1e3a8a; color: #fbbf24; padding: 0.5rem 1rem; border-radius: 0.5rem; font-weight: bold; font-size: 1.2rem;">${isHome ? teamScore : oppScore} - ${isHome ? oppScore : teamScore}</div>` :
                                     '<div style="background: #f3f4f6; color: #9ca3af; padding: 0.5rem 1rem; border-radius: 0.5rem;">vs</div>'
